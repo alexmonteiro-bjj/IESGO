@@ -1,0 +1,34 @@
+body{
+ background-color: black;
+
+}
+
+.menu a {
+    font-family: "IM Fell DW Pica", serif;
+}
+
+.menu {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.menu a {
+    font-size: 20px;
+}
+
+
+
+.imagens {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    justify-content: center;
+}
+
+.imagens img {
+    width: 50%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+}
