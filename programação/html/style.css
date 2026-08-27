@@ -1,0 +1,73 @@
+
+body {
+    background-color: black;
+    color: white;
+}
+
+
+/* CABEÇALHO */
+
+.cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.logo h1,
+.menu a {
+    font-family: "IM Fell DW Pica", serif;
+}
+
+.menu {
+    display: flex;
+    gap: 30px;
+}
+
+.menu a {
+    font-size: 20px;
+}
+
+
+/* INTRODUÇÃO */
+
+.introducao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.texto-introducao {
+    text-align: left;
+    
+}
+
+.imagem-introducao {
+    width: 600px;   
+}
+
+
+
+
+/* CARDS */
+
+.imagem-card {
+    width: 250px;
+    height: 180px;
+    object-fit: cover;
+}
+
+
+/* RODAPÉ */
+
+.rodape {
+    background-color:rgb(7, 7, 85);
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.rodape img {
+    width: 50px;
+    height: 50px;
+}
