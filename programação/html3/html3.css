@@ -24,6 +24,7 @@ body{
     grid-template-columns: repeat(3, 1fr);
     gap: 0;
     justify-content: center;
+    padding: 10px;
 }
 
 .imagens img {
@@ -31,4 +32,5 @@ body{
     height: 300px;
     object-fit: cover;
     display: block;
+    padding: 10px;
 }
