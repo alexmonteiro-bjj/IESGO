@@ -2,10 +2,20 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    .audiowide-regular {
+  font-family: "Audiowide", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 }
 
 html {
     scroll-behavior: smooth;
+    .audiowide-regular {
+  font-family: "Audiowide", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 }
 
 body {
@@ -20,21 +30,44 @@ body {
 ========================= */
 
 header {
-    width: 100%;
-    min-height: 170px;
+width: 100%;
 
-    padding: 15px 40px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+position: fixed;
+top: 0;
+left: 0;
+z-index: 10;
+background-color: rgba(3, 3, 3, 0.658);
+background-blend-mode: darken;
+}
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.logo {
+width: 70px;
+background-blend-mode: darken;
+background-color: none;
 
-    background-color: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(10px);
 
-    position: relative;
-    z-index: 100;
+}
+
+header ul {
+display: flex;
+gap: 20px;
+list-style: none;
+background-color: rgba(10, 2, 2, 0.1);
+padding: 6px 20px;
+border-radius: 12px;
+backdrop-filter: blur(20px);
+}
+
+header li {
+white-space: nowrap;
+}
+
+header a {
+color: white;
+text-decoration: none;
 }
 
 
@@ -42,15 +75,7 @@ header {
    LOGO
 ========================= */
 
-.logo {
-    width: 150px;
-    height: 150px;
-    object-fit: contain;
-    display: block;
-    border-radius: 10px;
-    margin-bottom: 12px;
-}
-   
+
 
 
 /* =========================
@@ -84,11 +109,71 @@ nav a:hover {
 }
 
 
-/* =========================
-   SECTION 1
-========================= */
+
+
+
 
 .section1 {
+background-image: url("./img/WhatsApp\ Image\ 2026-09-03\ at\ 16.18.29.jpeg");
+background-blend-mode: darken;
+background-color: rgba(0, 0, 0, 0.5);
+background-size: cover;
+background-position: 70% 50%;
+background-repeat: no-repeat;
+min-height: 100vh;
+padding: 120px 5%;
+justify-content: center;
+align-items: center;
+text-align: center;
+
+}
+
+.section1 h1 {
+    font-family: "Audiowide", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    justify-content: center;
+align-items: center;
+text-align: center;
+min-height: 100vh;
+display: flex;
+}
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   SECTION 2
+========================= */
+
+.section2 {
     width: 100%;
     height: 700px;
 
@@ -100,6 +185,67 @@ nav a:hover {
     align-items: center;
 
     text-align: center;
+}
+
+
+
+
+.section2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px;
+    background-color: #0f0e0ee5;
+}
+
+/* Logo no centro */
+.lado-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.logo2 {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+}
+
+.lado-logo h2 {
+    margin-top: 10px;
+    font-size: 28px;
+}
+
+/* Mensagens lado a lado */
+.conteudo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* Caixas */
+.info2,
+.info3 {
+    width: 450px;
+    height: 220px;
+    background-color: #000000;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 25px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+}
+
+/* Textos */
+.info2 h3,
+.info3 h4 {
+    margin: 0;
+    line-height: 1.6;
 }
 
 
@@ -211,4 +357,59 @@ nav a:hover {
         width: 100%;
         height: 100%;
     }
+}
+
+
+.lOJINHA {
+    text-align: center;
+    padding: 100px 20px;
+    min-height: 450px;
+    background-color: #2927279a;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.lOJINHA h2 {
+    margin-bottom: 20px;
+    font-size: 40px;
+}
+
+.lOJINHA h3 {
+    margin: 0 auto 40px;
+    max-width: 850px;
+    font-size: 21px;
+    line-height: 1.7;
+    font-weight: normal;
+}
+
+/* Botão */
+.botao-loja {
+    width: 280px;
+    height: 70px;
+
+    background-color: black;
+    color: white;
+
+    border: 2px solid white;
+    border-radius: 8px;
+
+    font-size: 21px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+/* Efeito do mouse */
+.botao-loja:hover {
+    transform: translateY(-8px);
+    background-color: white;
+    color: black;
 }
