@@ -1,27 +1,46 @@
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    .audiowide-regular {
-  font-family: "Audiowide", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
 }
 
 html {
     scroll-behavior: smooth;
-    .audiowide-regular {
-  font-family: "Audiowide", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
+    scroll-padding-top: 90px;
 }
 
 body {
-    background-color: #000000;
-    color: white;
+    background: #000;
+    color: #fff;
     font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* =========================
+   VARIÁVEIS
+========================= */
+
+:root {
+    --dourado: #d4af37;
+    --dourado-claro: #f0cf62;
+    --preto: #000;
+    --preto-2: #080808;
+    --preto-3: #101010;
+    --branco: #fff;
+    --cinza: rgba(255, 255, 255, 0.75);
 }
 
 
@@ -30,44 +49,43 @@ body {
 ========================= */
 
 header {
-width: 100%;
+    width: 100%;
+    height: 82px;
 
-display: flex;
-justify-content: space-between;
-align-items: center;
-position: fixed;
-top: 0;
-left: 0;
-z-index: 10;
-background-color: rgba(3, 3, 3, 0.658);
-background-blend-mode: darken;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 40px;
+
+    background: rgba(0, 0, 0, 0.72);
+
+    backdrop-filter: blur(15px);
+
+    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+
+    transition:
+        background 0.4s ease,
+        box-shadow 0.4s ease,
+        height 0.4s ease;
 }
 
-.logo {
-width: 70px;
-background-blend-mode: darken;
-background-color: none;
 
+/* Header quando rolar */
 
-}
+header.scrolled {
+    height: 70px;
 
-header ul {
-display: flex;
-gap: 20px;
-list-style: none;
-background-color: rgba(10, 2, 2, 0.1);
-padding: 6px 20px;
-border-radius: 12px;
-backdrop-filter: blur(20px);
-}
+    background: rgba(0, 0, 0, 0.94);
 
-header li {
-white-space: nowrap;
-}
-
-header a {
-color: white;
-text-decoration: none;
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -75,7 +93,28 @@ text-decoration: none;
    LOGO
 ========================= */
 
+.logo-link {
+    display: flex;
+    align-items: center;
+}
 
+.logo {
+    width: 65px;
+    height: 65px;
+
+    object-fit: contain;
+
+    transition:
+        transform 0.4s ease,
+        filter 0.4s ease;
+}
+
+.logo:hover {
+    transform: scale(1.08);
+
+    filter:
+        drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+}
 
 
 /* =========================
@@ -84,168 +123,633 @@ text-decoration: none;
 
 nav ul {
     display: flex;
-
     align-items: center;
-    justify-content: center;
 
-    gap: 35px;
+    gap: 32px;
 
     list-style: none;
 }
 
 nav a {
-    color: white;
+    position: relative;
 
-    text-decoration: none;
+    display: inline-block;
 
-    font-size: 16px;
-    font-weight: bold;
+    color: #fff;
 
-    transition: 0.3s;
-}
-
-nav a:hover {
-    color: #aaa;
-}
-
-
-
-
-
-
-.section1 {
-background-image: url("./img/WhatsApp\ Image\ 2026-09-03\ at\ 16.18.29.jpeg");
-background-blend-mode: darken;
-background-color: rgba(0, 0, 0, 0.5);
-background-size: cover;
-background-position: 70% 50%;
-background-repeat: no-repeat;
-min-height: 100vh;
-padding: 120px 5%;
-justify-content: center;
-align-items: center;
-text-align: center;
-
-}
-
-.section1 h1 {
     font-family: "Audiowide", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    justify-content: center;
-align-items: center;
-text-align: center;
-min-height: 100vh;
-display: flex;
+
+    font-size: 13px;
+
+    letter-spacing: 0.5px;
+
+    padding: 10px 0;
+
+    transition:
+        color 0.3s ease;
 }
 
 
+/* Linha do menu */
+
+nav a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    width: 0;
+    height: 2px;
+
+    background: var(--dourado);
+
+    transform: translateX(-50%);
+
+    transition: width 0.3s ease;
+
+    box-shadow:
+        0 0 8px rgba(212, 175, 55, 0.5);
+}
 
 
-    
+nav a:hover,
+nav a.ativo {
+    color: var(--dourado);
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+nav a:hover::after,
+nav a.ativo::after {
+    width: 100%;
+}
 
 
 /* =========================
-   SECTION 2
+   HERO
+========================= */
+
+.section1 {
+    width: 100%;
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 120px 30px 80px;
+
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.58),
+            rgba(0, 0, 0, 0.82)
+        ),
+        url("./img/WhatsApp Image 2026-09-03 at 16.18.29.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+/* Conteúdo do Hero */
+
+.hero-conteudo {
+    max-width: 1100px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* Pequeno título */
+
+.hero-subtitulo {
+    color: var(--dourado);
+
+    font-family: "Audiowide", sans-serif;
+
+    font-size: 16px;
+
+    letter-spacing: 6px;
+
+    margin-bottom: 20px;
+
+    text-shadow:
+        0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+
+/* Título */
+
+.section1 h1 {
+    font-family: "Audiowide", sans-serif;
+
+    font-weight: 400;
+
+    font-size: clamp(38px, 6vw, 78px);
+
+    line-height: 1.15;
+
+    max-width: 1100px;
+
+    color: #fff;
+
+    text-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.9),
+        0 0 30px rgba(212, 175, 55, 0.18);
+}
+
+
+/* =========================
+   LINHA DOURADA
+========================= */
+
+.linha-dourada {
+    width: 90px;
+    height: 2px;
+
+    margin: 22px auto;
+
+    background: var(--dourado);
+
+    box-shadow:
+        0 0 12px rgba(212, 175, 55, 0.55);
+}
+
+
+/* Texto Hero */
+
+.hero-conteudo p {
+    max-width: 650px;
+
+    color: rgba(255, 255, 255, 0.78);
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    margin-bottom: 35px;
+}
+
+
+/* =========================
+   BOTÃO HERO
+========================= */
+
+.botao-hero {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 250px;
+    height: 58px;
+
+    padding: 0 30px;
+
+    color: var(--dourado);
+
+    border: 1px solid var(--dourado);
+
+    background: rgba(0, 0, 0, 0.45);
+
+    font-family: "Audiowide", sans-serif;
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.botao-hero:hover {
+    background: var(--dourado);
+
+    color: #000;
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 10px 30px rgba(212, 175, 55, 0.25);
+}
+
+
+/* =========================
+   SOBRE
 ========================= */
 
 .section2 {
     width: 100%;
-    height: 700px;
 
-    padding: 0;
+    min-height: 700px;
+
+    padding: 100px 40px;
 
     display: flex;
+    flex-direction: column;
 
+    align-items: center;
     justify-content: center;
-    align-items: center;
 
     text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #111 0%,
+            #080808 55%,
+            #000 100%
+        );
+
+    border-top: 1px solid rgba(212, 175, 55, 0.12);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.12);
 }
 
 
+/* Cabeçalho Sobre */
 
-
-.section2 {
+.sobre-cabecalho {
     display: flex;
     flex-direction: column;
+
     align-items: center;
-    padding: 60px;
-    background-color: #0f0e0ee5;
 }
 
-/* Logo no centro */
-.lado-logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
 
 .logo2 {
-    width: 300px;
-    height: 300px;
+    width: 190px;
+    height: 190px;
+
     object-fit: contain;
+
+    margin-bottom: 20px;
+
+    filter:
+        drop-shadow(0 0 8px rgba(212, 175, 55, 0.25));
+
+    transition:
+        transform 0.5s ease,
+        filter 0.5s ease;
 }
 
-.lado-logo h2 {
-    margin-top: 10px;
-    font-size: 28px;
+.logo2:hover {
+    transform: scale(1.05);
+
+    filter:
+        drop-shadow(0 0 18px rgba(212, 175, 55, 0.45));
 }
 
-/* Mensagens lado a lado */
+
+/* Título pequeno */
+
+.titulo-pequeno {
+    color: var(--dourado);
+
+    font-family: "Audiowide", sans-serif;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    display: block;
+}
+
+
+/* Títulos */
+
+.section2 h2,
+.lOJINHA h2,
+.secao-conteudo h2 {
+    font-family: "Audiowide", sans-serif;
+
+    font-weight: 400;
+
+    color: #fff;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
 .conteudo {
+    width: 100%;
+    max-width: 1050px;
+
     display: flex;
-    flex-direction: row;
+
     justify-content: center;
+
+    align-items: stretch;
+
     gap: 30px;
-    margin-top: 40px;
+
+    margin-top: 45px;
 }
 
-/* Caixas */
+
 .info2,
 .info3 {
-    width: 450px;
-    height: 220px;
-    background-color: #000000;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    padding: 25px;
-    box-sizing: border-box;
+    position: relative;
+
+    width: 50%;
+
+    min-height: 260px;
+
+    padding: 45px 35px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20, 20, 20, 0.95),
+            rgba(3, 3, 3, 0.98)
+        );
+
+    border: 1px solid rgba(212, 175, 55, 0.3);
+
+    border-radius: 8px;
 
     display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+    justify-content: center;
+
+    text-align: left;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.4s ease,
+        border-color 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+
+/* Linha superior dos cards */
+
+.info2::before,
+.info3::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background: var(--dourado);
+
+    transform: scaleX(0);
+
+    transform-origin: left;
+
+    transition: transform 0.4s ease;
+}
+
+
+.info2:hover,
+.info3:hover {
+    transform: translateY(-8px);
+
+    border-color: rgba(212, 175, 55, 0.8);
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.5),
+        0 0 25px rgba(212, 175, 55, 0.08);
+}
+
+
+.info2:hover::before,
+.info3:hover::before {
+    transform: scaleX(1);
+}
+
+
+.numero-card {
+    color: var(--dourado);
+
+    font-family: "Audiowide", sans-serif;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 15px;
+}
+
+
+.info2 h3,
+.info3 h3 {
+    font-family: "Audiowide", sans-serif;
+
+    font-size: 20px;
+
+    font-weight: 400;
+
+    margin-bottom: 18px;
+
+    color: #fff;
+}
+
+
+.info2 p,
+.info3 p {
+    color: rgba(255, 255, 255, 0.7);
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================
+   LOJINHA
+========================= */
+
+.lOJINHA {
+    width: 100%;
+
+    min-height: 480px;
+
+    padding: 100px 25px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111,
+            #030303
+        );
+
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+
+.loja-conteudo {
+    max-width: 800px;
+
+    display: flex;
+    flex-direction: column;
+
     align-items: center;
 }
 
-/* Textos */
-.info2 h3,
-.info3 h4 {
-    margin: 0;
-    line-height: 1.6;
+
+.lOJINHA h2 {
+    font-size: clamp(32px, 5vw, 52px);
+
+    margin-top: 12px;
+}
+
+
+.lOJINHA p {
+    max-width: 700px;
+
+    color: rgba(255, 255, 255, 0.75);
+
+    font-size: 18px;
+
+    line-height: 1.8;
+
+    margin-bottom: 20px;
+}
+
+
+.produtos {
+    color: rgba(212, 175, 55, 0.8);
+
+    font-family: "Audiowide", sans-serif;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 35px;
+}
+
+
+/* =========================
+   BOTÃO LOJA
+========================= */
+
+.botao-loja {
+    width: 280px;
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #000;
+
+    background: var(--dourado);
+
+    border: 1px solid var(--dourado);
+
+    font-family: "Audiowide", sans-serif;
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.botao-loja:hover {
+    transform: translateY(-6px);
+
+    background: transparent;
+
+    color: var(--dourado);
+
+    box-shadow:
+        0 0 25px rgba(212, 175, 55, 0.2);
+}
+
+
+/* =========================
+   GALERIA
+========================= */
+
+.imagens-section {
+    position: relative;
+
+    width: 100%;
+
+    height: 700px;
+
+    overflow: hidden;
+
+    background: #000;
+}
+
+
+/* Cabeçalho da galeria */
+
+.galeria-cabecalho {
+    position: absolute;
+
+    top: 35px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 5;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+
+.galeria-cabecalho span {
+    font-family: "Audiowide", sans-serif;
+
+    color: var(--dourado);
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+}
+
+
+.galeria-cabecalho h2 {
+    margin-top: 8px;
+
+    font-family: "Audiowide", sans-serif;
+
+    font-size: 22px;
+
+    font-weight: 400;
+
+    text-shadow:
+        0 3px 15px #000;
 }
 
 
@@ -259,42 +763,31 @@ display: flex;
     width: 100%;
     height: 100%;
 
-    margin: 0;
-
     overflow: hidden;
-
-    border-radius: 0;
-
-    box-shadow: none;
 }
 
-
-/* =========================
-   SLIDES
-========================= */
 
 .slide {
     position: absolute;
 
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
+    inset: 0;
 
     opacity: 0;
 
-    transition: opacity 1s ease-in-out;
+    visibility: hidden;
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
 }
+
 
 .slide.ativa {
     opacity: 1;
+
+    visibility: visible;
 }
 
-
-/* =========================
-   IMAGENS DO SLIDE
-========================= */
 
 .slide img {
     width: 100%;
@@ -303,22 +796,500 @@ display: flex;
     display: block;
 
     object-fit: cover;
+
+    transform: scale(1);
+
+    transition:
+        transform 8s ease;
+}
+
+
+.slide.ativa img {
+    transform: scale(1.06);
+}
+
+
+/* Escurecimento */
+
+.slideshow::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.45),
+            transparent 35%,
+            rgba(0, 0, 0, 0.35)
+        );
 }
 
 
 /* =========================
-   OUTRAS SEÇÕES
+   BOTÕES SLIDES
 ========================= */
 
-#projetos,
-#atividades {
-    width: 100%;
-    min-height: 100vh;
+.slide-btn {
+    position: absolute;
+
+    top: 50%;
+
+    z-index: 10;
+
+    width: 50px;
+    height: 50px;
+
+    border: 1px solid rgba(255, 255, 255, 0.5);
+
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    color: #fff;
+
+    font-size: 35px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transform: translateY(-50%);
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.slide-btn:hover {
+    background: var(--dourado);
+
+    color: #000;
+
+    border-color: var(--dourado);
+
+    transform: translateY(-50%) scale(1.08);
+}
+
+
+.anterior {
+    left: 30px;
+}
+
+
+.proximo {
+    right: 30px;
+}
+
+
+/* =========================
+   INDICADORES
+========================= */
+
+.indicadores {
+    position: absolute;
+
+    bottom: 25px;
+    left: 50%;
+
+    z-index: 10;
 
     display: flex;
 
-    justify-content: center;
+    gap: 8px;
+
+    transform: translateX(-50%);
+}
+
+
+.indicador {
+    width: 30px;
+    height: 3px;
+
+    border: none;
+
+    background: rgba(255, 255, 255, 0.35);
+
+    cursor: pointer;
+
+    transition:
+        width 0.3s ease,
+        background 0.3s ease;
+}
+
+
+.indicador.ativo {
+    width: 55px;
+
+    background: var(--dourado);
+}
+
+
+/* =========================
+   PROJETOS / ATIVIDADES
+========================= */
+
+.secao-conteudo {
+    width: 100%;
+
+    min-height: 650px;
+
+    padding: 100px 30px;
+
+    display: flex;
+
     align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #101010,
+            #000
+        );
+
+    border-top: 1px solid rgba(212, 175, 55, 0.12);
+
+    border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+}
+
+
+.secao-conteudo > div {
+    max-width: 750px;
+}
+
+
+.secao-conteudo h2 {
+    font-size: clamp(38px, 6vw, 65px);
+
+    margin-top: 12px;
+}
+
+
+.secao-conteudo p {
+    margin-top: 25px;
+
+    color: rgba(255, 255, 255, 0.7);
+
+    font-size: 18px;
+
+    line-height: 1.8;
+}
+
+
+.atividades {
+    background:
+        linear-gradient(
+            135deg,
+            #050505,
+            #111,
+            #000
+        );
+}
+
+
+/* =========================
+   ANIMAÇÕES DE SCROLL
+========================= */
+
+.animacao {
+    opacity: 0;
+
+    transform: translateY(55px);
+
+    transition:
+        opacity 0.9s ease,
+        transform 0.9s ease;
+}
+
+
+.animacao.aparecer {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* =========================
+   BOTÃO VOLTAR AO TOPO
+========================= */
+
+#voltar-topo {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    z-index: 900;
+
+    width: 48px;
+    height: 48px;
+
+    border: 1px solid var(--dourado);
+
+    background: rgba(0, 0, 0, 0.75);
+
+    color: var(--dourado);
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(15px);
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+
+#voltar-topo.mostrar {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+}
+
+
+#voltar-topo:hover {
+    background: var(--dourado);
+
+    color: #000;
+}
+
+
+/* =========================
+   PRELOADER
+========================= */
+
+#preloader {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    z-index: 99999;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #111 0%,
+            #000 65%
+        );
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+
+.preloader-conteudo {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+/* Logo */
+
+.logo-preloader {
+    width: 230px;
+    height: 230px;
+
+    margin-bottom: 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    animation:
+        aparecer-logo 1.5s ease forwards,
+        brilho-logo 2.5s ease-in-out infinite alternate;
+}
+
+
+.logo-preloader img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 0 8px rgba(212, 175, 55, 0.5))
+        drop-shadow(0 0 20px rgba(212, 175, 55, 0.25));
+}
+
+
+/* Título */
+
+#preloader h1 {
+    font-family: "Audiowide", sans-serif;
+
+    font-size: 30px;
+
+    font-weight: 400;
+
+    letter-spacing: 5px;
+
+    color: #fff;
+}
+
+
+/* Subtítulo */
+
+#preloader p {
+    margin: 8px 0 30px;
+
+    font-family: "Audiowide", sans-serif;
+
+    font-size: 15px;
+
+    letter-spacing: 4px;
+
+    color: var(--dourado);
+}
+
+
+/* Barra */
+
+.barra-carregamento {
+    width: 260px;
+    height: 3px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.15);
+}
+
+
+.progresso {
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 100%;
+    height: 100%;
+
+    background: var(--dourado);
+
+    box-shadow:
+        0 0 8px var(--dourado),
+        0 0 18px rgba(212, 175, 55, 0.7);
+
+    animation:
+        carregar 2s infinite;
+}
+
+
+/* Texto */
+
+#preloader span {
+    margin-top: 15px;
+
+    color: rgba(255, 255, 255, 0.55);
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   ANIMAÇÕES PRELOADER
+========================= */
+
+@keyframes carregar {
+
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+
+}
+
+
+@keyframes aparecer-logo {
+
+    0% {
+        opacity: 0;
+
+        transform: scale(0.7);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform: scale(1);
+    }
+
+}
+
+
+@keyframes brilho-logo {
+
+    0% {
+        filter:
+            drop-shadow(0 0 3px rgba(212, 175, 55, 0.2));
+    }
+
+    50% {
+        filter:
+            drop-shadow(0 0 12px rgba(212, 175, 55, 0.45));
+    }
+
+    100% {
+        filter:
+            drop-shadow(0 0 20px rgba(212, 175, 55, 0.65));
+    }
+
+}
+
+
+/* =========================
+   ESCONDER PRELOADER
+========================= */
+
+.preloader-esconder {
+    opacity: 0 !important;
+
+    visibility: hidden !important;
+
+    pointer-events: none;
 }
 
 
@@ -326,19 +1297,23 @@ display: flex;
    RESPONSIVIDADE
 ========================= */
 
-@media (max-width: 700px) {
+@media (max-width: 850px) {
 
     header {
-        min-height: 150px;
+        height: auto;
 
-        padding: 15px 20px;
+        min-height: 75px;
+
+        padding: 8px 15px;
+    }
+
+    header.scrolled {
+        height: auto;
     }
 
     .logo {
-        width: 65px;
-        height: 65px;
-
-        margin-bottom: 10px;
+        width: 55px;
+        height: 55px;
     }
 
     nav ul {
@@ -346,70 +1321,237 @@ display: flex;
     }
 
     nav a {
-        font-size: 13px;
+        font-size: 10px;
+    }
+
+    .conteudo {
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+    .info2,
+    .info3 {
+        width: 100%;
+
+        max-width: 600px;
+    }
+
+    .imagens-section {
+        height: 550px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    header {
+        flex-direction: column;
+
+        justify-content: center;
+
+        gap: 3px;
+
+        padding: 7px 5px;
+    }
+
+    .logo {
+        width: 42px;
+        height: 42px;
+    }
+
+    nav ul {
+        gap: 8px;
+    }
+
+    nav a {
+        font-size: 8px;
+
+        padding: 5px 0;
     }
 
     .section1 {
-        height: calc(100vh - 150px);
+        padding:
+            130px 20px
+            70px;
     }
 
-    .slideshow {
-        width: 100%;
-        height: 100%;
+    .hero-subtitulo {
+        font-size: 11px;
+
+        letter-spacing: 4px;
     }
+
+    .section1 h1 {
+        font-size: 28px;
+    }
+
+    .hero-conteudo p {
+        font-size: 15px;
+    }
+
+    .botao-hero {
+        min-width: 210px;
+
+        height: 52px;
+
+        font-size: 10px;
+    }
+
+    .section2 {
+        padding: 80px 20px;
+    }
+
+    .logo2 {
+        width: 150px;
+        height: 150px;
+    }
+
+    .section2 h2 {
+        font-size: 25px;
+    }
+
+    .conteudo {
+        margin-top: 30px;
+    }
+
+    .info2,
+    .info3 {
+        padding: 30px 25px;
+
+        min-height: auto;
+    }
+
+    .info2 h3,
+    .info3 h3 {
+        font-size: 17px;
+    }
+
+    .info2 p,
+    .info3 p {
+        font-size: 14px;
+    }
+
+    .lOJINHA {
+        padding: 80px 20px;
+    }
+
+    .lOJINHA h2 {
+        font-size: 29px;
+    }
+
+    .lOJINHA p {
+        font-size: 15px;
+    }
+
+    .produtos {
+        font-size: 8px;
+
+        line-height: 2;
+    }
+
+    .botao-loja {
+        width: 230px;
+
+        height: 58px;
+
+        font-size: 11px;
+    }
+
+    .imagens-section {
+        height: 420px;
+    }
+
+    .galeria-cabecalho {
+        top: 25px;
+    }
+
+    .galeria-cabecalho h2 {
+        font-size: 16px;
+    }
+
+    .slide-btn {
+        width: 40px;
+        height: 40px;
+
+        font-size: 28px;
+    }
+
+    .anterior {
+        left: 15px;
+    }
+
+    .proximo {
+        right: 15px;
+    }
+
+    .secao-conteudo {
+        min-height: 500px;
+
+        padding: 80px 25px;
+    }
+
+    .secao-conteudo p {
+        font-size: 15px;
+    }
+
+    .logo-preloader {
+        width: 150px;
+        height: 150px;
+    }
+
+    #preloader h1 {
+        font-size: 19px;
+
+        letter-spacing: 3px;
+    }
+
+    #preloader p {
+        font-size: 10px;
+
+        letter-spacing: 2px;
+    }
+
+    .barra-carregamento {
+        width: 200px;
+    }
+
+    #preloader span {
+        font-size: 8px;
+
+        padding: 0 20px;
+    }
+
+    #voltar-topo {
+        right: 15px;
+        bottom: 15px;
+
+        width: 42px;
+        height: 42px;
+    }
+
 }
 
 
-.lOJINHA {
-    text-align: center;
-    padding: 100px 20px;
-    min-height: 450px;
-    background-color: #2927279a;
+/* =========================
+   ACESSIBILIDADE
+========================= */
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+@media (prefers-reduced-motion: reduce) {
 
-.lOJINHA h2 {
-    margin-bottom: 20px;
-    font-size: 40px;
-}
+    html {
+        scroll-behavior: auto;
+    }
 
-.lOJINHA h3 {
-    margin: 0 auto 40px;
-    max-width: 850px;
-    font-size: 21px;
-    line-height: 1.7;
-    font-weight: normal;
-}
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
 
-/* Botão */
-.botao-loja {
-    width: 280px;
-    height: 70px;
+        animation-iteration-count: 1 !important;
 
-    background-color: black;
-    color: white;
+        transition-duration: 0.01ms !important;
+    }
 
-    border: 2px solid white;
-    border-radius: 8px;
-
-    font-size: 21px;
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.3s ease,
-        background-color 0.3s ease,
-        color 0.3s ease;
-}
-
-/* Efeito do mouse */
-.botao-loja:hover {
-    transform: translateY(-8px);
-    background-color: white;
-    color: black;
 }

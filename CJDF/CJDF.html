@@ -2,214 +2,513 @@
 <html lang="pt-br">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CJDF</title>
+    <meta
+        name="description"
+        content="Conselho Jedi do Distrito Federal - Comunidade de fãs de Star Wars em Brasília."
+    >
+
+    <title>Conselho Jedi do Distrito Federal | CJDF</title>
 
     <link rel="stylesheet" href="cjdf.css">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap"
+        rel="stylesheet"
+    >
+
 </head>
 
+
 <body>
+
 
     <!-- =========================
          CABEÇALHO
     ========================== -->
 
-    <header>
+    <header id="cabecalho">
 
         <!-- LOGO -->
-        <img
-            class="logo"
-            src="img/cjdf logo.png"
-            alt="Logo CJDF"
-        >
+
+        <a href="#inicio" class="logo-link">
+
+            <img
+                class="logo"
+                src="img/cjdf logo.png"
+                alt="Logo do Conselho Jedi do Distrito Federal"
+            >
+
+        </a>
+
 
         <!-- MENU -->
-        <nav>
+
+        <nav aria-label="Navegação principal">
+
             <ul>
+
                 <li>
-                    <a href="#imagens">IMAGENS</a>
+                    <a href="#inicio" class="menu-link ativo">
+                        INÍCIO
+                    </a>
                 </li>
 
                 <li>
-                    <a href="#projetos">PROJETOS</a>
+                    <a href="#redes-sociais" class="menu-link">
+                        SOBRE
+                    </a>
                 </li>
 
                 <li>
-                    <a href="#atividades">ATIVIDADES</a>
+                    <a href="#imagens" class="menu-link">
+                        IMAGENS
+                    </a>
                 </li>
+
+                <li>
+                    <a href="#projetos" class="menu-link">
+                        PROJETOS
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#atividades" class="menu-link">
+                        ATIVIDADES
+                    </a>
+                </li>
+
             </ul>
+
         </nav>
 
     </header>
+
 
 
     <!-- =========================
          CONTEÚDO PRINCIPAL
     ========================== -->
 
-
-<section class="section1" id="inicio"> 
-
-    <h1 class="title">CONSELHO JEDI DO DISTRITO FEDERAL </h1>
-
-
-</section>
-
-<section class="section2" id="redes-sociais">
-
-    <div class="lado-logo">
-        <img src="img/cjdf logo.png" alt="Logo CJDF" class="logo2">
-        <h2>Sobre o CJDF</h2>
-    </div>
-
-    <div class="conteudo">
-
-        <div class="info2">
-            <h3>
-                O Conselho Jedi Distrito Federal é uma comunidade de fãs de Star Wars criada para reunir pessoas interessadas na franquia e promover atividades relacionadas à saga e à cultura geek.
-            </h3>
-        </div>
-
-        <div class="info3">
-            <h4>
-                O Conselho Jedi do Distrito Federal foi fundado em 2001. Ao longo dos anos, tornou-se uma das comunidades de fãs de Star Wars mais conhecidas da capital.
-
-                Um dos nomes mais importantes da história do grupo é Hermes Barreto, fundador do Conselho Jedi Brasília.
-            </h4>
-        </div>
-
-    </div>
-
-</section>
-
-<section class="lOJINHA">
-
-    <h2>LOJINHA DO CJDF</h2>
-
-    <h3>
-        Produtos exclusivos e raramente disponíveis temáticos do CJDF!
-        Jaquetas, pins, pôsteres, adesivos.
-    </h3>
-
-    <button class="botao-loja"
-        onclick="window.location.href='https://www.lojadojedi.com.br/lojinha-cjdf'">
-        Acessar Loja
-    </button>
-
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <main>
 
+
         <!-- =========================
-             SEÇÃO DE IMAGENS
+             HERO
         ========================== -->
 
-        <section class="section2" id="imagens">
+        <section
+            class="section1 animacao"
+            id="inicio"
+        >
 
-            <div class="slideshow">
+            <div class="hero-conteudo">
 
-                <!-- IMAGEM 1 -->
-                <div class="slide ativa">
-                    <img
-                        src="img/0a7b19d3-ec10-484b-85a6-4a1b922158ab.jpg"
-                        alt="Primeira imagem"
-                    >
-                </div>
+                <span class="hero-subtitulo">
+                    CONSELHO JEDI
+                </span>
 
-                <!-- IMAGEM 2 -->
-                <div class="slide">
-                    <img
-                        src="img/15c4b646-8f5b-4158-bf5d-9aedb25895c8.jpg"
-                        alt="Segunda imagem"
-                    >
-                </div>
+                <h1>
+                    DO DISTRITO FEDERAL
+                </h1>
 
-                <!-- IMAGEM 3 -->
-                <div class="slide">
-                    <img
-                        src="img/9b0ac6e3-cd4f-4494-83a0-9d6dab5df16a.jpg"
-                        alt="Terceira imagem"
-                    </div>
+                <div class="linha-dourada"></div>
+
+                <p>
+                    Uma comunidade de fãs de Star Wars,
+                    unida pela Força e pela paixão pela saga.
+                </p>
+
+                <a
+                    href="#redes-sociais"
+                    class="botao-hero"
+                >
+                    CONHEÇA O CJDF
+                </a>
 
             </div>
 
         </section>
 
 
+
         <!-- =========================
-             SEÇÃO DE PROJETOS
+             SOBRE O CJDF
         ========================== -->
 
-        <section id="projetos">
+        <section
+            class="section2 animacao"
+            id="redes-sociais"
+        >
 
-            <h2>PROJETOS</h2>
+            <div class="sobre-cabecalho">
+
+                <img
+                    src="img/cjdf logo.png"
+                    alt="Logo do Conselho Jedi do Distrito Federal"
+                    class="logo2"
+                >
+
+                <span class="titulo-pequeno">
+                    CONHEÇA
+                </span>
+
+                <h2>
+                    SOBRE O CJDF
+                </h2>
+
+                <div class="linha-dourada"></div>
+
+            </div>
+
+
+            <div class="conteudo">
+
+
+                <article class="info2">
+
+                    <span class="numero-card">
+                        01
+                    </span>
+
+                    <h3>
+                        Uma comunidade de fãs
+                    </h3>
+
+                    <p>
+                        O Conselho Jedi Distrito Federal é uma
+                        comunidade de fãs de Star Wars criada para
+                        reunir pessoas interessadas na franquia e
+                        promover atividades relacionadas à saga e
+                        à cultura geek.
+                    </p>
+
+                </article>
+
+
+
+                <article class="info3">
+
+                    <span class="numero-card">
+                        02
+                    </span>
+
+                    <h3>
+                        História e tradição
+                    </h3>
+
+                    <p>
+                        O Conselho Jedi do Distrito Federal foi
+                        fundado em 2001. Ao longo dos anos,
+                        tornou-se uma das comunidades de fãs de
+                        Star Wars mais conhecidas da capital.
+                        Um dos nomes importantes da história do
+                        grupo é Hermes Barreto, fundador do
+                        Conselho Jedi Brasília.
+                    </p>
+
+                </article>
+
+
+            </div>
 
         </section>
 
 
+
         <!-- =========================
-             SEÇÃO DE ATIVIDADES
+             LOJINHA
         ========================== -->
 
-        <section id="atividades">
+        <section class="lOJINHA animacao">
 
-            <h2>ATIVIDADES</h2>
+            <div class="loja-conteudo">
+
+                <span class="titulo-pequeno">
+                    PRODUTOS OFICIAIS
+                </span>
+
+                <h2>
+                    LOJINHA DO CJDF
+                </h2>
+
+                <div class="linha-dourada"></div>
+
+                <p>
+                    Produtos exclusivos e raramente disponíveis
+                    com a temática do Conselho Jedi do Distrito
+                    Federal.
+                </p>
+
+                <span class="produtos">
+                    JAQUETAS • PINS • PÔSTERES • ADESIVOS
+                </span>
+
+
+                <a
+                    href="https://www.lojadojedi.com.br/lojinha-cjdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="botao-loja"
+                >
+                    ACESSAR LOJA
+                </a>
+
+            </div>
 
         </section>
 
+
+
+        <!-- =========================
+             GALERIA
+        ========================== -->
+
+        <section
+            class="imagens-section animacao"
+            id="imagens"
+        >
+
+            <div class="galeria-cabecalho">
+
+                <span>
+                    GALERIA
+                </span>
+
+                <h2>
+                    MOMENTOS DO CJDF
+                </h2>
+
+            </div>
+
+
+            <div class="slideshow">
+
+
+                <!-- IMAGEM 1 -->
+
+                <div class="slide ativa">
+
+                    <img
+                        src="img/0a7b19d3-ec10-484b-85a6-4a1b922158ab.jpg"
+                        alt="Momento do Conselho Jedi do Distrito Federal"
+                    >
+
+                </div>
+
+
+
+                <!-- IMAGEM 2 -->
+
+                <div class="slide">
+
+                    <img
+                        src="img/15c4b646-8f5b-4158-bf5d-9aedb25895c8.jpg"
+                        alt="Evento do Conselho Jedi do Distrito Federal"
+                    >
+
+                </div>
+
+
+
+                <!-- IMAGEM 3 -->
+
+                <div class="slide">
+
+                    <img
+                        src="img/9b0ac6e3-cd4f-4494-83a0-9d6dab5df16a.jpg"
+                        alt="Participantes do Conselho Jedi do Distrito Federal"
+                    >
+
+                </div>
+
+
+                <!-- CONTROLES -->
+
+                <button
+                    class="slide-btn anterior"
+                    aria-label="Imagem anterior"
+                >
+                    ‹
+                </button>
+
+                <button
+                    class="slide-btn proximo"
+                    aria-label="Próxima imagem"
+                >
+                    ›
+                </button>
+
+
+                <!-- INDICADORES -->
+
+                <div class="indicadores">
+
+                    <button
+                        class="indicador ativo"
+                        data-slide="0"
+                        aria-label="Mostrar imagem 1"
+                    ></button>
+
+                    <button
+                        class="indicador"
+                        data-slide="1"
+                        aria-label="Mostrar imagem 2"
+                    ></button>
+
+                    <button
+                        class="indicador"
+                        data-slide="2"
+                        aria-label="Mostrar imagem 3"
+                    ></button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             PROJETOS
+        ========================== -->
+
+        <section
+            id="projetos"
+            class="secao-conteudo animacao"
+        >
+
+            <div>
+
+                <span class="titulo-pequeno">
+                    O QUE FAZEMOS
+                </span>
+
+                <h2>
+                    PROJETOS
+                </h2>
+
+                <div class="linha-dourada"></div>
+
+                <p>
+                    Projetos e iniciativas desenvolvidos pelo
+                    Conselho Jedi do Distrito Federal para
+                    fortalecer a comunidade e celebrar o universo
+                    de Star Wars.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             ATIVIDADES
+        ========================== -->
+
+        <section
+            id="atividades"
+            class="secao-conteudo atividades animacao"
+        >
+
+            <div>
+
+                <span class="titulo-pequeno">
+                    FAÇA PARTE
+                </span>
+
+                <h2>
+                    ATIVIDADES
+                </h2>
+
+                <div class="linha-dourada"></div>
+
+                <p>
+                    Encontros, eventos, ações e experiências que
+                    aproximam os fãs de Star Wars no Distrito Federal.
+                </p>
+
+            </div>
+
+        </section>
 
     </main>
 
 
-    <!-- JAVASCRIPT -->
+
+    <!-- =========================
+         BOTÃO VOLTAR AO TOPO
+    ========================== -->
+
+    <button
+        id="voltar-topo"
+        aria-label="Voltar ao topo"
+    >
+        ↑
+    </button>
+
+
+
+    <!-- =========================
+         PRELOADER
+    ========================== -->
+
+    <div id="preloader">
+
+        <div class="preloader-conteudo">
+
+            <div class="logo-preloader">
+
+                <img
+                    src="img/cjdf logo.png"
+                    alt="Logo do Conselho Jedi do Distrito Federal"
+                >
+
+            </div>
+
+
+            <h1>
+                CONSELHO JEDI
+            </h1>
+
+            <p>
+                DO DISTRITO FEDERAL
+            </p>
+
+
+            <div class="barra-carregamento">
+
+                <div class="progresso"></div>
+
+            </div>
+
+
+            <span>
+                QUE A FORÇA ESTEJA COM VOCÊ SEMPRE...
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
     <script src="CJDF.js"></script>
+
 
 </body>
 
