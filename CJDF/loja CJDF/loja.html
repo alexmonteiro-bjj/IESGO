@@ -1,0 +1,575 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Loja | CJDF</title>
+
+    <!-- FONTE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="loja.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         PRELOADER
+    ========================== -->
+
+    <div id="preloader">
+
+        <div class="preloader-conteudo">
+
+            <img
+                src="img/cjdf logo.png"
+                alt="Logo CJDF"
+                class="logo-preloader"
+            >
+
+            <h2>LOJA CJDF</h2>
+
+            <div class="barra">
+
+                <div class="progresso"></div>
+
+            </div>
+
+            <p>PREPARANDO A LOJA...</p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         CABEÇALHO
+    ========================== -->
+
+    <header class="cabecalho">
+
+        <a href="../index.html" class="logo">
+
+            <img
+                src="img/cjdf logo.png"
+                alt="Logo CJDF"
+            >
+
+            <span>CJDF</span>
+
+        </a>
+
+
+        <nav class="menu">
+
+            <a href="../index.html">
+                INÍCIO
+            </a>
+
+            <a href="#produtos">
+                PRODUTOS
+            </a>
+
+            <a href="#como-comprar">
+                COMO COMPRAR
+            </a>
+
+            <a href="#contato">
+                CONTATO
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+
+        <div class="hero-conteudo">
+
+            <p class="subtitulo">
+                CONSELHO JEDI DO DISTRITO FEDERAL
+            </p>
+
+            <h1>
+                LOJA CJDF
+            </h1>
+
+            <p class="texto-hero">
+                Produtos para levar a identidade
+                do CJDF com você.
+            </p>
+
+            <a
+                href="#produtos"
+                class="botao"
+            >
+                VER PRODUTOS
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         PRODUTOS
+    ========================== -->
+
+    <section
+        class="produtos"
+        id="produtos"
+    >
+
+        <div class="titulo">
+
+            <span></span>
+
+            <h2>CATÁLOGO</h2>
+
+            <span></span>
+
+        </div>
+
+
+        <p class="descricao-secao">
+            Escolha uma categoria para encontrar
+            o produto que procura.
+        </p>
+
+
+        <!-- FILTROS -->
+
+        <div class="filtros">
+
+            <button
+                class="filtro ativo"
+                data-filtro="todos"
+            >
+                TODOS
+            </button>
+
+            <button
+                class="filtro"
+                data-filtro="vestuario"
+            >
+                VESTUÁRIO
+            </button>
+
+            <button
+                class="filtro"
+                data-filtro="acessorios"
+            >
+                ACESSÓRIOS
+            </button>
+
+        </div>
+
+
+
+        <!-- GRID -->
+
+        <div class="grid-produtos">
+
+
+            <!-- CAMISETA -->
+
+            <article
+                class="produto"
+                data-categoria="vestuario"
+            >
+
+                <div class="produto-imagem">
+
+                    <img
+                        src="img/camiseta.jpg"
+                        alt="Camiseta CJDF"
+                    >
+
+                </div>
+
+
+                <div class="produto-info">
+
+                    <p>VESTUÁRIO</p>
+
+                    <h3>CAMISETA CJDF</h3>
+
+                    <button
+                        class="ver-detalhes"
+                        data-produto="camiseta"
+                    >
+                        VER DETALHES
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- JAQUETA -->
+
+            <article
+                class="produto"
+                data-categoria="vestuario"
+            >
+
+                <div class="produto-imagem">
+
+                    <img
+                        src="img/jaqueta.jpg"
+                        alt="Jaqueta CJDF"
+                    >
+
+                </div>
+
+
+                <div class="produto-info">
+
+                    <p>VESTUÁRIO</p>
+
+                    <h3>JAQUETA CJDF</h3>
+
+                    <button
+                        class="ver-detalhes"
+                        data-produto="jaqueta"
+                    >
+                        VER DETALHES
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- CANECA -->
+
+            <article
+                class="produto"
+                data-categoria="acessorios"
+            >
+
+                <div class="produto-imagem">
+
+                    <img
+                        src="img/caneca.jpg"
+                        alt="Caneca CJDF"
+                    >
+
+                </div>
+
+
+                <div class="produto-info">
+
+                    <p>ACESSÓRIOS</p>
+
+                    <h3>CANECA CJDF</h3>
+
+                    <button
+                        class="ver-detalhes"
+                        data-produto="caneca"
+                    >
+                        VER DETALHES
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- BONÉ -->
+
+            <article
+                class="produto"
+                data-categoria="acessorios"
+            >
+
+                <div class="produto-imagem">
+
+                    <img
+                        src="img/bone.jpg"
+                        alt="Boné CJDF"
+                    >
+
+                </div>
+
+
+                <div class="produto-info">
+
+                    <p>ACESSÓRIOS</p>
+
+                    <h3>BONÉ CJDF</h3>
+
+                    <button
+                        class="ver-detalhes"
+                        data-produto="bone"
+                    >
+                        VER DETALHES
+                    </button>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         COMO COMPRAR
+    ========================== -->
+
+    <section
+        class="como-comprar"
+        id="como-comprar"
+    >
+
+        <div class="titulo">
+
+            <span></span>
+
+            <h2>COMO COMPRAR</h2>
+
+            <span></span>
+
+        </div>
+
+
+        <div class="passos">
+
+
+            <div class="passo">
+
+                <strong>01</strong>
+
+                <h3>ESCOLHA</h3>
+
+                <p>
+                    Escolha o produto que deseja.
+                </p>
+
+            </div>
+
+
+            <div class="passo">
+
+                <strong>02</strong>
+
+                <h3>ENTRE EM CONTATO</h3>
+
+                <p>
+                    Clique em "Tenho interesse".
+                </p>
+
+            </div>
+
+
+            <div class="passo">
+
+                <strong>03</strong>
+
+                <h3>COMBINE</h3>
+
+                <p>
+                    Consulte disponibilidade,
+                    tamanhos e valores.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         CONTATO
+    ========================== -->
+
+    <section
+        class="contato"
+        id="contato"
+    >
+
+        <p class="subtitulo">
+            LOJA CJDF
+        </p>
+
+        <h2>
+            FICOU INTERESSADO?
+        </h2>
+
+        <p>
+            Nossa equipe está pronta para
+            ajudar você.
+        </p>
+
+        <a
+            href="https://wa.me/SEUNUMERO"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="botao"
+        >
+            FALAR CONOSCO
+        </a>
+
+    </section>
+
+
+
+    <!-- =========================
+         MODAL
+    ========================== -->
+
+    <div
+        class="modal"
+        id="modal"
+    >
+
+        <div class="modal-conteudo">
+
+            <button
+                class="fechar"
+                id="fecharModal"
+                aria-label="Fechar"
+            >
+                ×
+            </button>
+
+
+            <div class="modal-imagem">
+
+                <img
+                    id="modalImagem"
+                    src=""
+                    alt=""
+                >
+
+            </div>
+
+
+            <div class="modal-info">
+
+                <p
+                    id="modalCategoria"
+                    class="categoria-modal"
+                ></p>
+
+
+                <h2 id="modalTitulo"></h2>
+
+
+                <p id="modalDescricao"></p>
+
+
+                <div class="detalhe-modal">
+
+                    <strong>
+                        TAMANHOS
+                    </strong>
+
+                    <div
+                        class="tamanhos"
+                        id="modalTamanhos"
+                    ></div>
+
+                </div>
+
+
+                <p
+                    id="modalDisponibilidade"
+                    class="disponibilidade"
+                ></p>
+
+
+                <p class="valor">
+                    CONSULTE O VALOR
+                </p>
+
+
+                <a
+                    id="whatsappProduto"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="botao botao-whatsapp"
+                >
+                    TENHO INTERESSE
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         RODAPÉ
+    ========================== -->
+
+    <footer>
+
+        <div class="linha"></div>
+
+        <p>
+            © 2026 Conselho Jedi do Distrito Federal
+        </p>
+
+        <p class="frase">
+            Que a Força esteja com você.
+        </p>
+
+    </footer>
+
+
+
+    <!-- BOTÃO TOPO -->
+
+    <button
+        id="topo"
+        aria-label="Voltar ao topo"
+    >
+        ↑
+    </button>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="loja.js"></script>
+
+</body>
+
+</html>
+
