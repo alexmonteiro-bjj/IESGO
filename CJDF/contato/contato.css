@@ -1,0 +1,911 @@
+
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #050505;
+    color: white;
+    font-family: "Audiowide", sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+textarea {
+    font-family: inherit;
+}
+
+
+/* =========================
+   PRELOADER
+========================= */
+
+#preloader {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 99999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+#preloader.esconder {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.preloader-conteudo {
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+}
+
+.logo-preloader {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+
+    margin-bottom: 25px;
+
+    filter:
+        drop-shadow(0 0 10px rgba(255, 215, 0, 0.5))
+        drop-shadow(0 0 30px rgba(255, 215, 0, 0.3));
+
+    animation: pulsarLogo 2s infinite ease-in-out;
+}
+
+@keyframes pulsarLogo {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.06);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+.preloader-conteudo h1 {
+    color: #d4af37;
+    font-size: 34px;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+}
+
+.preloader-conteudo p {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin-bottom: 35px;
+}
+
+.barra-carregamento {
+    width: 100%;
+    height: 3px;
+    background: #252525;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.progresso {
+    width: 0%;
+    height: 100%;
+    background: #d4af37;
+
+    animation: carregar 4s linear forwards;
+}
+
+@keyframes carregar {
+
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+
+}
+
+.preloader-conteudo span {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #777;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.cabecalho {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 6%;
+
+    background: rgba(0, 0, 0, 0.92);
+
+    border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+
+    z-index: 1000;
+
+    backdrop-filter: blur(10px);
+}
+
+.logo img {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.menu a {
+    position: relative;
+
+    font-size: 11px;
+    letter-spacing: 1px;
+
+    color: #ddd;
+
+    transition: 0.3s;
+}
+
+.menu a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -8px;
+
+    width: 0;
+    height: 2px;
+
+    background: #d4af37;
+
+    transition: 0.3s;
+}
+
+.menu a:hover,
+.menu a.ativo {
+    color: #d4af37;
+}
+
+.menu a:hover::after,
+.menu a.ativo::after {
+    width: 100%;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 120px 8% 80px;
+
+    position: relative;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(212, 175, 55, 0.12),
+            transparent 45%
+        ),
+        #050505;
+}
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.7),
+            rgba(0,0,0,0.95)
+        );
+
+    pointer-events: none;
+}
+
+.hero-conteudo {
+    position: relative;
+    z-index: 2;
+}
+
+.mini-titulo {
+    color: #d4af37;
+
+    font-size: 10px;
+    letter-spacing: 4px;
+
+    display: block;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 8vw, 100px);
+
+    line-height: 0.95;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 30px;
+}
+
+.hero h1 strong {
+    color: #d4af37;
+}
+
+.hero p {
+    color: #aaa;
+
+    font-size: 12px;
+    letter-spacing: 3px;
+
+    margin-bottom: 45px;
+}
+
+
+/* =========================
+   BOTÕES
+========================= */
+
+.botao {
+    display: inline-block;
+
+    padding: 16px 30px;
+
+    border: 1px solid #d4af37;
+
+    color: #d4af37;
+
+    font-size: 11px;
+    letter-spacing: 2px;
+
+    transition: 0.3s;
+}
+
+.botao:hover {
+    background: #d4af37;
+    color: #000;
+
+    box-shadow:
+        0 0 25px rgba(212,175,55,0.3);
+}
+
+
+/* =========================
+   TÍTULOS
+========================= */
+
+.titulo-secao {
+    max-width: 700px;
+    margin-bottom: 60px;
+}
+
+.titulo-secao span {
+    color: #d4af37;
+
+    font-size: 10px;
+    letter-spacing: 4px;
+}
+
+.titulo-secao h2 {
+    font-size: clamp(32px, 5vw, 60px);
+
+    line-height: 1.05;
+
+    margin: 18px 0;
+}
+
+.titulo-secao h2 strong {
+    color: #d4af37;
+}
+
+.titulo-secao p {
+    color: #999;
+
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+
+/* =========================
+   CONTATOS
+========================= */
+
+.formas {
+    padding: 120px 8%;
+
+    background: #080808;
+}
+
+.contatos-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+
+    max-width: 1200px;
+    margin: auto;
+}
+
+.contato-card {
+    padding: 45px 35px;
+
+    border: 1px solid #222;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0d0d0d,
+            #050505
+        );
+
+    transition: 0.4s;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.contato-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background: #d4af37;
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: 0.4s;
+}
+
+.contato-card:hover {
+    transform: translateY(-8px);
+
+    border-color: rgba(212,175,55,0.5);
+}
+
+.contato-card:hover::before {
+    transform: scaleX(1);
+}
+
+.icone {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #d4af37;
+
+    color: #d4af37;
+
+    font-size: 25px;
+
+    margin-bottom: 30px;
+}
+
+.contato-card > span {
+    color: #d4af37;
+
+    font-size: 9px;
+    letter-spacing: 3px;
+}
+
+.contato-card h3 {
+    margin: 15px 0;
+
+    font-size: 20px;
+}
+
+.contato-card p {
+    color: #888;
+
+    font-size: 11px;
+    line-height: 1.8;
+
+    min-height: 75px;
+
+    margin-bottom: 25px;
+}
+
+.botao-card {
+    display: inline-block;
+
+    color: #d4af37;
+
+    font-size: 9px;
+    letter-spacing: 1px;
+
+    transition: 0.3s;
+}
+
+.botao-card:hover {
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.mensagem {
+    padding: 120px 8%;
+
+    background: #050505;
+}
+
+.mensagem-conteudo {
+    max-width: 850px;
+    margin: auto;
+}
+
+#formContato {
+    display: flex;
+    flex-direction: column;
+
+    gap: 25px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.campo label {
+    color: #d4af37;
+
+    font-size: 9px;
+    letter-spacing: 3px;
+}
+
+.campo input,
+.campo textarea {
+    width: 100%;
+
+    padding: 17px;
+
+    background: #0b0b0b;
+
+    border: 1px solid #292929;
+
+    color: white;
+
+    outline: none;
+
+    font-size: 12px;
+
+    resize: vertical;
+
+    transition: 0.3s;
+}
+
+.campo input:focus,
+.campo textarea:focus {
+    border-color: #d4af37;
+
+    box-shadow:
+        0 0 15px rgba(212,175,55,0.08);
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+    color: #555;
+}
+
+.botao-enviar {
+    padding: 18px;
+
+    border: 1px solid #d4af37;
+
+    background: transparent;
+
+    color: #d4af37;
+
+    cursor: pointer;
+
+    font-size: 10px;
+    letter-spacing: 2px;
+
+    transition: 0.3s;
+}
+
+.botao-enviar:hover {
+    background: #d4af37;
+    color: #000;
+}
+
+
+/* =========================
+   FRASE
+========================= */
+
+.frase {
+    min-height: 400px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 80px 8%;
+
+    border-top: 1px solid #181818;
+    border-bottom: 1px solid #181818;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(212,175,55,0.08),
+            transparent 55%
+        );
+}
+
+.frase span {
+    color: #777;
+
+    font-size: 12px;
+    letter-spacing: 5px;
+}
+
+.frase h2 {
+    margin-top: 20px;
+
+    font-size: clamp(35px, 6vw, 70px);
+}
+
+.frase strong {
+    color: #d4af37;
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.cta {
+    padding: 120px 8%;
+
+    text-align: center;
+
+    background: #080808;
+}
+
+.cta-conteudo > span {
+    color: #d4af37;
+
+    font-size: 10px;
+    letter-spacing: 4px;
+}
+
+.cta h2 {
+    margin: 20px 0;
+
+    font-size: clamp(35px, 6vw, 70px);
+
+    line-height: 1;
+}
+
+.cta h2 strong {
+    color: #d4af37;
+}
+
+.cta p {
+    color: #888;
+
+    font-size: 12px;
+
+    line-height: 1.8;
+
+    max-width: 550px;
+
+    margin: 0 auto 35px;
+}
+
+.cta-botoes {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+.botao-secundario {
+    display: inline-block;
+
+    padding: 16px 30px;
+
+    border: 1px solid #333;
+
+    color: #aaa;
+
+    font-size: 11px;
+    letter-spacing: 2px;
+
+    transition: 0.3s;
+}
+
+.botao-secundario:hover {
+    border-color: #d4af37;
+    color: #d4af37;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.rodape {
+    padding: 60px 8% 30px;
+
+    background: #000;
+
+    border-top: 1px solid rgba(212,175,55,0.25);
+
+    text-align: center;
+}
+
+.rodape-logo img {
+    width: 70px;
+
+    margin-bottom: 15px;
+}
+
+.rodape-logo p {
+    color: #777;
+
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.rodape-links {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 25px;
+
+    margin: 35px 0;
+}
+
+.rodape-links a {
+    color: #888;
+
+    font-size: 9px;
+
+    transition: 0.3s;
+}
+
+.rodape-links a:hover {
+    color: #d4af37;
+}
+
+.copyright {
+    color: #444;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================
+   VOLTAR AO TOPO
+========================= */
+
+#voltarTopo {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    width: 45px;
+    height: 45px;
+
+    border: 1px solid #d4af37;
+
+    background: #050505;
+
+    color: #d4af37;
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: 0.3s;
+
+    z-index: 500;
+}
+
+#voltarTopo.mostrar {
+    opacity: 1;
+    visibility: visible;
+}
+
+#voltarTopo:hover {
+    background: #d4af37;
+    color: #000;
+}
+
+
+/* =========================
+   ANIMAÇÕES
+========================= */
+
+.revelar {
+    opacity: 0;
+
+    transform: translateY(40px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.revelar.aparecer {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 900px) {
+
+    .cabecalho {
+        padding: 0 4%;
+    }
+
+    .menu {
+        gap: 15px;
+    }
+
+    .menu a {
+        font-size: 8px;
+    }
+
+    .contatos-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .cabecalho {
+        height: auto;
+
+        padding: 15px 5%;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .logo img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .menu {
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+        gap: 12px;
+    }
+
+    .menu a {
+        font-size: 7px;
+    }
+
+    .hero {
+        padding-top: 180px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+    }
+
+    .formas,
+    .mensagem,
+    .cta {
+        padding: 80px 6%;
+    }
+
+    .titulo-secao h2 {
+        font-size: 35px;
+    }
+
+    .contato-card {
+        padding: 35px 25px;
+    }
+
+    .cta-botoes {
+        flex-direction: column;
+    }
+
+    .cta-botoes a {
+        width: 100%;
+    }
+
+}
+

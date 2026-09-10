@@ -1,0 +1,1285 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050505;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =========================
+   PRELOADER
+========================= */
+
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: radial-gradient(
+    circle at center,
+    #181818 0%,
+    #080808 45%,
+    #000 100%
+  );
+
+  transition:
+    opacity 1s ease,
+    visibility 1s ease;
+}
+
+#preloader.esconder {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.preloader-conteudo {
+  width: min(90%, 500px);
+  text-align: center;
+}
+
+.preloader-conteudo img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+
+  filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.5));
+
+  animation: pulsar 2s infinite ease-in-out;
+}
+
+.preloader-conteudo h2 {
+  margin-top: 15px;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 30px;
+
+  letter-spacing: 5px;
+
+  color: #d4af37;
+}
+
+.preloader-conteudo p {
+  margin-top: 8px;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 3px;
+}
+
+.barra {
+  width: 100%;
+  height: 3px;
+
+  margin-top: 30px;
+
+  background: #222;
+
+  overflow: hidden;
+}
+
+.progresso {
+  width: 0;
+  height: 100%;
+
+  background: #d4af37;
+
+  animation: carregar 4s linear forwards;
+}
+
+.preloader-conteudo span {
+  display: block;
+
+  margin-top: 15px;
+
+  color: #777;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+}
+
+@keyframes carregar {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes pulsar {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.cabecalho {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 82px;
+
+  z-index: 1000;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 5%;
+
+  background: rgba(0, 0, 0, 0.88);
+
+  backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+
+  transition: 0.4s ease;
+}
+
+.cabecalho.scrolled {
+  height: 70px;
+
+  background: rgba(0, 0, 0, 0.96);
+}
+
+.logo img {
+  width: 58px;
+  height: 58px;
+
+  object-fit: contain;
+}
+
+.menu {
+  display: flex;
+
+  align-items: center;
+
+  gap: 25px;
+}
+
+.menu a {
+  position: relative;
+
+  color: #ccc;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 1px;
+
+  transition: 0.3s ease;
+}
+
+.menu a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -9px;
+
+  width: 0;
+  height: 2px;
+
+  background: #d4af37;
+
+  transition: 0.3s ease;
+}
+
+.menu a:hover,
+.menu a.ativo {
+  color: #d4af37;
+}
+
+.menu a:hover::after,
+.menu a.ativo::after {
+  width: 100%;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  min-height: 100vh;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.95),
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.9)
+    ),
+    url("img/sobre1.jpg") center/cover no-repeat;
+}
+
+.hero-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background: radial-gradient(
+    circle at center,
+    transparent 15%,
+    rgba(0, 0, 0, 0.8) 90%
+  );
+}
+
+.hero-conteudo {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(900px, 90%);
+}
+
+.mini-titulo,
+.titulo-secao > span {
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 10px;
+
+  letter-spacing: 4px;
+
+  color: #d4af37;
+}
+
+.hero h1 {
+  margin-top: 20px;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: clamp(40px, 7vw, 82px);
+
+  line-height: 1.05;
+
+  letter-spacing: 3px;
+}
+
+.linha-dourada {
+  width: 100px;
+  height: 2px;
+
+  margin: 25px auto;
+
+  background: #d4af37;
+}
+
+.hero p {
+  max-width: 700px;
+
+  margin: auto;
+
+  color: #bbb;
+
+  font-size: 17px;
+
+  line-height: 1.8;
+}
+
+.botao {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-top: 35px;
+
+  padding: 15px 28px;
+
+  border: 1px solid #d4af37;
+
+  color: #d4af37;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+
+  transition: 0.35s ease;
+}
+
+.botao:hover {
+  background: #d4af37;
+
+  color: #000;
+
+  transform: translateY(-3px);
+}
+
+/* =========================
+   TÍTULOS
+========================= */
+
+.titulo-secao {
+  max-width: 850px;
+
+  margin: 0 auto 80px;
+
+  text-align: center;
+}
+
+.titulo-secao h2 {
+  margin-top: 15px;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: clamp(28px, 4vw, 50px);
+}
+
+.titulo-secao > p {
+  max-width: 650px;
+
+  margin: 20px auto 0;
+
+  color: #888;
+
+  line-height: 1.8;
+}
+
+/* =========================
+   HISTÓRIA
+========================= */
+
+.historia {
+  padding: 130px 7%;
+
+  background: radial-gradient(circle at top, #191919, #050505 65%);
+}
+
+.historia-introducao {
+  max-width: 1200px;
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 70px;
+
+  align-items: center;
+}
+
+.historia-texto {
+  color: #aaa;
+
+  line-height: 1.9;
+}
+
+.numero-destaque {
+  display: block;
+
+  margin-bottom: 15px;
+
+  color: #d4af37;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 13px;
+
+  letter-spacing: 3px;
+}
+
+.historia-texto h3 {
+  margin-bottom: 25px;
+
+  color: #fff;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 30px;
+}
+
+.historia-texto p {
+  margin-bottom: 20px;
+}
+
+.historia-imagem img {
+  width: 100%;
+
+  height: 480px;
+
+  object-fit: cover;
+
+  border: 1px solid rgba(212, 175, 55, 0.45);
+
+  filter: brightness(0.75);
+}
+
+/* TIMELINE */
+
+.timeline {
+  max-width: 1000px;
+
+  margin: 120px auto 0;
+
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+
+  position: absolute;
+
+  left: 35px;
+
+  top: 0;
+  bottom: 0;
+
+  width: 1px;
+
+  background: rgba(212, 175, 55, 0.35);
+}
+
+.timeline-item {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: 70px 1fr;
+
+  gap: 30px;
+
+  margin-bottom: 45px;
+}
+
+.timeline-ponto {
+  width: 70px;
+  height: 70px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #080808;
+
+  border: 1px solid #d4af37;
+
+  color: #d4af37;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 12px;
+
+  z-index: 2;
+}
+
+.timeline-card {
+  padding: 25px 30px;
+
+  border: 1px solid #222;
+
+  background: #0b0b0b;
+
+  transition: 0.4s ease;
+}
+
+.timeline-card:hover {
+  border-color: rgba(212, 175, 55, 0.6);
+
+  transform: translateX(5px);
+}
+
+.timeline-card > span {
+  color: #d4af37;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+}
+
+.timeline-card h3 {
+  margin: 12px 0;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 19px;
+}
+
+.timeline-card p {
+  color: #888;
+
+  line-height: 1.7;
+}
+
+.timeline-item.destaque .timeline-card {
+  border-color: #d4af37;
+
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), #090909);
+}
+
+.timeline-item.destaque .timeline-ponto {
+  background: #d4af37;
+
+  color: #000;
+}
+
+.link-dourado {
+  display: inline-block;
+
+  margin-top: 20px;
+
+  color: #d4af37;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 8px;
+
+  letter-spacing: 1px;
+}
+
+/* =========================
+   JEDICON
+========================= */
+
+.jedicon {
+  min-height: 750px;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.94)),
+    url("img/sobre1.jpg") center/cover fixed;
+}
+
+.jedicon-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background: radial-gradient(
+    circle at center,
+    rgba(212, 175, 55, 0.13),
+    transparent 60%
+  );
+}
+
+.jedicon-conteudo {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(900px, 90%);
+}
+
+.tag-dourada {
+  color: #d4af37;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 3px;
+}
+
+.jedicon h2 {
+  margin-top: 20px;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: clamp(65px, 13vw, 160px);
+
+  letter-spacing: 8px;
+
+  line-height: 1;
+
+  text-shadow: 0 0 30px rgba(212, 175, 55, 0.25);
+}
+
+.jedicon h2 span {
+  color: #d4af37;
+}
+
+.jedicon h3 {
+  margin-bottom: 25px;
+
+  color: #d4af37;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 12px;
+
+  letter-spacing: 4px;
+}
+
+.jedicon p {
+  max-width: 700px;
+
+  margin: 0 auto 18px;
+
+  color: #aaa;
+
+  font-size: 16px;
+
+  line-height: 1.9;
+}
+
+.botao-dourado {
+  background: #d4af37;
+
+  color: #000;
+}
+
+.botao-dourado:hover {
+  background: #f0cf62;
+}
+
+/* =========================
+   SOBRE
+========================= */
+
+.sobre {
+  padding: 130px 7%;
+
+  background: #080808;
+}
+
+.sobre-grid {
+  max-width: 1200px;
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+.sobre-card {
+  padding: 50px 30px;
+
+  text-align: center;
+
+  background: #0d0d0d;
+
+  border: 1px solid #242424;
+
+  transition: 0.4s ease;
+}
+
+.sobre-card:hover {
+  transform: translateY(-8px);
+
+  border-color: #d4af37;
+}
+
+.icone {
+  margin-bottom: 25px;
+
+  color: #d4af37;
+
+  font-size: 38px;
+}
+
+.sobre-card h3 {
+  margin-bottom: 18px;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 16px;
+}
+
+.sobre-card p {
+  color: #888;
+
+  line-height: 1.8;
+}
+
+/* =========================
+   MISSÃO
+========================= */
+
+.missao {
+  padding: 130px 7%;
+
+  background: radial-gradient(circle at center, #171717, #050505 70%);
+}
+
+.missao-conteudo {
+  max-width: 1100px;
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 70px;
+
+  align-items: center;
+}
+
+.missao-principal {
+  padding: 50px;
+
+  border: 1px solid #d4af37;
+
+  background: #0b0b0b;
+}
+
+.missao-principal span {
+  color: #d4af37;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 12px;
+}
+
+.missao-principal h3 {
+  margin: 20px 0;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 30px;
+}
+
+.missao-principal p {
+  color: #999;
+
+  line-height: 1.9;
+}
+
+.missao-lista {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 25px;
+}
+
+.missao-item {
+  display: grid;
+
+  grid-template-columns: 50px 1fr;
+
+  gap: 20px;
+
+  padding-bottom: 25px;
+
+  border-bottom: 1px solid #222;
+}
+
+.missao-item strong {
+  color: #d4af37;
+
+  font-family: "Audiowide", sans-serif;
+}
+
+.missao-item h3 {
+  margin-bottom: 8px;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 15px;
+}
+
+.missao-item p {
+  color: #888;
+
+  line-height: 1.7;
+
+  font-size: 14px;
+}
+
+/* =========================
+   FRASE
+========================= */
+
+.frase {
+  padding: 150px 7%;
+
+  text-align: center;
+
+  border-top: 1px solid #222;
+
+  border-bottom: 1px solid #222;
+
+  background: linear-gradient(135deg, #070707, #151515);
+}
+
+.frase span {
+  color: #d4af37;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 4px;
+}
+
+.frase h2 {
+  margin-top: 25px;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: clamp(28px, 5vw, 60px);
+
+  line-height: 1.35;
+}
+
+/* =========================
+   CTA
+========================= */
+
+.cta {
+  padding: 120px 7%;
+
+  text-align: center;
+
+  background: radial-gradient(circle at center, #181818, #050505 70%);
+}
+
+.cta-conteudo {
+  max-width: 850px;
+
+  margin: auto;
+}
+
+.cta-conteudo > span {
+  color: #d4af37;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 3px;
+}
+
+.cta h2 {
+  margin-top: 20px;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: clamp(30px, 5vw, 58px);
+}
+
+.cta p {
+  max-width: 650px;
+
+  margin: 25px auto;
+
+  color: #888;
+
+  line-height: 1.8;
+}
+
+.cta-botoes {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 15px;
+}
+
+.botao-outline {
+  background: transparent;
+}
+
+/* =========================
+   RODAPÉ
+========================= */
+
+.rodape {
+  padding: 50px 7% 25px;
+
+  background: #000;
+
+  border-top: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+.rodape-conteudo {
+  max-width: 1200px;
+
+  margin: auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+.rodape-logo {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  gap: 8px;
+}
+
+.rodape-logo img {
+  width: 55px;
+  height: 55px;
+
+  object-fit: contain;
+}
+
+.rodape-logo p {
+  margin: 0;
+
+  color: #666;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  line-height: 1.5;
+
+  text-align: center;
+}
+
+.rodape-links {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 20px;
+}
+
+.rodape-links a {
+  color: #666;
+
+  font-family: "Audiowide", sans-serif;
+
+  font-size: 8px;
+
+  letter-spacing: 1px;
+
+  transition: 0.3s;
+}
+
+.rodape-links a:hover {
+  color: #d4af37;
+}
+
+.rodape-final {
+  max-width: 1200px;
+
+  margin: 35px auto 0;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #1c1c1c;
+
+  display: flex;
+
+  justify-content: space-between;
+}
+
+.rodape-final p {
+  color: #555;
+
+  font-size: 9px;
+
+  letter-spacing: 1px;
+}
+
+/* =========================
+   BOTÃO TOPO
+========================= */
+
+#topo {
+  position: fixed;
+
+  right: 25px;
+  bottom: 25px;
+
+  width: 45px;
+  height: 45px;
+
+  border: 1px solid #d4af37;
+
+  background: #080808;
+
+  color: #d4af37;
+
+  font-size: 20px;
+
+  cursor: pointer;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transition: 0.3s;
+
+  z-index: 900;
+}
+
+#topo.mostrar {
+  opacity: 1;
+
+  visibility: visible;
+}
+
+#topo:hover {
+  background: #d4af37;
+
+  color: #000;
+}
+
+/* =========================
+   ANIMAÇÕES
+========================= */
+
+.animacao {
+  opacity: 0;
+
+  transform: translateY(35px);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+.animacao.aparecer {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 1000px) {
+  .menu {
+    gap: 15px;
+  }
+
+  .menu a {
+    font-size: 8px;
+  }
+
+  .sobre-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .missao-conteudo {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 750px) {
+  .cabecalho {
+    height: auto;
+
+    min-height: 75px;
+
+    padding: 10px 5%;
+
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+  .menu {
+    width: 100%;
+
+    overflow-x: auto;
+
+    justify-content: flex-start;
+
+    gap: 20px;
+
+    padding-bottom: 5px;
+  }
+
+  .menu a {
+    white-space: nowrap;
+  }
+
+  .hero {
+    padding-top: 100px;
+  }
+
+  .historia-introducao {
+    grid-template-columns: 1fr;
+  }
+
+  .historia-imagem {
+    order: -1;
+  }
+
+  .timeline-item {
+    grid-template-columns: 55px 1fr;
+
+    gap: 15px;
+  }
+
+  .timeline-ponto {
+    width: 55px;
+    height: 55px;
+  }
+
+  .timeline::before {
+    left: 27px;
+  }
+
+  .cta-botoes {
+    flex-direction: column;
+
+    align-items: center;
+  }
+
+  .cta-botoes .botao {
+    width: 100%;
+
+    max-width: 280px;
+  }
+
+  .rodape-conteudo {
+    flex-direction: column;
+  }
+
+  .rodape-final {
+    flex-direction: column;
+
+    text-align: center;
+
+    gap: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .historia,
+  .sobre,
+  .missao {
+    padding: 90px 5%;
+  }
+
+  .hero h1 {
+    font-size: 35px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .historia-imagem img {
+    height: 300px;
+  }
+
+  .timeline-card {
+    padding: 20px;
+  }
+
+  .jedicon {
+    min-height: 650px;
+  }
+
+  .jedicon h2 {
+    font-size: 55px;
+
+    letter-spacing: 4px;
+  }
+
+  .jedicon p {
+    font-size: 14px;
+  }
+
+  .missao-principal {
+    padding: 30px;
+  }
+}
+
+/* =========================
+   REDUÇÃO DE MOVIMENTO
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
+
+  .animacao {
+    opacity: 1;
+
+    transform: none;
+  }
+}

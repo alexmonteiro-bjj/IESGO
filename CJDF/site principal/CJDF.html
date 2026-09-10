@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -5,27 +6,40 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <meta
         name="description"
         content="Conselho Jedi do Distrito Federal - Comunidade de fãs de Star Wars em Brasília."
     >
 
-    <title>Conselho Jedi do Distrito Federal | CJDF</title>
+    <meta
+        name="theme-color"
+        content="#000000"
+    >
 
+    <title>
+        Conselho Jedi do Distrito Federal | CJDF
+    </title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="cjdf.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap"
         rel="stylesheet"
-
-
-        link rel="loja" href="loja.html">
     >
 
 </head>
@@ -34,15 +48,17 @@
 <body>
 
 
-    <!-- =========================
+    <!-- =====================================================
          CABEÇALHO
-    ========================== -->
+    ====================================================== -->
 
     <header id="cabecalho">
 
-        <!-- LOGO -->
-
-        <a href="#inicio" class="logo-link">
+        <a
+            href="#inicio"
+            class="logo-link"
+            aria-label="Página inicial do CJDF"
+        >
 
             <img
                 class="logo"
@@ -53,39 +69,70 @@
         </a>
 
 
-        <!-- MENU -->
-
         <nav aria-label="Navegação principal">
 
             <ul>
 
                 <li>
-                    <a href="#inicio" class="menu-link ativo">
+                    <a
+                        href="#inicio"
+                        class="menu-link ativo"
+                    >
                         INÍCIO
                     </a>
                 </li>
 
                 <li>
-                    <a href="#redes-sociais" class="menu-link">
+                    <a
+                        href="sobre/sobre.html"
+                        class="menu-link"
+                    >
                         SOBRE
                     </a>
                 </li>
 
                 <li>
-                    <a href="#imagens" class="menu-link">
-                        IMAGENS
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#projetos" class="menu-link">
+                    <a
+                        href="projetos/projetos.html"
+                        class="menu-link"
+                    >
                         PROJETOS
                     </a>
                 </li>
 
                 <li>
-                    <a href="#atividades" class="menu-link">
+                    <a
+                        href="atividades/atividades.html"
+                        class="menu-link"
+                    >
                         ATIVIDADES
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="galeria/galeria.html"
+                        class="menu-link"
+                    >
+                        GALERIA
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="loja/loja.html"
+                        class="menu-link"
+                    >
+                        LOJA
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="contato/contato.html"
+                        class="menu-link menu-contato"
+                    >
+                        CONTATO
                     </a>
                 </li>
 
@@ -97,23 +144,26 @@
 
 
 
-    <!-- =========================
+    <!-- =====================================================
          CONTEÚDO PRINCIPAL
-    ========================== -->
+    ====================================================== -->
 
     <main>
 
 
-        <!-- =========================
+        <!-- =================================================
              HERO
-        ========================== -->
+        ================================================== -->
 
         <section
-            class="section1 animacao"
+            class="section1"
             id="inicio"
         >
 
-            <div class="hero-conteudo">
+            <div class="hero-overlay"></div>
+
+
+            <div class="hero-conteudo animacao">
 
                 <span class="hero-subtitulo">
                     CONSELHO JEDI
@@ -127,15 +177,39 @@
 
                 <p>
                     Uma comunidade de fãs de Star Wars,
-                    unida pela Força e pela paixão pela saga.
+                    unida pela Força, pela amizade e pela
+                    paixão por uma galáxia muito, muito distante.
                 </p>
 
-                <a
-                    href="#redes-sociais"
-                    class="botao-hero"
-                >
-                    CONHEÇA O CJDF
-                </a>
+
+                <div class="hero-botoes">
+
+                    <a
+                        href="sobre/sobre.html"
+                        class="botao-hero"
+                    >
+                        CONHEÇA O CJDF
+                    </a>
+
+                    <a
+                        href="#jedicon"
+                        class="botao-hero botao-secundario"
+                    >
+                        CONHEÇA A JEDICON
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="scroll-indicador">
+
+                <span>
+                    ROLE PARA EXPLORAR
+                </span>
+
+                <div class="scroll-linha"></div>
 
             </div>
 
@@ -143,22 +217,16 @@
 
 
 
-        <!-- =========================
-             SOBRE O CJDF
-        ========================== -->
+        <!-- =================================================
+             SOBRE / HISTÓRIA
+        ================================================== -->
 
         <section
             class="section2 animacao"
-            id="redes-sociais"
+            id="sobre"
         >
 
             <div class="sobre-cabecalho">
-
-                <img
-                    src="img/cjdf logo.png"
-                    alt="Logo do Conselho Jedi do Distrito Federal"
-                    class="logo2"
-                >
 
                 <span class="titulo-pequeno">
                     CONHEÇA
@@ -169,6 +237,11 @@
                 </h2>
 
                 <div class="linha-dourada"></div>
+
+                <p class="intro-secao">
+                    Uma comunidade construída por fãs,
+                    para fãs.
+                </p>
 
             </div>
 
@@ -182,16 +255,20 @@
                         01
                     </span>
 
+                    <span class="categoria-card">
+                        COMUNIDADE
+                    </span>
+
                     <h3>
                         Uma comunidade de fãs
                     </h3>
 
                     <p>
-                        O Conselho Jedi Distrito Federal é uma
+                        O Conselho Jedi do Distrito Federal é uma
                         comunidade de fãs de Star Wars criada para
-                        reunir pessoas interessadas na franquia e
-                        promover atividades relacionadas à saga e
-                        à cultura geek.
+                        reunir pessoas interessadas na franquia,
+                        promover encontros, atividades e experiências
+                        relacionadas à saga e à cultura geek.
                     </p>
 
                 </article>
@@ -204,65 +281,83 @@
                         02
                     </span>
 
+                    <span class="categoria-card">
+                        HISTÓRIA
+                    </span>
+
                     <h3>
-                        História e tradição
+                        Uma história construída juntos
                     </h3>
 
                     <p>
-                        O Conselho Jedi do Distrito Federal foi
-                        fundado em 2001. Ao longo dos anos,
-                        tornou-se uma das comunidades de fãs de
-                        Star Wars mais conhecidas da capital.
-                        Um dos nomes importantes da história do
-                        grupo é Hermes Barreto, fundador do
-                        Conselho Jedi Brasília.
+                        Fundado em 2001, o Conselho Jedi do Distrito
+                        Federal possui uma trajetória marcada por
+                        encontros, eventos e pela união de fãs de
+                        Star Wars no Distrito Federal.
                     </p>
 
                 </article>
 
-
             </div>
+
+
+            <a
+                href="sobre/sobre.html"
+                class="botao-secao"
+            >
+                CONHEÇA NOSSA HISTÓRIA →
+            </a>
 
         </section>
 
 
 
-        <!-- =========================
-             LOJINHA
-        ========================== -->
+        <!-- =================================================
+             JEDICON
+        ================================================== -->
 
-        <section class="lOJINHA animacao">
+        <section
+            class="jedicon-home animacao"
+            id="jedicon"
+        >
 
-            <div class="loja-conteudo">
+            <div class="jedicon-overlay"></div>
+
+
+            <div class="jedicon-conteudo">
 
                 <span class="titulo-pequeno">
-                    PRODUTOS OFICIAIS
+                    UM DOS GRANDES DESTAQUES DO CJDF
                 </span>
 
                 <h2>
-                    LOJINHA DO CJDF
+                    JEDI<span>CON</span>
                 </h2>
 
                 <div class="linha-dourada"></div>
 
+                <h3>
+                    UMA CELEBRAÇÃO DA COMUNIDADE
+                </h3>
+
                 <p>
-                    Produtos exclusivos e raramente disponíveis
-                    com a temática do Conselho Jedi do Distrito
-                    Federal.
+                    Um momento especial para reunir fãs,
+                    celebrar Star Wars e transformar a paixão
+                    pela saga em experiências inesquecíveis.
                 </p>
 
-                <span class="produtos">
-                    JAQUETAS • PINS • PÔSTERES • ADESIVOS
-                </span>
+                <p>
+                    A JEDICon representa o espírito de união,
+                    amizade e comunidade que faz parte da
+                    história do Conselho Jedi do Distrito Federal.
+                </p>
 
 
                 <a
-                    href="file:///C:/IESGO/CJDF/loja%20CJDF/loja.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="botao-loja"
+                    href="sobre/sobre.html#jedicon"
+                    class="botao-hero"
                 >
-                    ACESSAR LOJA
+                    CONHEÇA A JEDICON →
                 </a>
 
             </div>
@@ -271,9 +366,9 @@
 
 
 
-        <!-- =========================
+        <!-- =================================================
              GALERIA
-        ========================== -->
+        ================================================== -->
 
         <section
             class="imagens-section animacao"
@@ -289,6 +384,13 @@
                 <h2>
                     MOMENTOS DO CJDF
                 </h2>
+
+                <div class="linha-dourada"></div>
+
+                <p>
+                    Pessoas, eventos e momentos que fazem
+                    parte da nossa história.
+                </p>
 
             </div>
 
@@ -308,7 +410,6 @@
                 </div>
 
 
-
                 <!-- IMAGEM 2 -->
 
                 <div class="slide">
@@ -319,7 +420,6 @@
                     >
 
                 </div>
-
 
 
                 <!-- IMAGEM 3 -->
@@ -334,17 +434,22 @@
                 </div>
 
 
-                <!-- CONTROLES -->
+                <!-- CONTROLE ANTERIOR -->
 
                 <button
                     class="slide-btn anterior"
+                    type="button"
                     aria-label="Imagem anterior"
                 >
                     ‹
                 </button>
 
+
+                <!-- CONTROLE PRÓXIMO -->
+
                 <button
                     class="slide-btn proximo"
+                    type="button"
                     aria-label="Próxima imagem"
                 >
                     ›
@@ -357,18 +462,21 @@
 
                     <button
                         class="indicador ativo"
+                        type="button"
                         data-slide="0"
                         aria-label="Mostrar imagem 1"
                     ></button>
 
                     <button
                         class="indicador"
+                        type="button"
                         data-slide="1"
                         aria-label="Mostrar imagem 2"
                     ></button>
 
                     <button
                         class="indicador"
+                        type="button"
                         data-slide="2"
                         aria-label="Mostrar imagem 3"
                     ></button>
@@ -377,20 +485,28 @@
 
             </div>
 
+
+            <a
+                href="galeria/galeria.html"
+                class="botao-galeria"
+            >
+                VER GALERIA COMPLETA →
+            </a>
+
         </section>
 
 
 
-        <!-- =========================
+        <!-- =================================================
              PROJETOS
-        ========================== -->
+        ================================================== -->
 
         <section
             id="projetos"
-            class="secao-conteudo animacao"
+            class="secao-conteudo projetos animacao"
         >
 
-            <div>
+            <div class="secao-inner">
 
                 <span class="titulo-pequeno">
                     O QUE FAZEMOS
@@ -409,22 +525,29 @@
                     de Star Wars.
                 </p>
 
+                <a
+                    href="projetos/projetos.html"
+                    class="botao-secao"
+                >
+                    CONHEÇA NOSSOS PROJETOS →
+                </a>
+
             </div>
 
         </section>
 
 
 
-        <!-- =========================
+        <!-- =================================================
              ATIVIDADES
-        ========================== -->
+        ================================================== -->
 
         <section
             id="atividades"
             class="secao-conteudo atividades animacao"
         >
 
-            <div>
+            <div class="secao-inner">
 
                 <span class="titulo-pequeno">
                     FAÇA PARTE
@@ -441,6 +564,93 @@
                     aproximam os fãs de Star Wars no Distrito Federal.
                 </p>
 
+                <a
+                    href="atividades/atividades.html"
+                    class="botao-secao"
+                >
+                    VER ATIVIDADES →
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             LOJA
+        ================================================== -->
+
+        <section
+            class="lojinha animacao"
+            id="loja"
+        >
+
+            <div class="loja-conteudo">
+
+                <span class="titulo-pequeno">
+                    PRODUTOS CJDF
+                </span>
+
+                <h2>
+                    LOJINHA DO CJDF
+                </h2>
+
+                <div class="linha-dourada"></div>
+
+                <p>
+                    Produtos exclusivos com a identidade do
+                    Conselho Jedi do Distrito Federal.
+                </p>
+
+                <span class="produtos">
+                    JAQUETAS • CAMISETAS • CANECAS • BONÉS
+                </span>
+
+                <a
+                    href="loja/loja.html"
+                    class="botao-loja"
+                >
+                    ACESSAR LOJA →
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CTA FINAL
+        ================================================== -->
+
+        <section
+            class="cta-final animacao"
+        >
+
+            <div class="cta-final-conteudo">
+
+                <span class="titulo-pequeno">
+                    FAÇA PARTE DA COMUNIDADE
+                </span>
+
+                <h2>
+                    A FORÇA ESTÁ
+                    <strong>EM NÓS.</strong>
+                </h2>
+
+                <p>
+                    Quer conhecer o CJDF, participar das atividades
+                    ou simplesmente conversar com outros fãs?
+                </p>
+
+                <a
+                    href="contato/contato.html"
+                    class="botao-hero"
+                >
+                    ENTRE EM CONTATO →
+                </a>
+
             </div>
 
         </section>
@@ -449,12 +659,83 @@
 
 
 
-    <!-- =========================
-         BOTÃO VOLTAR AO TOPO
-    ========================== -->
+    <!-- =====================================================
+         RODAPÉ
+    ====================================================== -->
+
+    <footer class="rodape">
+
+        <div class="rodape-conteudo">
+
+
+            <div class="rodape-logo">
+
+                <img
+                    src="img/cjdf logo.png"
+                    alt="Logo CJDF"
+                >
+
+                <p>
+                    CONSELHO JEDI DO DISTRITO FEDERAL
+                </p>
+
+            </div>
+
+
+            <div class="rodape-links">
+
+                <a href="#inicio">
+                    INÍCIO
+                </a>
+
+                <a href="sobre/sobre.html">
+                    SOBRE
+                </a>
+
+                <a href="projetos/projetos.html">
+                    PROJETOS
+                </a>
+
+                <a href="atividades/atividades.html">
+                    ATIVIDADES
+                </a>
+
+                <a href="galeria/galeria.html">
+                    GALERIA
+                </a>
+
+                <a href="loja/loja.html">
+                    LOJA
+                </a>
+
+                <a href="contato/contato.html">
+                    CONTATO
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="rodape-linha"></div>
+
+
+        <p class="copyright">
+            © 2026 Conselho Jedi do Distrito Federal.
+            Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         VOLTAR AO TOPO
+    ====================================================== -->
 
     <button
         id="voltar-topo"
+        type="button"
         aria-label="Voltar ao topo"
     >
         ↑
@@ -462,11 +743,14 @@
 
 
 
-    <!-- =========================
+    <!-- =====================================================
          PRELOADER
-    ========================== -->
+    ====================================================== -->
 
-    <div id="preloader">
+    <div
+        id="preloader"
+        aria-label="Carregando site"
+    >
 
         <div class="preloader-conteudo">
 
@@ -506,13 +790,11 @@
 
 
 
-    <!-- =========================
-         JAVASCRIPT
-    ========================== -->
+    <!-- JavaScript -->
 
     <script src="CJDF.js"></script>
-
 
 </body>
 
 </html>
+

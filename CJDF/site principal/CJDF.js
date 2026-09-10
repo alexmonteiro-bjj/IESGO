@@ -1,18 +1,17 @@
-/* =========================
-   CJDF - JAVASCRIPT
-========================= */
 
-document.addEventListener("DOMContentLoaded", function () {
+/* =========================================================
+   CJDF - JAVASCRIPT PRINCIPAL
+   Conselho Jedi do Distrito Federal
+========================================================= */
 
+document.addEventListener("DOMContentLoaded", () => {
 
-    /* =========================
-       ELEMENTOS
-    ========================== */
+    /* =====================================================
+       ELEMENTOS PRINCIPAIS
+    ====================================================== */
 
     const header = document.getElementById("cabecalho");
-
     const preloader = document.getElementById("preloader");
-
     const voltarTopo = document.getElementById("voltar-topo");
 
     const elementosAnimacao =
@@ -25,59 +24,56 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll("main section[id]");
 
 
-    /* =========================
-       HEADER AO ROLAR
-    ========================== */
+    /* =====================================================
+       ACESSIBILIDADE
+    ====================================================== */
+
+    const reduzirMovimento = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+
+    /* =====================================================
+       HEADER
+    ====================================================== */
 
     function controlarHeader() {
 
-        if (!header) {
-            return;
-        }
+        if (!header) return;
 
         if (window.scrollY > 60) {
-
             header.classList.add("scrolled");
-
         } else {
-
             header.classList.remove("scrolled");
-
         }
-
     }
 
 
-    /* =========================
+    /* =====================================================
        BOTÃO VOLTAR AO TOPO
-    ========================== */
+    ====================================================== */
 
     function controlarBotaoTopo() {
 
-        if (!voltarTopo) {
-            return;
-        }
+        if (!voltarTopo) return;
 
         if (window.scrollY > 500) {
-
             voltarTopo.classList.add("mostrar");
-
         } else {
-
             voltarTopo.classList.remove("mostrar");
-
         }
-
     }
 
 
     if (voltarTopo) {
 
-        voltarTopo.addEventListener("click", function () {
+        voltarTopo.addEventListener("click", () => {
 
             window.scrollTo({
                 top: 0,
-                behavior: "smooth"
+                behavior: reduzirMovimento
+                    ? "auto"
+                    : "smooth"
             });
 
         });
@@ -85,42 +81,51 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =========================
+    /* =====================================================
        MENU ATIVO
-    ========================== */
+    ====================================================== */
 
     function atualizarMenu() {
 
-        let secaoAtual = "";
+        if (!secoes.length || !linksMenu.length) {
+            return;
+        }
 
-        secoes.forEach(function (secao) {
+        let secaoAtual = "inicio";
 
-            const topoSecao =
-                secao.offsetTop - 150;
+        const posicaoScroll =
+            window.scrollY + 200;
 
-            const alturaSecao =
-                secao.offsetHeight;
+
+        secoes.forEach(secao => {
+
+            const topo = secao.offsetTop;
+            const altura = secao.offsetHeight;
 
             if (
-                window.scrollY >= topoSecao &&
-                window.scrollY < topoSecao + alturaSecao
+                posicaoScroll >= topo &&
+                posicaoScroll < topo + altura
             ) {
 
-                secaoAtual = secao.getAttribute("id");
+                secaoAtual =
+                    secao.getAttribute("id");
 
             }
 
         });
 
 
-        linksMenu.forEach(function (link) {
+        linksMenu.forEach(link => {
 
             link.classList.remove("ativo");
 
             const destino =
                 link.getAttribute("href");
 
-            if (destino === "#" + secaoAtual) {
+
+            if (
+                destino === `#${secaoAtual}`
+            ) {
 
                 link.classList.add("ativo");
 
@@ -131,44 +136,67 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =========================
-       SCROLL
-    ========================== */
+    /* =====================================================
+       SCROLL OTIMIZADO
+    ====================================================== */
 
-    window.addEventListener("scroll", function () {
+    let scrollEmAndamento = false;
 
-        controlarHeader();
+    window.addEventListener(
+        "scroll",
+        () => {
 
-        controlarBotaoTopo();
+            if (scrollEmAndamento) return;
 
-        atualizarMenu();
+            scrollEmAndamento = true;
 
-    });
+            requestAnimationFrame(() => {
+
+                controlarHeader();
+                controlarBotaoTopo();
+                atualizarMenu();
+
+                scrollEmAndamento = false;
+
+            });
+
+        },
+        {
+            passive: true
+        }
+    );
 
 
-    /* =========================
-       ANIMAÇÃO AO ROLAR
-    ========================== */
+    /* =====================================================
+       ANIMAÇÕES AO ENTRAR NA TELA
+    ====================================================== */
 
-    if ("IntersectionObserver" in window) {
+    if (
+        reduzirMovimento ||
+        !("IntersectionObserver" in window)
+    ) {
+
+        elementosAnimacao.forEach(elemento => {
+
+            elemento.classList.add("aparecer");
+
+        });
+
+    } else {
 
         const observador =
             new IntersectionObserver(
+                entradas => {
 
-                function (entradas) {
+                    entradas.forEach(entrada => {
 
-                    entradas.forEach(function (entrada) {
-
-                        if (entrada.isIntersecting) {
+                        if (
+                            entrada.isIntersecting
+                        ) {
 
                             entrada.target.classList.add(
                                 "aparecer"
                             );
-
-                            /*
-                               Depois que apareceu,
-                               deixa de observar.
-                            */
 
                             observador.unobserve(
                                 entrada.target
@@ -179,40 +207,25 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
 
                 },
-
                 {
                     threshold: 0.15,
-
                     rootMargin: "0px 0px -50px 0px"
                 }
-
             );
 
 
-        elementosAnimacao.forEach(function (elemento) {
+        elementosAnimacao.forEach(elemento => {
 
             observador.observe(elemento);
-
-        });
-
-    } else {
-
-        /*
-           Fallback para navegadores antigos.
-        */
-
-        elementosAnimacao.forEach(function (elemento) {
-
-            elemento.classList.add("aparecer");
 
         });
 
     }
 
 
-    /* =========================
+    /* =====================================================
        SLIDESHOW
-    ========================== */
+    ====================================================== */
 
     const slides =
         document.querySelectorAll(".slide");
@@ -231,57 +244,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     let slideAtual = 0;
-
     let intervaloSlideshow = null;
 
 
-    /* =========================
+    /* =====================================================
        MOSTRAR SLIDE
-    ========================== */
+    ====================================================== */
 
     function mostrarSlide(numero) {
 
-        if (slides.length === 0) {
-            return;
-        }
+        if (!slides.length) return;
 
 
         if (numero >= slides.length) {
-
             numero = 0;
-
         }
-
 
         if (numero < 0) {
-
             numero = slides.length - 1;
-
         }
 
 
-        slides.forEach(function (slide) {
+        slides.forEach((slide, indice) => {
 
-            slide.classList.remove("ativa");
+            slide.classList.toggle(
+                "ativa",
+                indice === numero
+            );
 
         });
 
 
-        indicadores.forEach(function (indicador) {
+        indicadores.forEach((indicador, indice) => {
 
-            indicador.classList.remove("ativo");
+            indicador.classList.toggle(
+                "ativo",
+                indice === numero
+            );
 
         });
-
-
-        slides[numero].classList.add("ativa");
-
-
-        if (indicadores[numero]) {
-
-            indicadores[numero].classList.add("ativo");
-
-        }
 
 
         slideAtual = numero;
@@ -289,9 +290,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =========================
+    /* =====================================================
        PRÓXIMO SLIDE
-    ========================== */
+    ====================================================== */
 
     function proximoSlide() {
 
@@ -300,9 +301,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =========================
+    /* =====================================================
        SLIDE ANTERIOR
-    ========================== */
+    ====================================================== */
 
     function slideAnterior() {
 
@@ -311,30 +312,43 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =========================
-       AUTOPLAY
-    ========================== */
+    /* =====================================================
+       INICIAR AUTOPLAY
+    ====================================================== */
 
     function iniciarSlideshow() {
 
-        if (slides.length <= 1) {
+        if (
+            slides.length <= 1 ||
+            reduzirMovimento ||
+            document.hidden
+        ) {
             return;
         }
 
+
         pararSlideshow();
 
-        intervaloSlideshow =
-            setInterval(
-                proximoSlide,
-                7000
-            );
+
+        intervaloSlideshow = setInterval(
+            () => {
+
+                proximoSlide();
+
+            },
+            7000
+        );
 
     }
 
 
+    /* =====================================================
+       PARAR AUTOPLAY
+    ====================================================== */
+
     function pararSlideshow() {
 
-        if (intervaloSlideshow) {
+        if (intervaloSlideshow !== null) {
 
             clearInterval(
                 intervaloSlideshow
@@ -347,18 +361,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =========================
-       BOTÕES
-    ========================== */
+    /* =====================================================
+       BOTÃO PRÓXIMO
+    ====================================================== */
 
     if (botaoProximo) {
 
         botaoProximo.addEventListener(
             "click",
-            function () {
+            () => {
 
                 proximoSlide();
-
                 iniciarSlideshow();
 
             }
@@ -366,15 +379,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+
+    /* =====================================================
+       BOTÃO ANTERIOR
+    ====================================================== */
 
     if (botaoAnterior) {
 
         botaoAnterior.addEventListener(
             "click",
-            function () {
+            () => {
 
                 slideAnterior();
-
                 iniciarSlideshow();
 
             }
@@ -383,23 +399,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =========================
+    /* =====================================================
        INDICADORES
-    ========================== */
+    ====================================================== */
 
-    indicadores.forEach(function (indicador) {
+    indicadores.forEach(indicador => {
 
         indicador.addEventListener(
             "click",
-            function () {
+            () => {
 
                 const numero =
                     Number(
                         indicador.dataset.slide
                     );
 
-                mostrarSlide(numero);
 
+                if (Number.isNaN(numero)) {
+                    return;
+                }
+
+
+                mostrarSlide(numero);
                 iniciarSlideshow();
 
             }
@@ -408,9 +429,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    /* =========================
-       PAUSA AO PASSAR O MOUSE
-    ========================== */
+    /* =====================================================
+       PAUSAR NO MOUSE
+    ====================================================== */
 
     if (slideshow) {
 
@@ -425,105 +446,212 @@ document.addEventListener("DOMContentLoaded", function () {
             iniciarSlideshow
         );
 
+
+        /* ================================================
+           TOUCH
+        ================================================ */
+
+        let toqueInicialX = 0;
+        let toqueFinalX = 0;
+
+
+        slideshow.addEventListener(
+            "touchstart",
+            evento => {
+
+                pararSlideshow();
+
+                toqueInicialX =
+                    evento.changedTouches[0].screenX;
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        slideshow.addEventListener(
+            "touchend",
+            evento => {
+
+                toqueFinalX =
+                    evento.changedTouches[0].screenX;
+
+
+                const distancia =
+                    toqueFinalX - toqueInicialX;
+
+
+                /*
+                   Arrastar para esquerda
+                   = próximo slide
+                */
+
+                if (distancia < -50) {
+
+                    proximoSlide();
+
+                }
+
+
+                /*
+                   Arrastar para direita
+                   = slide anterior
+                */
+
+                if (distancia > 50) {
+
+                    slideAnterior();
+
+                }
+
+
+                iniciarSlideshow();
+
+            },
+            {
+                passive: true
+            }
+        );
+
     }
 
 
-    /* =========================
-       INICIA SLIDESHOW
-    ========================== */
+    /* =====================================================
+       CONTROLE PELO TECLADO
+    ====================================================== */
 
-    mostrarSlide(0);
+    document.addEventListener(
+        "keydown",
+        evento => {
 
-    iniciarSlideshow();
-
-
-    /* =========================
-       PRELOADER
-    ========================== */
-
-    window.addEventListener(
-        "load",
-        function () {
-
-            if (!preloader) {
-                return;
-            }
+            const elemento =
+                document.activeElement;
 
 
             /*
-               Tempo mínimo do preloader:
-               4 segundos.
+               Não interfere em campos de formulário.
             */
 
-            setTimeout(
-                function () {
+            if (
+                elemento &&
+                (
+                    elemento.tagName === "INPUT" ||
+                    elemento.tagName === "TEXTAREA" ||
+                    elemento.tagName === "SELECT"
+                )
+            ) {
 
-                    preloader.classList.add(
-                        "preloader-esconder"
-                    );
+                return;
+
+            }
 
 
-                    /*
-                       Remove depois
-                       da animação.
-                    */
+            if (evento.key === "ArrowRight") {
 
-                    setTimeout(
-                        function () {
+                proximoSlide();
+                iniciarSlideshow();
 
-                            preloader.style.display =
-                                "none";
+            }
 
-                        },
-                        1000
-                    );
 
-                },
-                4000
-            );
+            if (evento.key === "ArrowLeft") {
+
+                slideAnterior();
+                iniciarSlideshow();
+
+            }
 
         }
     );
 
 
-    /* =========================
-       MENU COM SCROLL SUAVE
-    ========================== */
+    /* =====================================================
+       VISIBILIDADE DA ABA
+    ====================================================== */
 
-    linksMenu.forEach(function (link) {
+    document.addEventListener(
+        "visibilitychange",
+        () => {
+
+            if (document.hidden) {
+
+                pararSlideshow();
+
+            } else {
+
+                iniciarSlideshow();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       INICIAR GALERIA
+    ====================================================== */
+
+    if (slides.length) {
+
+        mostrarSlide(0);
+        iniciarSlideshow();
+
+    }
+
+
+    /* =====================================================
+       MENU COM SCROLL SUAVE
+    ====================================================== */
+
+    linksMenu.forEach(link => {
 
         link.addEventListener(
             "click",
-            function (evento) {
+            evento => {
 
                 const destino =
                     link.getAttribute("href");
 
 
+                /*
+                   Links externos continuam
+                   funcionando normalmente.
+                */
+
                 if (
-                    destino &&
-                    destino.startsWith("#")
+                    !destino ||
+                    !destino.startsWith("#")
                 ) {
 
-                    const elemento =
-                        document.querySelector(
-                            destino
-                        );
-
-
-                    if (elemento) {
-
-                        evento.preventDefault();
-
-
-                        elemento.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start"
-                        });
-
-                    }
+                    return;
 
                 }
+
+
+                const elemento =
+                    document.querySelector(destino);
+
+
+                if (!elemento) {
+                    return;
+                }
+
+
+                evento.preventDefault();
+
+
+                elemento.scrollIntoView({
+
+                    behavior:
+                        reduzirMovimento
+                            ? "auto"
+                            : "smooth",
+
+                    block: "start"
+
+                });
 
             }
         );
@@ -531,9 +659,242 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    /* =========================
+    /* =====================================================
+       FOCO DOS LINKS
+    ====================================================== */
+
+    linksMenu.forEach(link => {
+
+        link.addEventListener(
+            "focus",
+            () => {
+
+                link.classList.add("foco");
+
+            }
+        );
+
+
+        link.addEventListener(
+            "blur",
+            () => {
+
+                link.classList.remove("foco");
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       EFEITO NOS BOTÕES
+    ====================================================== */
+
+    const botoes =
+        document.querySelectorAll(
+            ".botao-hero, .botao-secao, .botao-galeria, .botao-loja"
+        );
+
+
+    botoes.forEach(botao => {
+
+        botao.addEventListener(
+            "click",
+            () => {
+
+                botao.classList.add("clicado");
+
+
+                setTimeout(() => {
+
+                    botao.classList.remove(
+                        "clicado"
+                    );
+
+                }, 250);
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       EFEITO PARALLAX DO HERO
+    ====================================================== */
+
+    const hero =
+        document.querySelector(".section1");
+
+
+    if (
+        hero &&
+        !reduzirMovimento
+    ) {
+
+        window.addEventListener(
+            "scroll",
+            () => {
+
+                const scroll =
+                    window.scrollY;
+
+
+                if (scroll < window.innerHeight) {
+
+                    hero.style.backgroundPosition =
+                        `center ${scroll * 0.35}px`;
+
+                }
+
+            },
+            {
+                passive: true
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       PRELOADER
+    ====================================================== */
+
+    let paginaCarregada = false;
+    let tempoMinimoFinalizado = false;
+
+
+    function esconderPreloader() {
+
+        if (!preloader) return;
+
+        if (
+            !paginaCarregada ||
+            !tempoMinimoFinalizado
+        ) {
+
+            return;
+
+        }
+
+
+        preloader.classList.add(
+            "preloader-esconder"
+        );
+
+
+        setTimeout(() => {
+
+            preloader.style.display =
+                "none";
+
+        }, 1000);
+
+    }
+
+
+    /*
+       Página terminou de carregar.
+    */
+
+    window.addEventListener(
+        "load",
+        () => {
+
+            paginaCarregada = true;
+
+            esconderPreloader();
+
+        }
+    );
+
+
+    /*
+       Tempo mínimo de 4 segundos.
+    */
+
+    setTimeout(
+        () => {
+
+            tempoMinimoFinalizado = true;
+
+            esconderPreloader();
+
+        },
+        4000
+    );
+
+
+    /* =====================================================
+       GARANTIA CONTRA PRELOADER PRESO
+    ====================================================== */
+
+    setTimeout(
+        () => {
+
+            if (
+                preloader &&
+                !preloader.classList.contains(
+                    "preloader-esconder"
+                )
+            ) {
+
+                preloader.classList.add(
+                    "preloader-esconder"
+                );
+
+            }
+
+        },
+        10000
+    );
+
+
+    /* =====================================================
+       CARREGAMENTO PROGRESSIVO
+    ====================================================== */
+
+    const imagens =
+        document.querySelectorAll("img");
+
+
+    imagens.forEach(imagem => {
+
+        imagem.addEventListener(
+            "load",
+            () => {
+
+                imagem.classList.add(
+                    "imagem-carregada"
+                );
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       ATUALIZAÇÃO DE TAMANHO DA TELA
+    ====================================================== */
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            atualizarMenu();
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* =====================================================
        ESTADO INICIAL
-    ========================== */
+    ====================================================== */
 
     controlarHeader();
 
@@ -541,4 +902,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     atualizarMenu();
 
+
 });
+

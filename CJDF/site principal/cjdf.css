@@ -1,6 +1,7 @@
-/* =========================
-   CONFIGURAÇÕES GERAIS
-========================= */
+
+/* =========================================================
+   CJDF — CSS PRINCIPAL
+========================================================= */
 
 * {
     margin: 0;
@@ -22,33 +23,51 @@ body {
 
 a {
     text-decoration: none;
+    color: inherit;
 }
 
 button {
     font-family: inherit;
 }
 
+img {
+    max-width: 100%;
+}
 
-/* =========================
+::selection {
+    background: #d4af37;
+    color: #000;
+}
+
+
+/* =========================================================
    VARIÁVEIS
-========================= */
+========================================================= */
 
 :root {
     --dourado: #d4af37;
     --dourado-claro: #f0cf62;
+
     --preto: #000;
-    --preto-2: #080808;
-    --preto-3: #101010;
+    --preto-2: #050505;
+    --preto-3: #0b0b0b;
+    --preto-4: #111;
+
     --branco: #fff;
-    --cinza: rgba(255, 255, 255, 0.75);
+
+    --cinza:
+        rgba(255, 255, 255, 0.75);
+
+    --borda:
+        rgba(212, 175, 55, 0.25);
 }
 
 
-/* =========================
+/* =========================================================
    CABEÇALHO
-========================= */
+========================================================= */
 
-header {
+#cabecalho {
     width: 100%;
     height: 82px;
 
@@ -62,36 +81,39 @@ header {
     align-items: center;
     justify-content: space-between;
 
-    padding: 0 40px;
+    padding: 0 45px;
 
-    background: rgba(0, 0, 0, 0.72);
+    background:
+        rgba(0, 0, 0, 0.70);
 
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
-    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    border-bottom:
+        1px solid
+        rgba(212, 175, 55, 0.22);
 
     transition:
+        height 0.4s ease,
         background 0.4s ease,
-        box-shadow 0.4s ease,
-        height 0.4s ease;
+        box-shadow 0.4s ease;
 }
 
-
-/* Header quando rolar */
-
-header.scrolled {
+#cabecalho.scrolled {
     height: 70px;
 
-    background: rgba(0, 0, 0, 0.94);
+    background:
+        rgba(0, 0, 0, 0.96);
 
     box-shadow:
-        0 10px 35px rgba(0, 0, 0, 0.5);
+        0 10px 40px
+        rgba(0, 0, 0, 0.65);
 }
 
 
-/* =========================
+/* =========================================================
    LOGO
-========================= */
+========================================================= */
 
 .logo-link {
     display: flex;
@@ -113,19 +135,26 @@ header.scrolled {
     transform: scale(1.08);
 
     filter:
-        drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+        drop-shadow(
+            0 0 8px
+            rgba(212, 175, 55, 0.7)
+        )
+        drop-shadow(
+            0 0 20px
+            rgba(212, 175, 55, 0.25)
+        );
 }
 
 
-/* =========================
+/* =========================================================
    MENU
-========================= */
+========================================================= */
 
 nav ul {
     display: flex;
     align-items: center;
 
-    gap: 32px;
+    gap: 28px;
 
     list-style: none;
 }
@@ -137,20 +166,19 @@ nav a {
 
     color: #fff;
 
-    font-family: "Audiowide", sans-serif;
+    font-family:
+        "Audiowide",
+        sans-serif;
 
-    font-size: 13px;
+    font-size: 11px;
 
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
 
     padding: 10px 0;
 
     transition:
         color 0.3s ease;
 }
-
-
-/* Linha do menu */
 
 nav a::after {
     content: "";
@@ -163,22 +191,25 @@ nav a::after {
     width: 0;
     height: 2px;
 
-    background: var(--dourado);
+    background:
+        var(--dourado);
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    transition: width 0.3s ease;
+    transition:
+        width 0.3s ease;
 
     box-shadow:
-        0 0 8px rgba(212, 175, 55, 0.5);
+        0 0 10px
+        rgba(212, 175, 55, 0.6);
 }
-
 
 nav a:hover,
 nav a.ativo {
-    color: var(--dourado);
+    color:
+        var(--dourado);
 }
-
 
 nav a:hover::after,
 nav a.ativo::after {
@@ -186,9 +217,9 @@ nav a.ativo::after {
 }
 
 
-/* =========================
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .section1 {
     width: 100%;
@@ -202,13 +233,13 @@ nav a.ativo::after {
 
     text-align: center;
 
-    padding: 120px 30px 80px;
+    padding:
+        130px 30px
+        100px;
+
+    overflow: hidden;
 
     background:
-        linear-gradient(
-            rgba(0, 0, 0, 0.58),
-            rgba(0, 0, 0, 0.82)
-        ),
         url("./img/WhatsApp Image 2026-09-03 at 16.18.29.jpeg");
 
     background-size: cover;
@@ -217,9 +248,62 @@ nav a.ativo::after {
 }
 
 
-/* Conteúdo do Hero */
+/* =========================================================
+   HERO OVERLAY
+========================================================= */
+
+.hero-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.55),
+            rgba(0, 0, 0, 0.86)
+        ),
+        radial-gradient(
+            circle at center,
+            rgba(212, 175, 55, 0.10),
+            transparent 50%
+        );
+}
+
+
+/* =========================================================
+   GRADIENTE INFERIOR
+========================================================= */
+
+.section1::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 180px;
+
+    background:
+        linear-gradient(
+            transparent,
+            #000
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CONTEÚDO HERO
+========================================================= */
 
 .hero-conteudo {
+    position: relative;
+
+    z-index: 2;
+
     max-width: 1100px;
 
     display: flex;
@@ -227,136 +311,255 @@ nav a.ativo::after {
     align-items: center;
 }
 
-
-/* Pequeno título */
-
 .hero-subtitulo {
-    color: var(--dourado);
+    color:
+        var(--dourado);
 
-    font-family: "Audiowide", sans-serif;
+    font-family:
+        "Audiowide",
+        sans-serif;
 
-    font-size: 16px;
+    font-size: 15px;
 
-    letter-spacing: 6px;
+    letter-spacing: 7px;
 
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 
     text-shadow:
-        0 0 15px rgba(212, 175, 55, 0.4);
+        0 0 18px
+        rgba(212, 175, 55, 0.45);
 }
 
-
-/* Título */
-
 .section1 h1 {
-    font-family: "Audiowide", sans-serif;
+    font-family:
+        "Audiowide",
+        sans-serif;
 
     font-weight: 400;
 
-    font-size: clamp(38px, 6vw, 78px);
+    font-size:
+        clamp(40px, 6vw, 82px);
 
-    line-height: 1.15;
-
-    max-width: 1100px;
+    line-height: 1.08;
 
     color: #fff;
 
     text-shadow:
-        0 5px 20px rgba(0, 0, 0, 0.9),
-        0 0 30px rgba(212, 175, 55, 0.18);
+        0 5px 25px
+        rgba(0, 0, 0, 0.95),
+
+        0 0 35px
+        rgba(212, 175, 55, 0.15);
 }
 
 
-/* =========================
+/* =========================================================
    LINHA DOURADA
-========================= */
+========================================================= */
 
 .linha-dourada {
-    width: 90px;
+    width: 95px;
     height: 2px;
 
-    margin: 22px auto;
+    margin: 25px auto;
 
-    background: var(--dourado);
+    background:
+        var(--dourado);
 
     box-shadow:
-        0 0 12px rgba(212, 175, 55, 0.55);
+        0 0 12px
+        rgba(212, 175, 55, 0.6);
 }
-
-
-/* Texto Hero */
 
 .hero-conteudo p {
-    max-width: 650px;
+    max-width: 680px;
 
-    color: rgba(255, 255, 255, 0.78);
+    color:
+        rgba(255, 255, 255, 0.78);
 
-    font-size: 18px;
+    font-size: 17px;
 
-    line-height: 1.7;
+    line-height: 1.8;
 
-    margin-bottom: 35px;
+    margin-bottom: 38px;
 }
 
 
-/* =========================
-   BOTÃO HERO
-========================= */
+/* =========================================================
+   BOTÕES HERO
+========================================================= */
+
+.hero-botoes {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
 
 .botao-hero {
+    min-width: 240px;
+    height: 58px;
+
+    padding: 0 28px;
+
     display: inline-flex;
 
     align-items: center;
     justify-content: center;
 
-    min-width: 250px;
-    height: 58px;
+    color:
+        var(--dourado);
 
-    padding: 0 30px;
+    border:
+        1px solid
+        var(--dourado);
 
-    color: var(--dourado);
+    background:
+        rgba(0, 0, 0, 0.48);
 
-    border: 1px solid var(--dourado);
+    font-family:
+        "Audiowide",
+        sans-serif;
 
-    background: rgba(0, 0, 0, 0.45);
+    font-size: 11px;
 
-    font-family: "Audiowide", sans-serif;
-
-    font-size: 13px;
-
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 
     transition:
+        transform 0.3s ease,
         background 0.3s ease,
         color 0.3s ease,
-        transform 0.3s ease,
         box-shadow 0.3s ease;
 }
 
 .botao-hero:hover {
-    background: var(--dourado);
+    transform:
+        translateY(-5px);
+
+    background:
+        var(--dourado);
 
     color: #000;
 
-    transform: translateY(-5px);
-
     box-shadow:
-        0 10px 30px rgba(212, 175, 55, 0.25);
+        0 12px 35px
+        rgba(212, 175, 55, 0.30);
+}
+
+.botao-secundario {
+    background:
+        rgba(0, 0, 0, 0.25);
+
+    border-color:
+        rgba(255, 255, 255, 0.45);
+
+    color:
+        #fff;
+}
+
+.botao-secundario:hover {
+    border-color:
+        var(--dourado);
+
+    color:
+        #000;
 }
 
 
-/* =========================
+/* =========================================================
+   INDICADOR DE SCROLL
+========================================================= */
+
+.scroll-indicador {
+    position: absolute;
+
+    z-index: 3;
+
+    bottom: 35px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color:
+        rgba(255, 255, 255, 0.5);
+
+    font-family:
+        "Audiowide",
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+.scroll-linha {
+    width: 1px;
+    height: 35px;
+
+    background:
+        linear-gradient(
+            var(--dourado),
+            transparent
+        );
+}
+
+
+/* =========================================================
+   TÍTULOS
+========================================================= */
+
+.titulo-pequeno {
+    display: block;
+
+    color:
+        var(--dourado);
+
+    font-family:
+        "Audiowide",
+        sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+}
+
+.intro-secao {
+    color:
+        rgba(255, 255, 255, 0.55);
+
+    font-size: 14px;
+
+    margin-top: 10px;
+}
+
+
+/* =========================================================
    SOBRE
-========================= */
+========================================================= */
 
 .section2 {
     width: 100%;
 
-    min-height: 700px;
+    min-height: 760px;
 
-    padding: 100px 40px;
+    padding:
+        110px 40px;
 
     display: flex;
+
     flex-direction: column;
 
     align-items: center;
@@ -367,97 +570,57 @@ nav a.ativo::after {
     background:
         radial-gradient(
             circle at center,
-            #111 0%,
-            #080808 55%,
+            #151515 0%,
+            #080808 50%,
             #000 100%
         );
 
-    border-top: 1px solid rgba(212, 175, 55, 0.12);
-    border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+    border-top:
+        1px solid
+        rgba(212, 175, 55, 0.12);
+
+    border-bottom:
+        1px solid
+        rgba(212, 175, 55, 0.12);
 }
-
-
-/* Cabeçalho Sobre */
 
 .sobre-cabecalho {
-    display: flex;
-    flex-direction: column;
+    max-width: 750px;
 
-    align-items: center;
+    margin-bottom: 10px;
 }
-
-
-.logo2 {
-    width: 190px;
-    height: 190px;
-
-    object-fit: contain;
-
-    margin-bottom: 20px;
-
-    filter:
-        drop-shadow(0 0 8px rgba(212, 175, 55, 0.25));
-
-    transition:
-        transform 0.5s ease,
-        filter 0.5s ease;
-}
-
-.logo2:hover {
-    transform: scale(1.05);
-
-    filter:
-        drop-shadow(0 0 18px rgba(212, 175, 55, 0.45));
-}
-
-
-/* Título pequeno */
-
-.titulo-pequeno {
-    color: var(--dourado);
-
-    font-family: "Audiowide", sans-serif;
-
-    font-size: 12px;
-
-    letter-spacing: 4px;
-
-    display: block;
-}
-
-
-/* Títulos */
 
 .section2 h2,
-.lOJINHA h2,
-.secao-conteudo h2 {
-    font-family: "Audiowide", sans-serif;
+.lojinha h2,
+.secao-conteudo h2,
+.cta-final h2 {
+    font-family:
+        "Audiowide",
+        sans-serif;
 
     font-weight: 400;
-
-    color: #fff;
 }
 
 
-/* =========================
+/* =========================================================
    CARDS
-========================= */
+========================================================= */
 
 .conteudo {
     width: 100%;
+
     max-width: 1050px;
 
     display: flex;
 
     justify-content: center;
-
     align-items: stretch;
 
-    gap: 30px;
+    gap: 25px;
 
     margin-top: 45px;
+    margin-bottom: 35px;
 }
-
 
 .info2,
 .info3 {
@@ -465,9 +628,10 @@ nav a.ativo::after {
 
     width: 50%;
 
-    min-height: 260px;
+    min-height: 300px;
 
-    padding: 45px 35px;
+    padding:
+        45px 38px;
 
     background:
         linear-gradient(
@@ -476,14 +640,18 @@ nav a.ativo::after {
             rgba(3, 3, 3, 0.98)
         );
 
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    border:
+        1px solid
+        rgba(212, 175, 55, 0.25);
 
-    border-radius: 8px;
+    border-radius: 4px;
 
     display: flex;
+
     flex-direction: column;
 
     align-items: flex-start;
+
     justify-content: center;
 
     text-align: left;
@@ -495,9 +663,6 @@ nav a.ativo::after {
         border-color 0.4s ease,
         box-shadow 0.4s ease;
 }
-
-
-/* Linha superior dos cards */
 
 .info2::before,
 .info3::before {
@@ -511,81 +676,174 @@ nav a.ativo::after {
     width: 100%;
     height: 2px;
 
-    background: var(--dourado);
+    background:
+        var(--dourado);
 
-    transform: scaleX(0);
+    transform:
+        scaleX(0);
 
-    transform-origin: left;
+    transform-origin:
+        left;
 
-    transition: transform 0.4s ease;
+    transition:
+        transform 0.4s ease;
 }
 
+.info2::after,
+.info3::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: -80px;
+    bottom: -90px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(212, 175, 55, 0.04);
+}
 
 .info2:hover,
 .info3:hover {
-    transform: translateY(-8px);
+    transform:
+        translateY(-8px);
 
-    border-color: rgba(212, 175, 55, 0.8);
+    border-color:
+        rgba(212, 175, 55, 0.75);
 
     box-shadow:
-        0 20px 45px rgba(0, 0, 0, 0.5),
-        0 0 25px rgba(212, 175, 55, 0.08);
-}
+        0 20px 50px
+        rgba(0, 0, 0, 0.55),
 
+        0 0 25px
+        rgba(212, 175, 55, 0.08);
+}
 
 .info2:hover::before,
 .info3:hover::before {
-    transform: scaleX(1);
+    transform:
+        scaleX(1);
 }
 
-
 .numero-card {
-    color: var(--dourado);
+    color:
+        var(--dourado);
 
-    font-family: "Audiowide", sans-serif;
+    font-family:
+        "Audiowide",
+        sans-serif;
 
     font-size: 12px;
 
     letter-spacing: 2px;
 
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
+.categoria-card {
+    color:
+        rgba(255, 255, 255, 0.35);
+
+    font-family:
+        "Audiowide",
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 18px;
+}
 
 .info2 h3,
 .info3 h3 {
-    font-family: "Audiowide", sans-serif;
+    font-family:
+        "Audiowide",
+        sans-serif;
 
     font-size: 20px;
 
     font-weight: 400;
 
     margin-bottom: 18px;
-
-    color: #fff;
 }
-
 
 .info2 p,
 .info3 p {
-    color: rgba(255, 255, 255, 0.7);
+    color:
+        rgba(255, 255, 255, 0.68);
 
-    font-size: 16px;
+    font-size: 15px;
 
     line-height: 1.8;
 }
 
 
-/* =========================
-   LOJINHA
-========================= */
+/* =========================================================
+   BOTÃO DE SEÇÃO
+========================================================= */
 
-.lOJINHA {
+.botao-secao {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 50px;
+
+    padding:
+        0 25px;
+
+    border:
+        1px solid
+        rgba(212, 175, 55, 0.55);
+
+    color:
+        var(--dourado);
+
+    font-family:
+        "Audiowide",
+        sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.botao-secao:hover {
+    background:
+        var(--dourado);
+
+    color:
+        #000;
+
+    transform:
+        translateY(-4px);
+}
+
+
+/* =========================================================
+   JEDICON
+========================================================= */
+
+.jedicon-home {
+    position: relative;
+
     width: 100%;
 
-    min-height: 480px;
+    min-height: 720px;
 
-    padding: 100px 25px;
+    padding:
+        110px 30px;
 
     display: flex;
 
@@ -594,123 +852,115 @@ nav a.ativo::after {
 
     text-align: center;
 
+    overflow: hidden;
+
     background:
         linear-gradient(
-            135deg,
-            #111,
-            #030303
+            rgba(0, 0, 0, 0.65),
+            rgba(0, 0, 0, 0.90)
+        ),
+        url("./img/15c4b646-8f5b-4158-bf5d-9aedb25895c8.jpg");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.jedicon-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(212, 175, 55, 0.12),
+            transparent 55%
         );
-
-    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
 }
 
+.jedicon-conteudo {
+    position: relative;
 
-.loja-conteudo {
+    z-index: 2;
+
     max-width: 800px;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
 }
 
+.jedicon-conteudo h2 {
+    font-family:
+        "Audiowide",
+        sans-serif;
 
-.lOJINHA h2 {
-    font-size: clamp(32px, 5vw, 52px);
+    font-size:
+        clamp(55px, 9vw, 115px);
 
-    margin-top: 12px;
+    font-weight: 400;
+
+    letter-spacing: 5px;
+
+    text-shadow:
+        0 5px 25px
+        rgba(0, 0, 0, 0.9);
 }
 
+.jedicon-conteudo h2 span {
+    color:
+        var(--dourado);
 
-.lOJINHA p {
-    max-width: 700px;
+    text-shadow:
+        0 0 25px
+        rgba(212, 175, 55, 0.35);
+}
 
-    color: rgba(255, 255, 255, 0.75);
+.jedicon-conteudo h3 {
+    font-family:
+        "Audiowide",
+        sans-serif;
 
-    font-size: 18px;
+    font-size: 15px;
+
+    letter-spacing: 3px;
+
+    font-weight: 400;
+
+    margin-bottom: 22px;
+}
+
+.jedicon-conteudo p {
+    max-width: 680px;
+
+    margin:
+        0 auto 15px;
+
+    color:
+        rgba(255, 255, 255, 0.68);
+
+    font-size: 15px;
 
     line-height: 1.8;
+}
 
-    margin-bottom: 20px;
+.jedicon-conteudo .botao-hero {
+    margin-top: 20px;
 }
 
 
-.produtos {
-    color: rgba(212, 175, 55, 0.8);
-
-    font-family: "Audiowide", sans-serif;
-
-    font-size: 11px;
-
-    letter-spacing: 2px;
-
-    margin-bottom: 35px;
-}
-
-
-/* =========================
-   BOTÃO LOJA
-========================= */
-
-.botao-loja {
-    width: 280px;
-    height: 62px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    color: #000;
-
-    background: var(--dourado);
-
-    border: 1px solid var(--dourado);
-
-    font-family: "Audiowide", sans-serif;
-
-    font-size: 13px;
-
-    letter-spacing: 1px;
-
-    transition:
-        transform 0.3s ease,
-        background 0.3s ease,
-        color 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-
-.botao-loja:hover {
-    transform: translateY(-6px);
-
-    background: transparent;
-
-    color: var(--dourado);
-
-    box-shadow:
-        0 0 25px rgba(212, 175, 55, 0.2);
-}
-
-
-/* =========================
+/* =========================================================
    GALERIA
-========================= */
+========================================================= */
 
 .imagens-section {
     position: relative;
 
     width: 100%;
 
-    height: 700px;
+    height: 720px;
 
     overflow: hidden;
 
-    background: #000;
+    background:
+        #000;
 }
-
-
-/* Cabeçalho da galeria */
 
 .galeria-cabecalho {
     position: absolute;
@@ -718,33 +968,39 @@ nav a.ativo::after {
     top: 35px;
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    z-index: 5;
+    z-index: 20;
+
+    width: 90%;
 
     text-align: center;
 
     pointer-events: none;
 }
 
-
 .galeria-cabecalho span {
-    font-family: "Audiowide", sans-serif;
+    color:
+        var(--dourado);
 
-    color: var(--dourado);
+    font-family:
+        "Audiowide",
+        sans-serif;
 
-    font-size: 11px;
+    font-size: 10px;
 
     letter-spacing: 4px;
 }
 
-
 .galeria-cabecalho h2 {
     margin-top: 8px;
 
-    font-family: "Audiowide", sans-serif;
+    font-family:
+        "Audiowide",
+        sans-serif;
 
-    font-size: 22px;
+    font-size: 24px;
 
     font-weight: 400;
 
@@ -752,10 +1008,22 @@ nav a.ativo::after {
         0 3px 15px #000;
 }
 
+.galeria-cabecalho .linha-dourada {
+    margin:
+        15px auto;
+}
 
-/* =========================
+.galeria-cabecalho p {
+    color:
+        rgba(255, 255, 255, 0.60);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
    SLIDESHOW
-========================= */
+========================================================= */
 
 .slideshow {
     position: relative;
@@ -765,7 +1033,6 @@ nav a.ativo::after {
 
     overflow: hidden;
 }
-
 
 .slide {
     position: absolute;
@@ -781,13 +1048,11 @@ nav a.ativo::after {
         visibility 1.2s ease;
 }
 
-
 .slide.ativa {
     opacity: 1;
 
     visibility: visible;
 }
-
 
 .slide img {
     width: 100%;
@@ -797,19 +1062,22 @@ nav a.ativo::after {
 
     object-fit: cover;
 
-    transform: scale(1);
+    transform:
+        scale(1);
 
     transition:
         transform 8s ease;
 }
 
-
 .slide.ativa img {
-    transform: scale(1.06);
+    transform:
+        scale(1.07);
 }
 
 
-/* Escurecimento */
+/* =========================================================
+   ESCURECIMENTO DA GALERIA
+========================================================= */
 
 .slideshow::after {
     content: "";
@@ -823,42 +1091,47 @@ nav a.ativo::after {
     background:
         linear-gradient(
             to bottom,
-            rgba(0, 0, 0, 0.45),
-            transparent 35%,
-            rgba(0, 0, 0, 0.35)
+            rgba(0, 0, 0, 0.65),
+            transparent 30%,
+            rgba(0, 0, 0, 0.45)
         );
 }
 
 
-/* =========================
-   BOTÕES SLIDES
-========================= */
+/* =========================================================
+   BOTÕES DOS SLIDES
+========================================================= */
 
 .slide-btn {
     position: absolute;
 
     top: 50%;
 
-    z-index: 10;
+    z-index: 30;
 
-    width: 50px;
-    height: 50px;
+    width: 52px;
+    height: 52px;
 
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.5);
 
     border-radius: 50%;
 
-    background: rgba(0, 0, 0, 0.45);
+    background:
+        rgba(0, 0, 0, 0.45);
 
-    color: #fff;
+    color:
+        #fff;
 
-    font-size: 35px;
+    font-size: 34px;
 
     line-height: 1;
 
     cursor: pointer;
 
-    transform: translateY(-50%);
+    transform:
+        translateY(-50%);
 
     transition:
         background 0.3s ease,
@@ -867,47 +1140,49 @@ nav a.ativo::after {
         transform 0.3s ease;
 }
 
-
 .slide-btn:hover {
-    background: var(--dourado);
+    background:
+        var(--dourado);
 
-    color: #000;
+    color:
+        #000;
 
-    border-color: var(--dourado);
+    border-color:
+        var(--dourado);
 
-    transform: translateY(-50%) scale(1.08);
+    transform:
+        translateY(-50%)
+        scale(1.08);
 }
-
 
 .anterior {
     left: 30px;
 }
-
 
 .proximo {
     right: 30px;
 }
 
 
-/* =========================
+/* =========================================================
    INDICADORES
-========================= */
+========================================================= */
 
 .indicadores {
     position: absolute;
 
-    bottom: 25px;
+    bottom: 30px;
     left: 50%;
 
-    z-index: 10;
+    z-index: 30;
 
     display: flex;
 
     gap: 8px;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 }
-
 
 .indicador {
     width: 30px;
@@ -915,7 +1190,8 @@ nav a.ativo::after {
 
     border: none;
 
-    background: rgba(255, 255, 255, 0.35);
+    background:
+        rgba(255, 255, 255, 0.35);
 
     cursor: pointer;
 
@@ -924,24 +1200,79 @@ nav a.ativo::after {
         background 0.3s ease;
 }
 
-
 .indicador.ativo {
     width: 55px;
 
-    background: var(--dourado);
+    background:
+        var(--dourado);
 }
 
 
-/* =========================
+/* =========================================================
+   BOTÃO GALERIA
+========================================================= */
+
+.botao-galeria {
+    position: absolute;
+
+    z-index: 40;
+
+    bottom: 25px;
+    right: 30px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding:
+        0 20px;
+
+    border:
+        1px solid
+        var(--dourado);
+
+    background:
+        rgba(0, 0, 0, 0.55);
+
+    color:
+        var(--dourado);
+
+    font-family:
+        "Audiowide",
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+.botao-galeria:hover {
+    background:
+        var(--dourado);
+
+    color:
+        #000;
+}
+
+
+/* =========================================================
    PROJETOS / ATIVIDADES
-========================= */
+========================================================= */
 
 .secao-conteudo {
     width: 100%;
 
     min-height: 650px;
 
-    padding: 100px 30px;
+    padding:
+        110px 30px;
 
     display: flex;
 
@@ -950,41 +1281,73 @@ nav a.ativo::after {
 
     text-align: center;
 
+    border-top:
+        1px solid
+        rgba(212, 175, 55, 0.12);
+
+    border-bottom:
+        1px solid
+        rgba(212, 175, 55, 0.12);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.secao-conteudo::before {
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(212, 175, 55, 0.035);
+
+    filter:
+        blur(20px);
+}
+
+.secao-inner {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 750px;
+}
+
+.secao-conteudo h2 {
+    font-size:
+        clamp(38px, 6vw, 65px);
+
+    margin-top: 12px;
+}
+
+.secao-conteudo p {
+    margin:
+        25px auto 35px;
+
+    color:
+        rgba(255, 255, 255, 0.68);
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    max-width: 680px;
+}
+
+.projetos {
     background:
         radial-gradient(
             circle at center,
             #101010,
             #000
         );
-
-    border-top: 1px solid rgba(212, 175, 55, 0.12);
-
-    border-bottom: 1px solid rgba(212, 175, 55, 0.12);
 }
-
-
-.secao-conteudo > div {
-    max-width: 750px;
-}
-
-
-.secao-conteudo h2 {
-    font-size: clamp(38px, 6vw, 65px);
-
-    margin-top: 12px;
-}
-
-
-.secao-conteudo p {
-    margin-top: 25px;
-
-    color: rgba(255, 255, 255, 0.7);
-
-    font-size: 18px;
-
-    line-height: 1.8;
-}
-
 
 .atividades {
     background:
@@ -997,31 +1360,317 @@ nav a.ativo::after {
 }
 
 
-/* =========================
-   ANIMAÇÕES DE SCROLL
-========================= */
+/* =========================================================
+   LOJA
+========================================================= */
 
-.animacao {
-    opacity: 0;
+.lojinha {
+    width: 100%;
 
-    transform: translateY(55px);
+    min-height: 500px;
+
+    padding:
+        110px 25px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111,
+            #030303
+        );
+
+    border-bottom:
+        1px solid
+        rgba(212, 175, 55, 0.15);
+}
+
+.loja-conteudo {
+    max-width: 800px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.lojinha h2 {
+    font-size:
+        clamp(32px, 5vw, 55px);
+
+    margin-top: 12px;
+}
+
+.lojinha p {
+    max-width: 700px;
+
+    color:
+        rgba(255, 255, 255, 0.72);
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    margin-bottom: 20px;
+}
+
+.produtos {
+    color:
+        rgba(212, 175, 55, 0.82);
+
+    font-family:
+        "Audiowide",
+        sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 35px;
+}
+
+.botao-loja {
+    width: 280px;
+    height: 60px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color:
+        #000;
+
+    background:
+        var(--dourado);
+
+    border:
+        1px solid
+        var(--dourado);
+
+    font-family:
+        "Audiowide",
+        sans-serif;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
 
     transition:
-        opacity 0.9s ease,
-        transform 0.9s ease;
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.botao-loja:hover {
+    transform:
+        translateY(-6px);
+
+    background:
+        transparent;
+
+    color:
+        var(--dourado);
+
+    box-shadow:
+        0 0 30px
+        rgba(212, 175, 55, 0.22);
 }
 
 
-.animacao.aparecer {
-    opacity: 1;
+/* =========================================================
+   CTA FINAL
+========================================================= */
 
-    transform: translateY(0);
+.cta-final {
+    width: 100%;
+
+    min-height: 500px;
+
+    padding:
+        100px 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(212, 175, 55, 0.08),
+            transparent 55%
+        ),
+        #050505;
+}
+
+.cta-final-conteudo {
+    max-width: 800px;
+}
+
+.cta-final h2 {
+    font-size:
+        clamp(35px, 6vw, 68px);
+
+    line-height: 1.05;
+
+    margin:
+        18px 0 20px;
+}
+
+.cta-final h2 strong {
+    color:
+        var(--dourado);
+}
+
+.cta-final p {
+    max-width: 600px;
+
+    margin:
+        0 auto 35px;
+
+    color:
+        rgba(255, 255, 255, 0.65);
+
+    font-size: 15px;
+
+    line-height: 1.8;
 }
 
 
-/* =========================
-   BOTÃO VOLTAR AO TOPO
-========================= */
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.rodape {
+    padding:
+        60px 7% 30px;
+
+    background:
+        #000;
+
+    border-top:
+        1px solid
+        rgba(212, 175, 55, 0.25);
+
+    text-align: center;
+}
+
+.rodape-conteudo {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+    max-width: 1200px;
+
+    margin: auto;
+}
+
+.rodape-logo {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    gap: 8px;
+}
+
+.rodape-logo img {
+    width: 55px;
+    height: 55px;
+
+    object-fit: contain;
+}
+
+.rodape-logo p {
+    margin: 0;
+
+    color:
+        #666;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    line-height: 1.5;
+
+    text-align: center;
+}
+
+.rodape-links {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 20px;
+}
+
+.rodape-links a {
+    color:
+        #777;
+
+    font-family:
+        "Audiowide",
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    transition:
+        color 0.3s ease;
+}
+
+.rodape-links a:hover {
+    color:
+        var(--dourado);
+}
+
+.rodape-linha {
+    width: 100%;
+    height: 1px;
+
+    margin:
+        35px 0 25px;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+}
+
+.copyright {
+    color:
+        #444;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   VOLTAR AO TOPO
+========================================================= */
 
 #voltar-topo {
     position: fixed;
@@ -1034,20 +1683,26 @@ nav a.ativo::after {
     width: 48px;
     height: 48px;
 
-    border: 1px solid var(--dourado);
+    border:
+        1px solid
+        var(--dourado);
 
-    background: rgba(0, 0, 0, 0.75);
+    background:
+        rgba(0, 0, 0, 0.8);
 
-    color: var(--dourado);
+    color:
+        var(--dourado);
 
     font-size: 22px;
 
     cursor: pointer;
 
     opacity: 0;
+
     visibility: hidden;
 
-    transform: translateY(15px);
+    transform:
+        translateY(15px);
 
     transition:
         opacity 0.3s ease,
@@ -1056,26 +1711,50 @@ nav a.ativo::after {
         background 0.3s ease;
 }
 
-
 #voltar-topo.mostrar {
     opacity: 1;
 
     visibility: visible;
 
-    transform: translateY(0);
+    transform:
+        translateY(0);
 }
-
 
 #voltar-topo:hover {
-    background: var(--dourado);
+    background:
+        var(--dourado);
 
-    color: #000;
+    color:
+        #000;
 }
 
 
-/* =========================
+/* =========================================================
+   ANIMAÇÕES
+========================================================= */
+
+.animacao {
+    opacity: 0;
+
+    transform:
+        translateY(45px);
+
+    transition:
+        opacity 0.9s ease,
+        transform 0.9s ease;
+}
+
+.animacao.aparecer {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
    PRELOADER
-========================= */
+========================================================= */
 
 #preloader {
     position: fixed;
@@ -1095,8 +1774,8 @@ nav a.ativo::after {
     background:
         radial-gradient(
             circle at center,
-            #111 0%,
-            #000 65%
+            #151515 0%,
+            #000 68%
         );
 
     transition:
@@ -1104,21 +1783,21 @@ nav a.ativo::after {
         visibility 1s ease;
 }
 
-
 .preloader-conteudo {
     display: flex;
 
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
 }
 
 
-/* Logo */
+/* =========================================================
+   LOGO PRELOADER
+========================================================= */
 
 .logo-preloader {
     width: 230px;
@@ -1136,7 +1815,6 @@ nav a.ativo::after {
         brilho-logo 2.5s ease-in-out infinite alternate;
 }
 
-
 .logo-preloader img {
     width: 100%;
     height: 100%;
@@ -1144,54 +1822,60 @@ nav a.ativo::after {
     object-fit: contain;
 
     filter:
-        drop-shadow(0 0 8px rgba(212, 175, 55, 0.5))
-        drop-shadow(0 0 20px rgba(212, 175, 55, 0.25));
+        drop-shadow(
+            0 0 8px
+            rgba(212, 175, 55, 0.5)
+        )
+        drop-shadow(
+            0 0 22px
+            rgba(212, 175, 55, 0.25)
+        );
 }
 
-
-/* Título */
-
 #preloader h1 {
-    font-family: "Audiowide", sans-serif;
+    font-family:
+        "Audiowide",
+        sans-serif;
 
     font-size: 30px;
 
     font-weight: 400;
 
     letter-spacing: 5px;
-
-    color: #fff;
 }
 
-
-/* Subtítulo */
-
 #preloader p {
-    margin: 8px 0 30px;
+    margin:
+        8px 0 30px;
 
-    font-family: "Audiowide", sans-serif;
+    font-family:
+        "Audiowide",
+        sans-serif;
 
-    font-size: 15px;
+    font-size: 14px;
 
     letter-spacing: 4px;
 
-    color: var(--dourado);
+    color:
+        var(--dourado);
 }
 
 
-/* Barra */
+/* =========================================================
+   BARRA DE CARREGAMENTO
+========================================================= */
 
 .barra-carregamento {
-    width: 260px;
+    width: 280px;
     height: 3px;
 
     position: relative;
 
     overflow: hidden;
 
-    background: rgba(255, 255, 255, 0.15);
+    background:
+        rgba(255, 255, 255, 0.15);
 }
-
 
 .progresso {
     position: absolute;
@@ -1202,33 +1886,35 @@ nav a.ativo::after {
     width: 100%;
     height: 100%;
 
-    background: var(--dourado);
+    background:
+        var(--dourado);
 
     box-shadow:
-        0 0 8px var(--dourado),
-        0 0 18px rgba(212, 175, 55, 0.7);
+        0 0 8px
+        var(--dourado),
+
+        0 0 18px
+        rgba(212, 175, 55, 0.7);
 
     animation:
         carregar 2s infinite;
 }
 
-
-/* Texto */
-
 #preloader span {
     margin-top: 15px;
 
-    color: rgba(255, 255, 255, 0.55);
+    color:
+        rgba(255, 255, 255, 0.5);
 
-    font-size: 11px;
+    font-size: 9px;
 
     letter-spacing: 2px;
 }
 
 
-/* =========================
-   ANIMAÇÕES PRELOADER
-========================= */
+/* =========================================================
+   ANIMAÇÕES DO PRELOADER
+========================================================= */
 
 @keyframes carregar {
 
@@ -1239,50 +1925,51 @@ nav a.ativo::after {
     100% {
         left: 100%;
     }
-
 }
-
 
 @keyframes aparecer-logo {
 
     0% {
         opacity: 0;
 
-        transform: scale(0.7);
+        transform:
+            scale(0.7);
     }
 
     100% {
         opacity: 1;
 
-        transform: scale(1);
+        transform:
+            scale(1);
     }
-
 }
-
 
 @keyframes brilho-logo {
 
     0% {
         filter:
-            drop-shadow(0 0 3px rgba(212, 175, 55, 0.2));
+            drop-shadow(
+                0 0 3px
+                rgba(212, 175, 55, 0.2)
+            );
     }
 
     50% {
         filter:
-            drop-shadow(0 0 12px rgba(212, 175, 55, 0.45));
+            drop-shadow(
+                0 0 12px
+                rgba(212, 175, 55, 0.45)
+            );
     }
 
     100% {
         filter:
-            drop-shadow(0 0 20px rgba(212, 175, 55, 0.65));
+            drop-shadow(
+                0 0 22px
+                rgba(212, 175, 55, 0.7)
+            );
     }
-
 }
-
-
-/* =========================
-   ESCONDER PRELOADER
-========================= */
 
 .preloader-esconder {
     opacity: 0 !important;
@@ -1293,21 +1980,51 @@ nav a.ativo::after {
 }
 
 
-/* =========================
-   RESPONSIVIDADE
-========================= */
+/* =========================================================
+   RESPONSIVIDADE — 1000PX
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    #cabecalho {
+        padding:
+            0 25px;
+    }
+
+    nav ul {
+        gap: 18px;
+    }
+
+    nav a {
+        font-size: 9px;
+    }
+
+    .rodape-conteudo {
+        flex-direction: column;
+    }
+
+    .rodape-logo {
+        text-align: center;
+    }
+}
+
+
+/* =========================================================
+   TABLET — 850PX
+========================================================= */
 
 @media (max-width: 850px) {
 
-    header {
+    #cabecalho {
         height: auto;
 
         min-height: 75px;
 
-        padding: 8px 15px;
+        padding:
+            8px 15px;
     }
 
-    header.scrolled {
+    #cabecalho.scrolled {
         height: auto;
     }
 
@@ -1317,11 +2034,15 @@ nav a.ativo::after {
     }
 
     nav ul {
-        gap: 15px;
+        gap: 13px;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
     }
 
     nav a {
-        font-size: 10px;
+        font-size: 8px;
     }
 
     .conteudo {
@@ -1334,26 +2055,34 @@ nav a.ativo::after {
     .info3 {
         width: 100%;
 
-        max-width: 600px;
+        max-width: 650px;
     }
 
     .imagens-section {
-        height: 550px;
+        height: 580px;
     }
 
+    .jedicon-home {
+        min-height: 650px;
+    }
 }
 
 
+/* =========================================================
+   CELULAR — 600PX
+========================================================= */
+
 @media (max-width: 600px) {
 
-    header {
+    #cabecalho {
         flex-direction: column;
 
         justify-content: center;
 
         gap: 3px;
 
-        padding: 7px 5px;
+        padding:
+            7px 5px;
     }
 
     .logo {
@@ -1366,19 +2095,23 @@ nav a.ativo::after {
     }
 
     nav a {
-        font-size: 8px;
+        font-size: 7px;
 
-        padding: 5px 0;
+        padding:
+            5px 0;
     }
+
+
+    /* HERO */
 
     .section1 {
         padding:
-            130px 20px
-            70px;
+            150px 20px
+            80px;
     }
 
     .hero-subtitulo {
-        font-size: 11px;
+        font-size: 10px;
 
         letter-spacing: 4px;
     }
@@ -1388,39 +2121,53 @@ nav a.ativo::after {
     }
 
     .hero-conteudo p {
-        font-size: 15px;
+        font-size: 14px;
+    }
+
+    .hero-botoes {
+        flex-direction: column;
+
+        width: 100%;
     }
 
     .botao-hero {
-        min-width: 210px;
+        width: 100%;
+
+        max-width: 280px;
+
+        min-width: 0;
 
         height: 52px;
 
-        font-size: 10px;
+        font-size: 9px;
     }
+
+    .scroll-indicador {
+        display: none;
+    }
+
+
+    /* SOBRE */
 
     .section2 {
-        padding: 80px 20px;
-    }
-
-    .logo2 {
-        width: 150px;
-        height: 150px;
+        padding:
+            80px 20px;
     }
 
     .section2 h2 {
-        font-size: 25px;
+        font-size: 28px;
     }
 
     .conteudo {
-        margin-top: 30px;
+        margin-top: 25px;
     }
 
     .info2,
     .info3 {
-        padding: 30px 25px;
-
         min-height: auto;
+
+        padding:
+            32px 25px;
     }
 
     .info2 h3,
@@ -1433,20 +2180,48 @@ nav a.ativo::after {
         font-size: 14px;
     }
 
-    .lOJINHA {
-        padding: 80px 20px;
+
+    /* JEDICON */
+
+    .jedicon-home {
+        min-height: 600px;
+
+        padding:
+            80px 20px;
     }
 
-    .lOJINHA h2 {
+    .jedicon-conteudo h2 {
+        font-size: 55px;
+    }
+
+    .jedicon-conteudo h3 {
+        font-size: 11px;
+
+        letter-spacing: 2px;
+    }
+
+    .jedicon-conteudo p {
+        font-size: 14px;
+    }
+
+
+    /* LOJA */
+
+    .lojinha {
+        padding:
+            80px 20px;
+    }
+
+    .lojinha h2 {
         font-size: 29px;
     }
 
-    .lOJINHA p {
+    .lojinha p {
         font-size: 15px;
     }
 
     .produtos {
-        font-size: 8px;
+        font-size: 7px;
 
         line-height: 2;
     }
@@ -1454,47 +2229,98 @@ nav a.ativo::after {
     .botao-loja {
         width: 230px;
 
-        height: 58px;
-
-        font-size: 11px;
+        height: 56px;
     }
 
+
+    /* GALERIA */
+
     .imagens-section {
-        height: 420px;
+        height: 430px;
     }
 
     .galeria-cabecalho {
-        top: 25px;
+        top: 22px;
     }
 
     .galeria-cabecalho h2 {
-        font-size: 16px;
+        font-size: 15px;
+    }
+
+    .galeria-cabecalho p {
+        font-size: 10px;
     }
 
     .slide-btn {
         width: 40px;
         height: 40px;
 
-        font-size: 28px;
+        font-size: 27px;
     }
 
     .anterior {
-        left: 15px;
+        left: 12px;
     }
 
     .proximo {
-        right: 15px;
+        right: 12px;
     }
+
+    .botao-galeria {
+        left: 50%;
+
+        right: auto;
+
+        transform:
+            translateX(-50%);
+
+        white-space: nowrap;
+    }
+
+
+    /* PROJETOS / ATIVIDADES */
 
     .secao-conteudo {
         min-height: 500px;
 
-        padding: 80px 25px;
+        padding:
+            80px 25px;
+    }
+
+    .secao-conteudo h2 {
+        font-size: 38px;
     }
 
     .secao-conteudo p {
-        font-size: 15px;
+        font-size: 14px;
     }
+
+
+    /* CTA */
+
+    .cta-final {
+        padding:
+            80px 25px;
+    }
+
+    .cta-final h2 {
+        font-size: 36px;
+    }
+
+
+    /* FOOTER */
+
+    .rodape {
+        padding:
+            50px 20px 25px;
+    }
+
+    .rodape-links {
+        gap: 15px;
+    }
+
+
+    /* PRELOADER */
 
     .logo-preloader {
         width: 150px;
@@ -1508,7 +2334,7 @@ nav a.ativo::after {
     }
 
     #preloader p {
-        font-size: 10px;
+        font-size: 9px;
 
         letter-spacing: 2px;
     }
@@ -1518,10 +2344,14 @@ nav a.ativo::after {
     }
 
     #preloader span {
-        font-size: 8px;
+        font-size: 7px;
 
-        padding: 0 20px;
+        padding:
+            0 20px;
     }
+
+
+    /* TOPO */
 
     #voltar-topo {
         right: 15px;
@@ -1530,13 +2360,12 @@ nav a.ativo::after {
         width: 42px;
         height: 42px;
     }
-
 }
 
 
-/* =========================
+/* =========================================================
    ACESSIBILIDADE
-========================= */
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -1547,11 +2376,14 @@ nav a.ativo::after {
     *,
     *::before,
     *::after {
-        animation-duration: 0.01ms !important;
+        animation-duration:
+            0.01ms !important;
 
-        animation-iteration-count: 1 !important;
+        animation-iteration-count:
+            1 !important;
 
-        transition-duration: 0.01ms !important;
+        transition-duration:
+            0.01ms !important;
     }
-
 }
+
