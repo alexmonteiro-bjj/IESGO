@@ -54,18 +54,18 @@ color:#c9a227;
 transform:translateY(-3px);
 }
 
-.menu .ativo{
+.menu a.ativo{
 color:#c9a227;
 }
 
-.games-intro{
+.anime-intro{
 min-height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
 padding:120px 20px 80px;
-background:linear-gradient(rgba(7,21,46,0.88),rgba(7,21,46,0.94));
+background:#07152e;
 color:#ffffff;
 }
 
@@ -90,9 +90,10 @@ margin-bottom:20px;
 .intro-conteudo span{
 font-size:20px;
 color:#eeeeee;
+line-height:1.6;
 }
 
-.games{
+.animes{
 background:#f4f6f8;
 padding:100px 8%;
 min-height:100vh;
@@ -116,7 +117,7 @@ color:#07152e;
 font-size:36px;
 }
 
-.games-container{
+.animes-container{
 max-width:1200px;
 margin:auto;
 display:grid;
@@ -124,7 +125,7 @@ grid-template-columns:repeat(3,1fr);
 gap:35px;
 }
 
-.game-card{
+.anime-card{
 background:#ffffff;
 border-radius:18px;
 overflow:hidden;
@@ -132,14 +133,14 @@ box-shadow:0 5px 18px rgba(0,0,0,0.12);
 transition:transform 0.4s ease,box-shadow 0.4s ease;
 }
 
-.game-card:hover{
+.anime-card:hover{
 transform:translateY(-12px);
 box-shadow:0 18px 35px rgba(0,0,0,0.22);
 }
 
 .imagem{
 width:100%;
-height:300px;
+height:350px;
 overflow:hidden;
 background:#07152e;
 }
@@ -152,21 +153,21 @@ object-fit:cover;
 transition:transform 0.5s ease;
 }
 
-.game-card:hover .imagem img{
+.anime-card:hover .imagem img{
 transform:scale(1.05);
 }
 
-.game-info{
+.anime-info{
 padding:25px;
 }
 
-.game-info h2{
+.anime-info h2{
 color:#07152e;
 font-size:23px;
 margin-bottom:12px;
 }
 
-.game-info p{
+.anime-info p{
 color:#555555;
 font-size:15px;
 line-height:1.6;
@@ -190,8 +191,12 @@ font-size:14px;
 padding:0 5%;
 }
 
-.games-container{
+.animes-container{
 grid-template-columns:repeat(2,1fr);
+}
+
+.intro-conteudo h1{
+font-size:60px;
 }
 
 }
@@ -220,7 +225,7 @@ justify-content:center;
 font-size:14px;
 }
 
-.games-intro{
+.anime-intro{
 padding-top:150px;
 }
 
@@ -232,7 +237,7 @@ font-size:48px;
 font-size:17px;
 }
 
-.games{
+.animes{
 padding:80px 20px;
 }
 
@@ -240,13 +245,13 @@ padding:80px 20px;
 font-size:28px;
 }
 
-.games-container{
+.animes-container{
 grid-template-columns:1fr;
 gap:25px;
 }
 
 .imagem{
-height:300px;
+height:350px;
 }
 
 }

@@ -3,17 +3,14 @@ margin:0;
 padding:0;
 box-sizing:border-box;
 }
-
 html{
 scroll-behavior:smooth;
 }
-
 body{
 font-family:"Radio Canada Big",sans-serif;
 background:#f4f6f8;
 color:#1b1b1b;
 }
-
 .cabecalho{
 height:80px;
 width:100%;
@@ -28,225 +25,209 @@ top:0;
 left:0;
 z-index:1000;
 }
-
 .logo a{
-color:#ffffff;
 text-decoration:none;
+color:white;
 font-size:30px;
 font-weight:700;
+transition:.3s;
 }
-
+.logo a:hover
 .menu{
 display:flex;
 align-items:center;
-gap:35px;
+gap:45px;
 }
-
 .menu a{
-color:#ffffff;
 text-decoration:none;
+color:white;
 font-size:16px;
-transition:0.3s ease;
+font-weight:500;
+white-space:nowrap;
+transition:.3s;
 }
-
 .menu a:hover{
 color:#c9a227;
 transform:translateY(-3px);
 }
-
-.menu .ativo{
+.menu a.ativo{
 color:#c9a227;
 }
-
-.games-intro{
+.filmes-intro{
 min-height:100vh;
+background:#07152e;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
-padding:120px 20px 80px;
-background:linear-gradient(rgba(7,21,46,0.88),rgba(7,21,46,0.94));
-color:#ffffff;
+padding:100px 8% 60px;
+color:white;
 }
-
 .intro-conteudo{
-max-width:800px;
+max-width:900px;
 }
-
 .intro-conteudo p{
 color:#c9a227;
-font-size:18px;
-font-weight:700;
+font-size:15px;
+font-weight:600;
 letter-spacing:4px;
-margin-bottom:15px;
-}
-
-.intro-conteudo h1{
-font-size:75px;
-font-weight:700;
 margin-bottom:20px;
 }
-
-.intro-conteudo span{
-font-size:20px;
-color:#eeeeee;
+.intro-conteudo h1{
+font-size:70px;
+font-weight:700;
+line-height:1.1;
+margin-bottom:25px;
 }
-
-.games{
+.intro-conteudo span{
+display:block;
+width:80px;
+height:3px;
+background:#c9a227;
+margin:0 auto 25px;
+}
+.intro-conteudo h2{
+font-size:20px;
+font-weight:400;
+color:#d8dce3;
+}
+.filmes{
 background:#f4f6f8;
 padding:100px 8%;
 min-height:100vh;
 }
-
-.titulo{
+.titulo-secao{
 text-align:center;
 margin-bottom:60px;
 }
-
-.titulo p{
+.titulo-secao p{
 color:#c9a227;
-font-size:16px;
-font-weight:700;
-letter-spacing:3px;
+font-size:14px;
+font-weight:600;
+letter-spacing:4px;
 margin-bottom:10px;
 }
-
-.titulo h2{
-color:#07152e;
+.titulo-secao h2{
 font-size:36px;
+color:#07152e;
 }
-
-.games-container{
+.filmes-container{
 max-width:1200px;
 margin:auto;
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:35px;
 }
-
-.game-card{
-background:#ffffff;
+.filme-card{
+background:white;
 border-radius:18px;
 overflow:hidden;
-box-shadow:0 5px 18px rgba(0,0,0,0.12);
-transition:transform 0.4s ease,box-shadow 0.4s ease;
+box-shadow:0 8px 25px rgba(7,21,46,.10);
+transition:.35s ease;
 }
-
-.game-card:hover{
+.filme-card:hover{
 transform:translateY(-12px);
-box-shadow:0 18px 35px rgba(0,0,0,0.22);
+box-shadow:0 18px 40px rgba(7,21,46,.20);
 }
-
 .imagem{
 width:100%;
-height:300px;
+height:350px;
 overflow:hidden;
 background:#07152e;
 }
-
 .imagem img{
 width:100%;
 height:100%;
 display:block;
 object-fit:cover;
-transition:transform 0.5s ease;
+transition:.4s ease;
 }
-
-.game-card:hover .imagem img{
+.filme-card:hover .imagem img{
 transform:scale(1.05);
 }
-
-.game-info{
+.filme-info{
 padding:25px;
 }
-
-.game-info h2{
-color:#07152e;
+.filme-info h2{
 font-size:23px;
-margin-bottom:12px;
+color:#07152e;
+margin-bottom:10px;
 }
-
-.game-info p{
-color:#555555;
+.filme-info p{
 font-size:15px;
 line-height:1.6;
+color:#555;
 }
-
 footer{
 background:#07152e;
-color:#ffffff;
-text-align:center;
-padding:30px;
 border-top:2px solid #c9a227;
+padding:30px 8%;
+text-align:center;
+color:white;
 }
-
 footer p{
 font-size:14px;
 }
-
-@media(max-width:950px){
-
+@media(max-width:1100px){
 .cabecalho{
 padding:0 5%;
 }
-
-.games-container{
+.menu{
+gap:30px;
+}
+}
+@media(max-width:950px){
+.filmes-container{
 grid-template-columns:repeat(2,1fr);
 }
-
+.intro-conteudo h1{
+font-size:55px;
 }
-
-@media(max-width:650px){
-
+}
+@media(max-width:750px){
 .cabecalho{
 height:auto;
 min-height:80px;
-padding:15px 20px;
+padding:18px 5%;
 flex-direction:column;
-gap:15px;
+gap:18px;
 }
-
-.logo a{
-font-size:27px;
-}
-
 .menu{
-gap:15px;
-flex-wrap:wrap;
+gap:22px;
 justify-content:center;
+flex-wrap:wrap;
 }
-
 .menu a{
 font-size:14px;
 }
-
-.games-intro{
+.filmes-intro{
 padding-top:150px;
 }
-
-.intro-conteudo h1{
-font-size:48px;
 }
-
-.intro-conteudo span{
+@media(max-width:650px){
+.intro-conteudo h1{
+font-size:42px;
+}
+.intro-conteudo h2{
 font-size:17px;
 }
-
-.games{
-padding:80px 20px;
+.filmes{
+padding:80px 6%;
 }
-
-.titulo h2{
+.filmes-container{
+grid-template-columns:1fr;
+}
+.titulo-secao h2{
 font-size:28px;
 }
-
-.games-container{
-grid-template-columns:1fr;
+.imagem{
+height:350px;
+}
+.menu{
 gap:25px;
 }
-
-.imagem{
-height:300px;
+.menu a{
+font-size:14px;
+white-space:nowrap;
 }
-
 }
