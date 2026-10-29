@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Alexverso — um universo de animes, games, filmes e séries que marcaram minha trajetória.">
+  <meta name="author" content="Alex Monteiro">
+  <meta name="theme-color" content="#07152e">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <title>Alexverso | Minha Biblioteca &amp; Paixões</title>
+
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css">
+  <script src="./java.js" defer></script>
+</head>
+
+<body>
+
+  <!-- 1. PRELOADER INTEGRADO SUTIL -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-conteudo">
+      <span class="logo">ALEX<span>VERSO</span><span class="ponto">.</span></span>
+      <div class="preloader-linha">
+        <div class="preloader-progresso" id="preloaderProgresso"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. LINHA DE LEITURA NO TOPO (2px) -->
+  <div class="barra-leitura" id="barraLeitura" aria-hidden="true"></div>
+
+  <!-- CABEÇALHO -->
+  <header class="cabecalho">
+    <div class="container navegacao">
+
+      <a href="./Alexverso.html" class="logo" aria-label="Alexverso — página inicial">
+        ALEX<span>VERSO</span><span class="ponto">.</span>
+      </a>
+
+      <div class="cabecalho-lado-direito">
+        <!-- Alternador de Tema Sutil -->
+        <button class="btn-tema" id="btnAlternarTema" aria-label="Alternar tema claro/escuro" title="Alternar Tema">
+          <span id="iconeTema" aria-hidden="true">☀️</span>
+        </button>
+
+        <button
+          class="menu-mobile-btn"
+          id="menuToggle"
+          type="button"
+          aria-label="Abrir menu de navegação"
+          aria-controls="menuPrincipal"
+          aria-expanded="false">
+
+          <svg width="24" height="24" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2"
+            aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="menu" id="menuPrincipal" aria-label="Navegação principal">
+        <a href="#inicio" class="link-menu ativo" aria-current="page">Início</a>
+        <a href="#universo" class="link-menu">Categorias</a>
+        <a href="#destaque" class="link-menu">Destaque</a>
+        <a href="#biblioteca" class="link-menu">Acervo</a>
+        <a href="#favoritos" class="link-menu">Favoritos</a>
+        <a href="#sobre" class="link-menu">Sobre</a>
+        <a href="#redes-sociais" class="link-menu">Contato</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- APRESENTAÇÃO -->
+    <section class="inicio" id="inicio">
+      <div class="container inicio-conteudo">
+
+        <p class="tag-topo">
+          <span class="indicador"></span>
+          MINHA BIBLIOTECA PESSOAL
+        </p>
+
+        <!-- 3. STATUS "NO RADAR" -->
+        <div class="radar-status" aria-label="O que estou consumindo no momento">
+          <span class="ponto-radar"></span>
+          <span><strong>No radar:</strong> 🎮 Elden Ring • 🎬 Duna: Parte 2</span>
+        </div>
+
+        <h1>
+          ALEXVERSO<span class="ponto-titulo">.</span>
+        </h1>
+
+        <p class="subtitulo">MINHAS PAIXÕES</p>
+
+        <p class="descricao">
+          Um universo feito de histórias, jogos, filmes e séries
+          que fazem parte da minha vida.
+        </p>
+
+        <div class="botoes">
+          <a href="#universo" class="botao">
+            EXPLORAR <span aria-hidden="true">↗</span>
+          </a>
+
+          <a href="#destaque" class="botao botao-secundario">
+            DESTAQUE
+          </a>
+        </div>
+
+        <a href="#universo" class="scroll-link" aria-label="Rolar para a seção Universo">
+          <span class="icone-scroll" aria-hidden="true">↓</span>
+          <span>ROLE PARA EXPLORAR</span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- UNIVERSO -->
+    <section class="universo secao" id="universo">
+      <div class="container">
+
+        <div class="titulo">
+          <p>MEU UNIVERSO</p>
+          <h2>Explore minhas paixões</h2>
+          <span class="linha-titulo"></span>
+        </div>
+
+        <div class="cards">
+
+          <a href="../html 2/animes.html" class="card">
+            <div class="card-icone" aria-hidden="true">
+              <svg width="27" height="27" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="1.7">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+
+            <div class="card-conteudo">
+              <h3>Animes</h3>
+              <p>Histórias, personagens inesquecíveis e mundos que despertam a imaginação.</p>
+              <span class="card-link">Explorar coleção <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+
+          <a href="../html4/games.html" class="card">
+            <div class="card-icone" aria-hidden="true">
+              <svg width="27" height="27" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="1.7">
+                <rect x="2" y="6" width="20" height="12" rx="6"></rect>
+                <line x1="6" y1="12" x2="10" y2="12"></line>
+                <line x1="8" y1="10" x2="8" y2="14"></line>
+                <circle cx="15" cy="13" r="1"></circle>
+                <circle cx="17" cy="11" r="1"></circle>
+              </svg>
+            </div>
+
+            <div class="card-conteudo">
+              <h3>Games</h3>
+              <p>Jogos que marcaram minha trajetória e despertaram boas memórias.</p>
+              <span class="card-link">Explorar coleção <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+
+          <a href="../html3/filmes e series.html" class="card">
+            <div class="card-icone" aria-hidden="true">
+              <svg width="27" height="27" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="1.7">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <path d="M2 8h20"></path>
+                <path d="M6 4l2 4"></path>
+                <path d="M12 4l2 4"></path>
+                <path d="M18 4l2 4"></path>
+              </svg>
+            </div>
+
+            <div class="card-conteudo">
+              <h3>Filmes &amp; Séries</h3>
+              <p>Grandes narrativas cinematográficas, direções marcantes e roteiros inesquecíveis.</p>
+              <span class="card-link">Explorar coleção <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- DESTAQUE -->
+    <section class="destaque" id="destaque">
+      <div class="container destaque-container">
+        <div class="destaque-conteudo">
+          <span class="badge-destaque">EM DESTAQUE</span>
+
+          <p class="destaque-universo">UM UNIVERSO EXTRAORDINÁRIO</p>
+
+          <h2>DUNA<span>.</span></h2>
+
+          <p class="destaque-sub">MEU FILME FAVORITO</p>
+
+          <p class="descricao">
+            Um dos universos de ficção científica mais fascinantes,
+            com uma jornada marcada por política, sobrevivência,
+            profecias e poder.
+          </p>
+
+          <div class="botoes-destaque">
+            <button type="button" class="botao" id="btnTrailerDuna">
+              VER TRAILER <span aria-hidden="true">▶</span>
+            </button>
+            <a href="../html3/filmes e series.html" class="botao botao-secundario">
+              EXPLORAR MAIS <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="destaque-visual" aria-hidden="true">
+          <div class="duna-sol"></div>
+          <div class="duna-montanha duna-montanha-1"></div>
+          <div class="duna-montanha duna-montanha-2"></div>
+          <div class="duna-montanha duna-montanha-3"></div>
+          <span class="duna-legenda">ARRAKIS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- BIBLIOTECA -->
+    <section class="biblioteca secao" id="biblioteca">
+      <div class="container">
+
+        <div class="titulo">
+          <p>MEU ACERVO</p>
+          <h2>Biblioteca pessoal</h2>
+          <span class="linha-titulo"></span>
+          <p class="texto-secao">
+            Encontre algumas das obras que fazem parte do meu universo.
+          </p>
+        </div>
+
+        <div class="controles">
+          <label class="campo-busca">
+            <svg width="20" height="20" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2"
+              aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="16" y1="16" x2="21" y2="21"></line>
+            </svg>
+
+            <input
+              type="search"
+              id="campoBusca"
+              placeholder="Pesquisar obras..."
+              aria-label="Pesquisar obras na biblioteca">
+
+            <button type="button" id="limparBusca" aria-label="Limpar pesquisa" hidden>
+              ×
+            </button>
+          </label>
+
+          <div class="filtros" id="filtrosCategoria" aria-label="Filtrar obras">
+            <button type="button" class="filtro ativo" data-categoria="todos" aria-pressed="true">Todas</button>
+            <button type="button" class="filtro" data-categoria="filme" aria-pressed="false">Filmes</button>
+            <button type="button" class="filtro" data-categoria="anime" aria-pressed="false">Animes</button>
+            <button type="button" class="filtro" data-categoria="game" aria-pressed="false">Games</button>
+            
+            <!-- 4. BOTÃO SORTEADOR -->
+            <button type="button" class="filtro filtro-sortear" id="btnSortear" title="Sortear uma obra aleatória">
+              🎲 Surpreenda-me
+            </button>
+          </div>
+        </div>
+
+        <p class="contador" id="contadorResultados" aria-live="polite"></p>
+
+        <div class="grade-obras" id="gradeObras">
+
+          <!-- 5. NOTAS EDITORIAIS INSERIDAS EM CADA CARD -->
+          <article class="obra-card" data-categoria="filme" data-titulo="Duna Parte Dois">
+            <div class="capa capa-duna">
+              <span class="capa-selo">FILME</span>
+              <span class="capa-simbolo" aria-hidden="true">砂</span>
+              <span class="capa-nome">D U N A</span>
+            </div>
+            <div class="obra-info">
+              <div class="obra-meta">
+                <span>Ficção científica</span>
+                <span>2024</span>
+                <span class="obra-nota">★ 9.8</span>
+              </div>
+              <h3>Duna: Parte Dois</h3>
+              <p>Destino, poder e sobrevivência nas areias de Arrakis.</p>
+            </div>
+          </article>
+
+          <article class="obra-card" data-categoria="filme" data-titulo="Star Wars">
+            <div class="capa capa-starwars">
+              <span class="capa-selo">FILME</span>
+              <span class="capa-simbolo" aria-hidden="true">✦</span>
+              <span class="capa-nome">STAR WARS</span>
+            </div>
+            <div class="obra-info">
+              <div class="obra-meta">
+                <span>Ficção científica</span>
+                <span>1980</span>
+                <span class="obra-nota">★ 9.6</span>
+              </div>
+              <h3>O Império Contra-Ataca</h3>
+              <p>Uma galáxia em conflito entre a luz e o lado sombrio.</p>
+            </div>
+          </article>
+
+          <article class="obra-card" data-categoria="anime" data-titulo="One Piece">
+            <div class="capa capa-onepiece">
+              <span class="capa-selo">ANIME</span>
+              <span class="capa-simbolo" aria-hidden="true">☠</span>
+              <span class="capa-nome">ONE PIECE</span>
+            </div>
+            <div class="obra-info">
+              <div class="obra-meta">
+                <span>Aventura</span>
+                <span>1999</span>
+                <span class="obra-nota">★ 10.0</span>
+              </div>
+              <h3>One Piece</h3>
+              <p>Uma tripulação, um sonho e um oceano de possibilidades.</p>
+            </div>
+          </article>
+
+          <article class="obra-card" data-categoria="game" data-titulo="The Witcher 3">
+            <div class="capa capa-witcher">
+              <span class="capa-selo">GAME</span>
+              <span class="capa-simbolo" aria-hidden="true">⚔</span>
+              <span class="capa-nome">THE WITCHER</span>
+            </div>
+            <div class="obra-info">
+              <div class="obra-meta">
+                <span>RPG</span>
+                <span>2015</span>
+                <span class="obra-nota">★ 9.9</span>
+              </div>
+              <h3>The Witcher 3</h3>
+              <p>Um mundo de fantasia, monstros e escolhas difíceis.</p>
+            </div>
+          </article>
+
+          <article class="obra-card" data-categoria="filme" data-titulo="Interestelar">
+            <div class="capa capa-interestelar">
+              <span class="capa-selo">FILME</span>
+              <span class="capa-simbolo" aria-hidden="true">✧</span>
+              <span class="capa-nome">INTERESTELAR</span>
+            </div>
+            <div class="obra-info">
+              <div class="obra-meta">
+                <span>Ficção científica</span>
+                <span>2014</span>
+                <span class="obra-nota">★ 9.7</span>
+              </div>
+              <h3>Interestelar</h3>
+              <p>Uma viagem pelo espaço, pelo tempo e pelos limites humanos.</p>
+            </div>
+          </article>
+
+          <article class="obra-card" data-categoria="game" data-titulo="Halo">
+            <div class="capa capa-halo">
+              <span class="capa-selo">GAME</span>
+              <span class="capa-simbolo" aria-hidden="true">◈</span>
+              <span class="capa-nome">HALO</span>
+            </div>
+            <div class="obra-info">
+              <div class="obra-meta">
+                <span>Ação</span>
+                <span>2001</span>
+                <span class="obra-nota">★ 9.2</span>
+              </div>
+              <h3>Halo</h3>
+              <p>A humanidade enfrenta uma guerra em escala interestelar.</p>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="mensagem-vazia" id="mensagemVazia" hidden>
+          Nenhuma obra encontrada. Tente outra pesquisa.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- FAVORITOS -->
+    <section class="favoritos secao" id="favoritos">
+      <div class="container">
+
+        <div class="titulo">
+          <p>MINHAS ESCOLHAS</p>
+          <h2>Obras que me marcaram</h2>
+          <span class="linha-titulo"></span>
+        </div>
+
+        <div class="favoritos-container">
+
+          <article class="favorito-card">
+            <span class="categoria-badge cinema">CINEMA</span>
+            <h3>STAR WARS</h3>
+            <p>Uma galáxia de aventuras, filosofia e batalhas intergalácticas.</p>
+          </article>
+
+          <article class="favorito-card">
+            <span class="categoria-badge anime">ANIME</span>
+            <h3>ONE PIECE</h3>
+            <p>Uma celebração sobre lealdade, liberdade e o peso de sonhar alto.</p>
+          </article>
+
+          <article class="favorito-card">
+            <span class="categoria-badge scifi">SCI-FI</span>
+            <h3>CYBERPUNK</h3>
+            <p>Alta tecnologia, conflitos morais e uma visão visceral sobre o futuro.</p>
+          </article>
+
+          <article class="favorito-card">
+            <span class="categoria-badge games">GAME</span>
+            <h3>THE WITCHER</h3>
+            <p>Uma imersão em fantasia sombria, escolhas de peso e magia.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="sobre secao" id="sobre">
+      <div class="container sobre-conteudo">
+        <p class="sobretitulo">POR TRÁS DO ACERVO</p>
+        <h2>Mais que entretenimento.</h2>
+        <p>
+          O Alexverso é meu espaço pessoal para reunir histórias,
+          universos e experiências que despertam minha curiosidade.
+          Um projeto em constante evolução, feito à minha maneira.
+        </p>
+        <a href="#inicio" class="link-simples">Voltar ao início ↑</a>
+      </div>
+    </section>
+
+    <!-- REDES SOCIAIS -->
+    <section class="redes secao" id="redes-sociais">
+      <div class="container">
+
+        <div class="titulo">
+          <p>FAÇA PARTE</p>
+          <h2>Acompanhe o Alexverso</h2>
+          <span class="linha-titulo"></span>
+        </div>
+
+        <div class="redes-container">
+
+          <a href="https://www.instagram.com/alexmonteiro.bjj/"
+            target="_blank" rel="noopener noreferrer" class="rede-card">
+
+            <div class="rede-icone" aria-hidden="true">◎</div>
+            <div class="rede-conteudo">
+              <h3>Instagram</h3>
+              <p>Fotos, bastidores e atualizações.</p>
+            </div>
+            <span class="rede-seta" aria-hidden="true">↗</span>
+          </a>
+
+          <a href="https://discord.gg/SEU_CODIGO_DE_CONVITE"
+            target="_blank" rel="noopener noreferrer" class="rede-card">
+
+            <div class="rede-icone" aria-hidden="true">⌘</div>
+            <div class="rede-conteudo">
+              <h3>Discord</h3>
+              <p>Converse sobre games, animes e cultura geek.</p>
+            </div>
+            <span class="rede-seta" aria-hidden="true">↗</span>
+          </a>
+
+          <a href="https://www.youtube.com/@alexmonteiro3677"
+            target="_blank" rel="noopener noreferrer" class="rede-card">
+
+            <div class="rede-icone" aria-hidden="true">▷</div>
+            <div class="rede-conteudo">
+              <h3>YouTube</h3>
+              <p>Vídeos, análises e produções.</p>
+            </div>
+            <span class="rede-seta" aria-hidden="true">↗</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 6. MODAL DE TRAILER (CINEMATOGRÁFICO) -->
+  <div class="modal" id="modalTrailer" aria-hidden="true">
+    <div class="modal-conteudo">
+      <button class="modal-fechar" id="btnFecharTrailer" aria-label="Fechar vídeo">&times;</button>
+      <div class="video-container">
+        <iframe id="iframeTrailer" src="" title="Trailer Oficial" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- VOLTAR AO TOPO -->
+  <a href="#inicio" class="btn-topo" id="btnTopo"
+    aria-label="Voltar ao início da página" hidden>
+    <svg width="20" height="20" viewBox="0 0 24 24"
+      fill="none" stroke="currentColor" stroke-width="2"
+      aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </a>
+
+  <!-- RODAPÉ -->
+  <footer class="rodape">
+    <div class="container rodape-conteudo">
+      <a href="./Alexverso.html" class="logo">ALEX<span>VERSO</span><span class="ponto">.</span></a>
+
+      <p class="rodape-frase">Minha biblioteca. Minhas paixões. Meu universo.</p>
+
+      <small>
+        © <span id="anoAtual">2026</span> Alex Monteiro. Todos os direitos reservados.
+      </small>
+    </div>
+  </footer>
+
+</body>
+</html>
