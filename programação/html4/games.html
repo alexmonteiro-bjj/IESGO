@@ -1,113 +1,448 @@
-<!DOCTYPE html>
 
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Games | Alexverso</title>
-<link rel="stylesheet" href="game.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#07152e">
+  <meta name="description" content="Games | Alexverso — Minha biblioteca pessoal de jogos, franquias marcantes e experiências virtuais.">
+  <meta name="author" content="Alex Monteiro">
+
+  <title>Games | Alexverso</title>
+
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./game.css">
+  <script src="./java.js" defer></script>
 </head>
+
 <body>
 
-<header class="cabecalho">
- <div class="logo"><a href="../html/Alexverso.html">Alexverso</a></div>
-      <nav class="menu">
-        <a href="../html/Alexverso.html">Início</a>
-        <a href="../html 2/animes.html">Anime</a>
-        <a href="../html4/games.html">Games</a>
-        <a href="../html3/filmes e series.html" class="ativo">Filmes e Séries</a>
-</header>
+  <a href="#conteudoPrincipal" class="pular-conteudo">
+    Pular para o conteúdo
+  </a>
 
-<main>
+  <!-- Carregamento -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-conteudo">
+      <span class="logo">ALEX<span>VERSO</span><span class="ponto">.</span></span>
+      <p>CARREGANDO UNIVERSO DOS GAMES</p>
+      <div class="preloader-linha">
+        <div class="preloader-progresso"></div>
+      </div>
+    </div>
+  </div>
 
-<section class="games-intro">
-<div class="intro-conteudo">
-<p>MINHA BIBLIOTECA</p>
-<h1>GAMES</h1>
-<span>Jogos que fizeram parte da minha história.</span>
-</div>
-</section>
+  <!-- Progresso de leitura -->
+  <div class="barra-leitura" id="barraLeitura" aria-hidden="true"></div>
 
-<section class="games">
+  <!-- Cabeçalho -->
+  <header class="cabecalho" id="topo">
+    <div class="container navegacao">
 
-<div class="titulo">
-<p>MINHAS PAIXÕES</p>
-<h2>MEUS GAMES FAVORITOS</h2>
-</div>
+      <a href="./Alexverso.html" class="logo" aria-label="Alexverso, página inicial">
+        ALEX<span>VERSO</span><span class="ponto">.</span>
+      </a>
 
-<div class="games-container">
+      <button
+        class="menu-mobile-btn"
+        id="menuToggle"
+        type="button"
+        aria-label="Abrir menu de navegação"
+        aria-controls="menuPrincipal"
+        aria-expanded="false">
 
-<div class="game-card">
-<div class="imagem">
-<img src="img/images.jpg" alt="Halo">
-</div>
-<div class="game-info">
-<h2>Halo</h2>
-<p>Uma das maiores franquias de ficção científica dos games e uma das minhas favoritas.</p>
-</div>
-</div>
+        <svg viewBox="0 0 24 24" width="24" height="24"
+          fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
 
-<div class="game-card">
-<div class="imagem">
-<img src="img/apps.29856.13758467164481545.c998f207-34a5-4a78-8843-178e2acdf371.jpg" alt="Forza">
-</div>
-<div class="game-info">
-<h2>Forza</h2>
-<p>Velocidade, competição e experiências incríveis no universo dos jogos de corrida.</p>
-</div>
-</div>
+      <nav class="menu" id="menuPrincipal" aria-label="Navegação principal">
+        <a href="../html/Alexverso.html" class="link-menu">Início</a>
+        <a href="../html 2/animes.html" class="link-menu">Animes</a>
+        <a href="../html4/games.html" class="link-menu ativo" aria-current="page">Games</a>
+        <a href="../html3/filmes e series.html" class="link-menu">Filmes &amp; Séries</a>
+      </nav>
 
-<div class="game-card">
-<div class="imagem">
-<img src="img/Black_ops_2_cover.jpg" alt="Call of Duty">
-</div>
-<div class="game-info">
-<h2>Call of Duty</h2>
-<p>Uma das franquias de ação mais conhecidas e marcantes da história dos videogames.</p>
-</div>
-</div>
+    </div>
+  </header>
 
-<div class="game-card">
-<div class="imagem">
-<img src="img/Star_Wars_Battlefront_2015_capa.png" alt="Star Wars Battlefront">
-</div>
-<div class="game-info">
-<h2>Star Wars Battlefront</h2>
-<p>A oportunidade de viver batalhas épicas em uma galáxia muito, muito distante.</p>
-</div>
-</div>
+  <main id="conteudoPrincipal">
 
-<div class="game-card">
-<div class="imagem">
-<img src="img/images.jpg" alt="Minecraft">
-</div>
-<div class="game-info">
-<h2>Minecraft</h2>
-<p>Um universo de criatividade, exploração e possibilidades praticamente infinitas.</p>
-</div>
-</div>
+    <!-- Apresentação -->
+    <section class="games-intro" id="inicio">
 
-<div class="game-card">
-<div class="imagem">
-<img src="img/Grand_Theft_Auto_V_capa.png" alt="GTA V">
-</div>
-<div class="game-info">
-<h2>GTA V</h2>
-<p>Momentos inesquecíveis com amigos e jogadores de todo o mundo.</p>
-</div>
-</div>
+      <div class="intro-fundo" aria-hidden="true"></div>
 
-</div>
-</section>
+      <div class="container intro-conteudo">
 
-</main>
+        <p class="tag-topo">
+          <span class="indicador"></span>
+          MINHA BIBLIOTECA PESSOAL
+        </p>
 
-<footer>
-<p>Copyright alexmonteiro 2026</p>
-</footer>
+        <h1>UNIVERSO <span class="ponto-titulo">GAMES.</span></h1>
+
+        <p class="subtitulo">MUNDOS VIRTUAIS &amp; GRANDES AVENTURAS</p>
+
+        <p class="descricao">
+          Jogos que vão além da tela, com universos imersivos,
+          desafios inesquecíveis e histórias que fazem parte
+          da minha trajetória no mundo gamer.
+        </p>
+
+        <div class="botoes">
+          <a href="#catalogo" class="botao">
+            EXPLORAR ACERVO <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+
+        <div class="intro-detalhe" aria-hidden="true">
+          <span>MEUS JOGOS</span>
+          <span>FRANQUIAS MARCANTES</span>
+          <span>OUTROS UNIVERSOS</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Catálogo -->
+    <section class="games secao" id="catalogo">
+      <div class="container">
+
+        <div class="titulo animacao">
+          <p class="sobretitulo">MINHAS PAIXÕES</p>
+          <h2>Meus games favoritos<span class="ponto-titulo">.</span></h2>
+          <span class="linha-titulo"></span>
+
+          <p class="texto-secao">
+            Ficção científica, velocidade, ação e RPG:
+            jogos que transformam cada partida em uma nova experiência.
+          </p>
+        </div>
+
+        <!-- Busca e filtros -->
+        <div class="controles animacao">
+
+          <label class="campo-busca">
+            <svg viewBox="0 0 24 24" width="20" height="20"
+              fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="16" y1="16" x2="21" y2="21"></line>
+            </svg>
+
+            <input
+              type="search"
+              id="campoBusca"
+              placeholder="Pesquisar por jogo ou gênero..."
+              aria-label="Pesquisar jogos"
+              autocomplete="off">
+
+            <button type="button" id="limparBusca"
+              class="limpar-busca" aria-label="Limpar pesquisa" hidden>
+              &times;
+            </button>
+          </label>
+
+          <div class="filtros" id="filtrosGenero" aria-label="Filtrar por gênero">
+            <button type="button" class="filtro ativo"
+              data-genero="todos" aria-pressed="true">Todos</button>
+
+            <button type="button" class="filtro"
+              data-genero="scifi" aria-pressed="false">Sci-Fi</button>
+
+            <button type="button" class="filtro"
+              data-genero="corrida" aria-pressed="false">Corrida</button>
+
+            <button type="button" class="filtro"
+              data-genero="acao" aria-pressed="false">Ação</button>
+
+            <button type="button" class="filtro"
+              data-genero="rpg" aria-pressed="false">RPG</button>
+          </div>
+
+        </div>
+
+        <div class="catalogo-info">
+          <p id="contadorGames" aria-live="polite">6 jogos no acervo</p>
+
+          <span class="catalogo-indicador">
+            <span class="indicador"></span>
+            COLEÇÃO PESSOAL
+          </span>
+        </div>
+
+        <!-- Grade de jogos -->
+        <div class="games-container" id="gradeGames">
+
+          <!-- Halo -->
+          <article class="game-card animacao"
+            data-genero="scifi"
+            data-nome="Halo"
+            data-pesquisa="halo xbox master chief ficção científica fps espaço alienígenas">
+
+            <div class="imagem">
+              <span class="game-badge">SCI-FI</span>
+              <img src="./img/halo.jpg" alt="Arte de Halo"
+                loading="lazy" decoding="async">
+              <span class="imagem-numero">01</span>
+            </div>
+
+            <div class="game-info">
+              <div class="game-meta">
+                <span>FPS / Franquia</span>
+                <span class="game-nota">★ 10.0</span>
+              </div>
+
+              <h3>Halo</h3>
+
+              <p>
+                Uma jornada de ficção científica marcada pelo Master Chief,
+                batalhas espaciais e conflitos que definem o destino da humanidade.
+              </p>
+
+              <div class="game-rodape">
+                <span class="game-genero">Ficção científica</span>
+                <span class="game-status">No acervo</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Forza Horizon -->
+          <article class="game-card animacao"
+            data-genero="corrida"
+            data-nome="Forza Horizon"
+            data-pesquisa="forza horizon corrida carros automobilismo velocidade mundo aberto xbox">
+
+            <div class="imagem">
+              <span class="game-badge">CORRIDA</span>
+              <img src="./img/forza.jpg" alt="Arte de Forza Horizon"
+                loading="lazy" decoding="async">
+              <span class="imagem-numero">02</span>
+            </div>
+
+            <div class="game-info">
+              <div class="game-meta">
+                <span>Corrida / Mundo aberto</span>
+                <span class="game-nota">★ 9.5</span>
+              </div>
+
+              <h3>Forza Horizon</h3>
+
+              <p>
+                Velocidade, carros incríveis e liberdade para explorar
+                paisagens em uma experiência de corrida dinâmica.
+              </p>
+
+              <div class="game-rodape">
+                <span class="game-genero">Corrida</span>
+                <span class="game-status">No acervo</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Call of Duty -->
+          <article class="game-card animacao"
+            data-genero="acao"
+            data-nome="Call of Duty"
+            data-pesquisa="call of duty cod fps tiro guerra ação multiplayer campanha">
+
+            <div class="imagem">
+              <span class="game-badge">AÇÃO / FPS</span>
+              <img src="./img/call-of-duty.jpg" alt="Arte de Call of Duty"
+                loading="lazy" decoding="async">
+              <span class="imagem-numero">03</span>
+            </div>
+
+            <div class="game-info">
+              <div class="game-meta">
+                <span>FPS / Franquia</span>
+                <span class="game-nota">★ 9.2</span>
+              </div>
+
+              <h3>Call of Duty</h3>
+
+              <p>
+                Combates intensos, campanhas cinematográficas e partidas
+                competitivas em diferentes cenários de guerra.
+              </p>
+
+              <div class="game-rodape">
+                <span class="game-genero">Ação</span>
+                <span class="game-status">No acervo</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Star Wars Battlefront -->
+          <article class="game-card animacao"
+            data-genero="scifi"
+            data-nome="Star Wars Battlefront"
+            data-pesquisa="star wars battlefront jedi sith galáxia ficção científica batalhas espaciais">
+
+            <div class="imagem">
+              <span class="game-badge">STAR WARS</span>
+              <img src="./img/star-wars-battlefront.jpg"
+                alt="Arte de Star Wars Battlefront"
+                loading="lazy" decoding="async">
+              <span class="imagem-numero">04</span>
+            </div>
+
+            <div class="game-info">
+              <div class="game-meta">
+                <span>Ação / Sci-Fi</span>
+                <span class="game-nota">★ 9.5</span>
+              </div>
+
+              <h3>Star Wars Battlefront</h3>
+
+              <p>
+                Entre nas batalhas de uma galáxia muito, muito distante,
+                com soldados, heróis e confrontos épicos.
+              </p>
+
+              <div class="game-rodape">
+                <span class="game-genero">Ficção científica</span>
+                <span class="game-status">No acervo</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- The Witcher 3 -->
+          <article class="game-card animacao"
+            data-genero="rpg"
+            data-nome="The Witcher 3"
+            data-pesquisa="the witcher 3 geralt rpg fantasia monstros mundo aberto escolhas">
+
+            <div class="imagem">
+              <span class="game-badge">RPG</span>
+              <img src="./img/the-witcher-3.jpg"
+                alt="Arte de The Witcher 3"
+                loading="lazy" decoding="async">
+              <span class="imagem-numero">05</span>
+            </div>
+
+            <div class="game-info">
+              <div class="game-meta">
+                <span>RPG / Mundo aberto</span>
+                <span class="game-nota">★ 9.8</span>
+              </div>
+
+              <h3>The Witcher 3</h3>
+
+              <p>
+                Uma aventura de fantasia sombria repleta de monstros,
+                escolhas difíceis e personagens memoráveis.
+              </p>
+
+              <div class="game-rodape">
+                <span class="game-genero">RPG</span>
+                <span class="game-status">No acervo</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Cyberpunk 2077 -->
+          <article class="game-card animacao"
+            data-genero="rpg"
+            data-nome="Cyberpunk 2077"
+            data-pesquisa="cyberpunk 2077 rpg ficção científica night city tecnologia futuro distopia">
+
+            <div class="imagem">
+              <span class="game-badge">CYBERPUNK</span>
+              <img src="./img/cyberpunk-2077.jpg"
+                alt="Arte de Cyberpunk 2077"
+                loading="lazy" decoding="async">
+              <span class="imagem-numero">06</span>
+            </div>
+
+            <div class="game-info">
+              <div class="game-meta">
+                <span>RPG / Ação</span>
+                <span class="game-nota">★ 9.7</span>
+              </div>
+
+              <h3>Cyberpunk 2077</h3>
+
+              <p>
+                Uma viagem por Night City, onde tecnologia, identidade
+                e poder se encontram em um futuro distópico.
+              </p>
+
+              <div class="game-rodape">
+                <span class="game-genero">RPG</span>
+                <span class="game-status">No acervo</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Nenhum resultado -->
+        <div class="mensagem-vazia" id="mensagemVazia" hidden>
+          <span class="vazio-icone" aria-hidden="true">⌕</span>
+          <h3>Nenhum jogo encontrado.</h3>
+          <p>Tente pesquisar outro nome ou selecionar uma categoria diferente.</p>
+
+          <button type="button" class="botao botao-secundario"
+            id="limparFiltros">
+            LIMPAR FILTROS
+          </button>
+        </div>
+
+        <p class="catalogo-final">
+          <span class="indicador"></span>
+          FIM DO CATÁLOGO — MAIS AVENTURAS VIRÃO
+        </p>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Voltar ao topo -->
+  <button type="button" class="btn-topo" id="btnTopo"
+    aria-label="Voltar ao topo" hidden>
+    <svg viewBox="0 0 24 24" width="22" height="22"
+      fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round"
+      aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- Rodapé -->
+  <footer class="rodape">
+    <div class="container rodape-conteudo">
+
+      <a href="./Alexverso.html" class="logo"
+        aria-label="Voltar ao Alexverso">
+        ALEX<span>VERSO</span><span class="ponto">.</span>
+      </a>
+
+      <p class="rodape-frase">
+        Meus jogos. Minhas jornadas. Meu universo.
+      </p>
+
+      <a href="#inicio" class="rodape-link">
+        VOLTAR AO INÍCIO ↑
+      </a>
+
+      <small>
+        © <span id="anoAtual">2026</span> Alex Monteiro.
+        Todos os direitos reservados.
+      </small>
+
+    </div>
+  </footer>
 
 </body>
 </html>

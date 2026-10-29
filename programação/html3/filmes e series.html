@@ -1,117 +1,514 @@
-<!doctype html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Filmes e Séries | Alexverso</title>
-    <link rel="stylesheet" href="filmes.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <header class="cabecalho">
-      <div class="logo"><a href="../html/Alexverso.html">Alexverso</a></div>
-      <nav class="menu">
-        <a href="../html/Alexverso.html">Início</a>
-        <a href="../html 2/animes.html">Anime</a>
-        <a href="../html4/games.html">Games</a>
-        <a href="../html3/filmes e series.html" class="ativo">Filmes e Séries</a>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#07152e">
+  <meta name="description" content="Filmes e Séries | Alexverso — Minha biblioteca pessoal de filmes, séries e universos inesquecíveis.">
+  <meta name="author" content="Alex Monteiro">
+
+  <title>Filmes & Séries | Alexverso</title>
+
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./filmes.css">
+  <script src="./filmes.js" defer></script>
+</head>
+
+<body>
+
+  <a href="#conteudoPrincipal" class="pular-conteudo">
+    Pular para o conteúdo
+  </a>
+
+  <!-- Carregamento -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-conteudo">
+      <span class="logo">ALEX<span>VERSO</span><span class="ponto">.</span></span>
+      <p>CARREGANDO MEU UNIVERSO</p>
+      <div class="preloader-linha">
+        <div class="preloader-progresso"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progresso de leitura -->
+  <div class="barra-leitura" id="barraLeitura" aria-hidden="true"></div>
+
+  <!-- Cabeçalho -->
+  <header class="cabecalho" id="topo">
+    <div class="container navegacao">
+
+      <a href="./Alexverso.html" class="logo" aria-label="Alexverso, página inicial">
+        ALEX<span>VERSO</span><span class="ponto">.</span>
+      </a>
+
+      <button
+        class="menu-mobile-btn"
+        id="menuToggle"
+        type="button"
+        aria-label="Abrir menu de navegação"
+        aria-controls="menuPrincipal"
+        aria-expanded="false">
+
+        <svg viewBox="0 0 24 24" width="24" height="24"
+          fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <nav class="menu" id="menuPrincipal" aria-label="Navegação principal">
+       <a href="../html/Alexverso.html" class="link-menu">Início</a>
+        <a href="../html 2/animes.html" class="link-menu">Animes</a>
+        <a href="../html4/games.html" class="link-menu ativo" aria-current="page">Games</a>
+        <a href="../html3/filmes e series.html" class="link-menu">Filmes &amp; Séries</a>
       </nav>
-    </header>
-    <main>
-      <section class="filmes-intro">
-        <div class="intro-conteudo">
-          <p>MINHA BIBLIOTECA</p>
-          <h1>FILMES E SÉRIES</h1>
-          <span></span>
-          <h2>Histórias e universos que fazem parte das minhas paixões</h2>
+
+    </div>
+  </header>
+
+  <main id="conteudoPrincipal">
+
+    <!-- Apresentação -->
+    <section class="filmes-intro" id="inicio">
+
+      <div class="intro-fundo" aria-hidden="true"></div>
+
+      <div class="container intro-conteudo">
+
+        <p class="tag-topo">
+          <span class="indicador"></span>
+          MINHA BIBLIOTECA PESSOAL
+        </p>
+
+        <h1>FILMES <span class="ponto-titulo">&amp;</span> SÉRIES<span class="ponto-titulo">.</span></h1>
+
+        <p class="subtitulo">HISTÓRIAS, EMOÇÕES &amp; UNIVERSOS</p>
+
+        <p class="descricao">
+          Filmes e séries que despertaram minha imaginação, marcaram
+          diferentes momentos e transformaram grandes histórias em
+          parte da minha trajetória.
+        </p>
+
+        <div class="botoes">
+          <a href="#catalogo" class="botao">
+            EXPLORAR ACERVO <span aria-hidden="true">↓</span>
+          </a>
         </div>
-      </section>
-      <section class="filmes">
-        <div class="titulo-secao">
-          <p>MINHAS PAIXÕES</p>
-          <h2>FILMES E SÉRIES FAVORITOS</h2>
+
+        <div class="intro-detalhe" aria-hidden="true">
+          <span>ACERVO PESSOAL</span>
+          <span>GRANDES HISTÓRIAS</span>
+          <span>UNIVERSOS INESQUECÍVEIS</span>
         </div>
-        <div class="filmes-container">
-          <div class="filme-card">
+
+      </div>
+    </section>
+
+    <!-- Catálogo -->
+    <section class="filmes secao" id="catalogo">
+
+      <div class="container">
+
+        <div class="titulo animacao">
+          <p class="sobretitulo">MINHAS PAIXÕES</p>
+          <h2>Meus filmes e séries favoritos<span class="ponto-titulo">.</span></h2>
+          <span class="linha-titulo"></span>
+
+          <p class="texto-secao">
+            Ficção científica, super-heróis, comédia e aventuras
+            que continuam fazendo parte do meu universo.
+          </p>
+        </div>
+
+        <!-- Busca e filtros -->
+        <div class="controles animacao">
+
+          <label class="campo-busca">
+
+            <svg viewBox="0 0 24 24" width="20" height="20"
+              fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="16" y1="16" x2="21" y2="21"></line>
+            </svg>
+
+            <input
+              type="search"
+              id="campoBusca"
+              placeholder="Pesquisar por título ou gênero..."
+              aria-label="Pesquisar filmes e séries"
+              autocomplete="off">
+
+            <button
+              type="button"
+              id="limparBusca"
+              class="limpar-busca"
+              aria-label="Limpar pesquisa"
+              hidden>
+              &times;
+            </button>
+
+          </label>
+
+          <div class="filtros" id="filtrosGenero" aria-label="Filtrar por categoria">
+
+            <button type="button" class="filtro ativo"
+              data-genero="todos" aria-pressed="true">
+              Todos
+            </button>
+
+            <button type="button" class="filtro"
+              data-genero="scifi" aria-pressed="false">
+              Sci-Fi
+            </button>
+
+            <button type="button" class="filtro"
+              data-genero="super-herois" aria-pressed="false">
+              Super-heróis
+            </button>
+
+            <button type="button" class="filtro"
+              data-genero="comedia" aria-pressed="false">
+              Comédia
+            </button>
+
+            <button type="button" class="filtro"
+              data-genero="aventura" aria-pressed="false">
+              Aventura
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="catalogo-info">
+          <p id="contadorFilmes" aria-live="polite">6 títulos no acervo</p>
+
+          <span class="catalogo-indicador">
+            <span class="indicador"></span>
+            COLEÇÃO PESSOAL
+          </span>
+        </div>
+
+        <!-- Grade de filmes e séries -->
+        <div class="filmes-container" id="gradeFilmes">
+
+          <!-- Star Wars -->
+          <article class="filme-card animacao"
+            data-genero="scifi"
+            data-nome="Star Wars"
+            data-pesquisa="star wars ficção científica espaço jedi sith galáxia filmes">
+
             <div class="imagem">
-              <img src="./img/images.jpg" alt="Star Wars" />
+              <span class="filme-badge">SCI-FI</span>
+
+              <img src="./img/images.jpg"
+                alt="Imagem de Star Wars"
+                loading="lazy"
+                decoding="async">
+
+              <span class="imagem-numero">01</span>
             </div>
+
             <div class="filme-info">
-              <h2>Star Wars</h2>
+
+              <div class="filme-meta">
+                <span>Filmes / Franquia</span>
+                <span class="filme-nota">★ 10.0</span>
+              </div>
+
+              <h3>Star Wars</h3>
+
               <p>
                 Uma das maiores paixões do meu universo, com histórias,
                 personagens e uma galáxia que marcou gerações.
               </p>
+
+              <div class="filme-rodape">
+                <span class="filme-genero">Ficção científica</span>
+                <span class="filme-status">No acervo</span>
+              </div>
+
             </div>
-          </div>
-          <div class="filme-card">
+          </article>
+
+          <!-- Spider-Man -->
+          <article class="filme-card animacao"
+            data-genero="super-herois"
+            data-nome="Spider-Man"
+            data-pesquisa="spider-man spider man homem aranha marvel super-herói ação aventura filmes">
+
             <div class="imagem">
-              <img src="./img/spider.jpg" alt="Spider-Man" />
+              <span class="filme-badge">SUPER-HERÓIS</span>
+
+              <img src="./img/spider.jpg"
+                alt="Imagem do Spider-Man"
+                loading="lazy"
+                decoding="async">
+
+              <span class="imagem-numero">02</span>
             </div>
+
             <div class="filme-info">
-              <h2>Spider-Man</h2>
+
+              <div class="filme-meta">
+                <span>Filmes / Franquia</span>
+                <span class="filme-nota">★ 9.5</span>
+              </div>
+
+              <h3>Spider-Man</h3>
+
               <p>
-                Um dos grandes personagens dos quadrinhos e do cinema, conhecido
-                por sua personalidade e suas aventuras.
+                Um dos grandes personagens dos quadrinhos e do cinema,
+                conhecido por sua personalidade e suas aventuras.
               </p>
+
+              <div class="filme-rodape">
+                <span class="filme-genero">Super-heróis</span>
+                <span class="filme-status">No acervo</span>
+              </div>
+
             </div>
-          </div>
-          <div class="filme-card">
+          </article>
+
+          <!-- Tron -->
+          <article class="filme-card animacao"
+            data-genero="scifi"
+            data-nome="Tron"
+            data-pesquisa="tron ficção científica tecnologia universo digital computador aventura filme">
+
             <div class="imagem">
-              <img src="./img/Tron1982poster.jpg" alt="Tron" />
+              <span class="filme-badge">SCI-FI / TECH</span>
+
+              <img src="./img/Tron1982poster.jpg"
+                alt="Pôster de Tron"
+                loading="lazy"
+                decoding="async">
+
+              <span class="imagem-numero">03</span>
             </div>
+
             <div class="filme-info">
-              <h2>Tron</h2>
+
+              <div class="filme-meta">
+                <span>Filmes / Franquia</span>
+                <span class="filme-nota">★ 9.2</span>
+              </div>
+
+              <h3>Tron</h3>
+
               <p>
                 Um clássico da ficção científica que mistura tecnologia,
                 aventura e um universo digital único.
               </p>
+
+              <div class="filme-rodape">
+                <span class="filme-genero">Ficção científica</span>
+                <span class="filme-status">No acervo</span>
+              </div>
+
             </div>
-          </div>
-          <div class="filme-card">
+          </article>
+
+          <!-- The Big Bang Theory -->
+          <article class="filme-card animacao"
+            data-genero="comedia"
+            data-nome="The Big Bang Theory"
+            data-pesquisa="the big bang theory tbbt série comédia ciência amizade humor sitcom">
+
             <div class="imagem">
-              <img src="./img/tbbt.jpg" alt="The Big Bang Theory" />
+              <span class="filme-badge">COMÉDIA</span>
+
+              <img src="./img/tbbt.jpg"
+                alt="Imagem de The Big Bang Theory"
+                loading="lazy"
+                decoding="async">
+
+              <span class="imagem-numero">04</span>
             </div>
+
             <div class="filme-info">
-              <h2>The Big Bang Theory</h2>
+
+              <div class="filme-meta">
+                <span>Série de TV</span>
+                <span class="filme-nota">★ 9.3</span>
+              </div>
+
+              <h3>The Big Bang Theory</h3>
+
               <p>
                 Uma série que mistura ciência, amizade, humor e situações
                 marcantes entre seus personagens.
               </p>
+
+              <div class="filme-rodape">
+                <span class="filme-genero">Comédia</span>
+                <span class="filme-status">No acervo</span>
+              </div>
+
             </div>
-          </div>
-          <div class="filme-card">
+          </article>
+
+          <!-- Loki -->
+          <article class="filme-card animacao"
+            data-genero="scifi"
+            data-nome="Loki"
+            data-pesquisa="loki marvel série ficção científica multiverso variantes linhas do tempo super-heróis">
+
             <div class="imagem">
-              <img src="./img/Loki_season_1_poster.jpg" alt="Loki" />
+              <span class="filme-badge">MARVEL / SCI-FI</span>
+
+              <img src="./img/Loki_season_1_poster.jpg"
+                alt="Pôster da série Loki"
+                loading="lazy"
+                decoding="async">
+
+              <span class="imagem-numero">05</span>
             </div>
+
             <div class="filme-info">
-              <h2>Loki</h2>
+
+              <div class="filme-meta">
+                <span>Série / Marvel</span>
+                <span class="filme-nota">★ 9.5</span>
+              </div>
+
+              <h3>Loki</h3>
+
               <p>
-                Uma aventura pelo universo da Marvel envolvendo linhas do tempo,
-                variantes e novas possibilidades.
+                Uma aventura pelo universo da Marvel envolvendo linhas
+                do tempo, variantes e novas possibilidades.
               </p>
+
+              <div class="filme-rodape">
+                <span class="filme-genero">Ficção científica</span>
+                <span class="filme-status">No acervo</span>
+              </div>
+
             </div>
-          </div>
-          <div class="filme-card">
+          </article>
+
+          <!-- One Piece -->
+          <article class="filme-card animacao"
+            data-genero="aventura"
+            data-nome="One Piece"
+            data-pesquisa="one piece anime série aventura piratas amizade sonhos liberdade ação">
+
             <div class="imagem">
-              <img src="./img/5601463.webp" alt="One Piece" />
+              <span class="filme-badge">AVENTURA</span>
+
+              <img src="./img/5601463.webp"
+                alt="Imagem de One Piece"
+                loading="lazy"
+                decoding="async">
+
+              <span class="imagem-numero">06</span>
             </div>
+
             <div class="filme-info">
-              <h2>One Piece</h2>
+
+              <div class="filme-meta">
+                <span>Anime / Série</span>
+                <span class="filme-nota">★ 9.8</span>
+              </div>
+
+              <h3>One Piece</h3>
+
               <p>
-                Uma grande aventura pelos mares, marcada por amizade, sonhos,
-                liberdade e personagens inesquecíveis.
+                Uma grande aventura pelos mares, marcada por amizade,
+                sonhos, liberdade e personagens inesquecíveis.
               </p>
+
+              <div class="filme-rodape">
+                <span class="filme-genero">Aventura</span>
+                <span class="filme-status">No acervo</span>
+              </div>
+
             </div>
-          </div>
+          </article>
+
         </div>
-      </section>
-    </main>
-    <footer><p>Copyright alexmonteiro 2026</p></footer>
-  </body>
+
+        <!-- Nenhum resultado -->
+        <div class="mensagem-vazia" id="mensagemVazia" hidden>
+          <span class="vazio-icone" aria-hidden="true">⌕</span>
+
+          <h3>Nenhum título encontrado.</h3>
+
+          <p>
+            Tente pesquisar outro nome ou selecionar uma categoria diferente.
+          </p>
+
+          <button type="button"
+            class="botao botao-secundario"
+            id="limparFiltros">
+            LIMPAR FILTROS
+          </button>
+        </div>
+
+        <p class="catalogo-final">
+          <span class="indicador"></span>
+          FIM DO CATÁLOGO — MAIS HISTÓRIAS VIRÃO
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Voltar ao topo -->
+  <button type="button"
+    class="btn-topo"
+    id="btnTopo"
+    aria-label="Voltar ao topo"
+    hidden>
+
+    <svg viewBox="0 0 24 24" width="22" height="22"
+      fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round"
+      aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+
+  </button>
+
+  <!-- Rodapé -->
+  <footer class="rodape">
+    <div class="container rodape-conteudo">
+
+      <a href="./Alexverso.html"
+        class="logo"
+        aria-label="Voltar ao Alexverso">
+        ALEX<span>VERSO</span><span class="ponto">.</span>
+      </a>
+
+      <p class="rodape-frase">
+        Minha biblioteca. Minhas paixões. Meu universo.
+      </p>
+
+      <a href="#inicio" class="rodape-link">
+        VOLTAR AO INÍCIO ↑
+      </a>
+
+      <small>
+        © <span id="anoAtual">2026</span> Alex Monteiro.
+        Todos os direitos reservados.
+      </small>
+
+    </div>
+  </footer>
+
+</body>
 </html>

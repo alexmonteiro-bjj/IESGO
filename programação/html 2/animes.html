@@ -1,175 +1,520 @@
-<!DOCTYPE html>
 
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anime | Alexverso</title>
-<link rel="stylesheet" href="animes.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#07152e">
+  <meta name="description" content="Animes | Alexverso — Minha biblioteca pessoal de animes, personagens e histórias inesquecíveis.">
+  <meta name="author" content="Alex Monteiro">
+
+  <title>Animes | Alexverso</title>
+
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./animes.css">
+  <script src="./animes.js" defer></script>
 </head>
+
 <body>
 
-<header class="cabecalho">
-
- <div class="logo"><a href="../html/Alexverso.html">Alexverso</a></div>
-      <nav class="menu">
-        <a href="../html/Alexverso.html">Início</a>
-        <a href="../html 2/animes.html">Anime</a>
-        <a href="../html4/games.html">Games</a>
-        <a href="../html3/filmes e series.html" class="ativo">Filmes e Séries</a>
-
-</header>
-
-<main>
-
-<section class="anime-intro">
-
-<div class="intro-conteudo">
-
-<p>MINHA BIBLIOTECA</p>
-
-<h1>ANIME</h1>
-
-<span>Histórias, personagens e mundos que fazem parte das minhas paixões.</span>
-
-</div>
-
-</section>
-
-<section class="animes">
-
-<div class="titulo">
-
-<p>MINHAS PAIXÕES</p>
-
-<h2>MEUS ANIMES FAVORITOS</h2>
-
-</div>
-
-<div class="animes-container">
-
-<div class="anime-card">
-
-<div class="imagem">
-
-<img src="./imag/images.jpg" alt="Anime">
-
-</div>
-
-<div class="anime-info">
-
-<h2>Anime</h2>
-
-<p>Uma das obras que fazem parte da minha biblioteca de animes.</p>
-
-</div>
-
-</div>
-
-<div class="anime-card">
-
-<div class="imagem">
-
-<img src="./imag/089875.webp" alt="Anime">
-
-</div>
-
-<div class="anime-info">
-
-<h2>Anime</h2>
-
-<p>Uma história marcante que conquistou seu espaço entre minhas favoritas.</p>
-
-</div>
-
-</div>
-
-<div class="anime-card">
-
-<div class="imagem">
-
-<img src="./imag/MV5BN2EyODU0ZWEtZmU3Ni00NjliLTg4ZWEtMTY3NGVmOWJmNjQxXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Anime">
-
-</div>
-
-<div class="anime-info">
-
-<h2>Anime</h2>
-
-<p>Personagens e histórias que tornam esse universo especial.</p>
-
-</div>
-
-</div>
-
-<div class="anime-card">
-
-<div class="imagem">
-
-<img src="./imag/MV5BYTgyZDhmMTEtZDFhNi00MTc4LTg3NjUtYWJlNGE5Mzk2NzMxXkEyXkFqcGc@._V1_QL75_UX190_CR0,2,190,281_.jpg" alt="Anime">
-
-</div>
-
-<div class="anime-info">
-
-<h2>Anime</h2>
-
-<p>Mais uma obra que faz parte da minha coleção pessoal.</p>
-
-</div>
-
-</div>
-
-<div class="anime-card">
-
-<div class="imagem">
-
-<img src="./imag/Cyberpunk_mercenarios.jpg" alt="Cyberpunk: Mercenários">
-
-</div>
-
-<div class="anime-info">
-
-<h2>Cyberpunk: Mercenários</h2>
-
-<p>Uma história intensa em um futuro marcado pela tecnologia e pelo caos.</p>
-
-</div>
-
-</div>
-
-<div class="anime-card">
-
-<div class="imagem">
-
-<img src="./imag/One_Piece_vol._01.jpg" alt="One Piece">
-
-</div>
-
-<div class="anime-info">
-
-<h2>One Piece</h2>
-
-<p>Uma aventura gigantesca repleta de personagens, amizades e descobertas.</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-<footer>
-
-<p>Copyright alexmonteiro 2026</p>
-
-</footer>
+  <a href="#conteudoPrincipal" class="pular-conteudo">
+    Pular para o conteúdo
+  </a>
+
+  <!-- Carregamento -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-conteudo">
+      <span class="logo">ALEX<span>VERSO</span><span class="ponto">.</span></span>
+      <p>CARREGANDO UNIVERSO DOS ANIMES</p>
+      <div class="preloader-linha">
+        <div class="preloader-progresso"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progresso de leitura -->
+  <div class="barra-leitura" id="barraLeitura" aria-hidden="true"></div>
+
+  <!-- Cabeçalho -->
+  <header class="cabecalho" id="topo">
+    <div class="container navegacao">
+
+      <a href="./Alexverso.html" class="logo" aria-label="Alexverso, página inicial">
+        ALEX<span>VERSO</span><span class="ponto">.</span>
+      </a>
+
+      <button
+        class="menu-mobile-btn"
+        id="menuToggle"
+        type="button"
+        aria-label="Abrir menu de navegação"
+        aria-controls="menuPrincipal"
+        aria-expanded="false">
+
+        <svg viewBox="0 0 24 24" width="24" height="24"
+          fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <nav class="menu" id="menuPrincipal" aria-label="Navegação principal">
+        <a href="../html/Alexverso.html" class="link-menu">Início</a>
+        <a href="../html 2/animes.html" class="link-menu">Animes</a>
+        <a href="../html4/games.html" class="link-menu ativo" aria-current="page">Games</a>
+        <a href="../html3/filmes e series.html" class="link-menu">Filmes &amp; Séries</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main id="conteudoPrincipal">
+
+    <!-- Apresentação -->
+    <section class="animes-intro" id="inicio">
+
+      <div class="intro-fundo" aria-hidden="true"></div>
+
+      <div class="container intro-conteudo">
+
+        <p class="tag-topo">
+          <span class="indicador"></span>
+          MINHA BIBLIOTECA PESSOAL
+        </p>
+
+        <h1>UNIVERSO <span class="ponto-titulo">ANIME</span><span class="ponto-titulo">.</span></h1>
+
+        <p class="subtitulo">GRANDES JORNADAS &amp; PERSONAGENS</p>
+
+        <p class="descricao">
+          Histórias que vão além da tela, com mundos extraordinários,
+          personagens inesquecíveis e jornadas que despertam a imaginação,
+          a coragem e a vontade de continuar seguindo em frente.
+        </p>
+
+        <div class="botoes">
+          <a href="#catalogo" class="botao">
+            EXPLORAR ACERVO <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+
+        <div class="intro-detalhe" aria-hidden="true">
+          <span>AVENTURAS</span>
+          <span>PERSONAGENS</span>
+          <span>HISTÓRIAS INESQUECÍVEIS</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Catálogo -->
+    <section class="animes secao" id="catalogo">
+
+      <div class="container">
+
+        <div class="titulo animacao">
+          <p class="sobretitulo">MINHAS PAIXÕES</p>
+          <h2>Meus animes favoritos<span class="ponto-titulo">.</span></h2>
+          <span class="linha-titulo"></span>
+
+          <p class="texto-secao">
+            Dos grandes shonen às histórias de ficção científica,
+            uma coleção de universos que merecem ser explorados.
+          </p>
+        </div>
+
+        <!-- Busca e filtros -->
+        <div class="controles animacao">
+
+          <label class="campo-busca">
+
+            <svg viewBox="0 0 24 24" width="20" height="20"
+              fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="16" y1="16" x2="21" y2="21"></line>
+            </svg>
+
+            <input
+              type="search"
+              id="campoBusca"
+              placeholder="Pesquisar por título ou gênero..."
+              aria-label="Pesquisar animes"
+              autocomplete="off">
+
+            <button
+              type="button"
+              id="limparBusca"
+              class="limpar-busca"
+              aria-label="Limpar pesquisa"
+              hidden>
+              &times;
+            </button>
+
+          </label>
+
+          <div class="filtros" id="filtrosGenero" aria-label="Filtrar por gênero">
+
+            <button type="button" class="filtro ativo"
+              data-genero="todos" aria-pressed="true">
+              Todos
+            </button>
+
+            <button type="button" class="filtro"
+              data-genero="shonen" aria-pressed="false">
+              Shonen
+            </button>
+
+            <button type="button" class="filtro"
+              data-genero="acao" aria-pressed="false">
+              Ação
+            </button>
+
+            <button type="button" class="filtro"
+              data-genero="aventura" aria-pressed="false">
+              Aventura
+            </button>
+
+            <button type="button" class="filtro"
+              data-genero="scifi" aria-pressed="false">
+              Sci-Fi
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="catalogo-info">
+          <p id="contadorAnimes" aria-live="polite">6 títulos no acervo</p>
+
+          <span class="catalogo-indicador">
+            <span class="indicador"></span>
+            COLEÇÃO PESSOAL
+          </span>
+        </div>
+
+        <!-- Grade de animes -->
+        <div class="animes-container" id="gradeAnimes">
+
+          <!-- Naruto -->
+          <article class="anime-card animacao"
+            data-genero="shonen"
+            data-nome="Naruto"
+            data-pesquisa="naruto naruto shippuden ninja ninjas konoha amizade ação shonen">
+
+            <div class="imagem">
+              <span class="anime-badge">SHONEN</span>
+
+              <img src="./img/naruto.jpg"
+                alt="Pôster de Naruto"
+                loading="lazy"
+                decoding="async">
+
+              <span class="imagem-numero">01</span>
+            </div>
+
+            <div class="anime-info">
+
+              <div class="anime-meta">
+                <span>Anime / Franquia</span>
+                <span class="anime-nota">★ 9.5</span>
+              </div>
+
+              <h3>Naruto</h3>
+
+              <p>
+                A jornada de um jovem ninja determinado a superar
+                obstáculos, conquistar o reconhecimento e realizar
+                o sonho de se tornar Hokage.
+              </p>
+
+              <div class="anime-rodape">
+                <span class="anime-genero">Ação e aventura</span>
+                <span class="anime-status">No acervo</span>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- One Piece -->
+          <article class="anime-card animacao"
+            data-genero="aventura"
+            data-nome="One Piece"
+            data-pesquisa="one piece luffy piratas aventura amizade liberdade sonhos shonen ação">
+
+            <div class="imagem">
+              <span class="anime-badge">AVENTURA</span>
+
+              <img src="./img/one-piece.jpg"
+                alt="Pôster de One Piece"
+                loading="lazy"
+                decoding="async">
+
+              <span class="imagem-numero">02</span>
+            </div>
+
+            <div class="anime-info">
+
+              <div class="anime-meta">
+                <span>Anime / Franquia</span>
+                <span class="anime-nota">★ 9.8</span>
+              </div>
+
+              <h3>One Piece</h3>
+
+              <p>
+                Uma viagem pelos mares ao lado de Luffy e sua tripulação,
+                em busca de sonhos, liberdade, amizades e do lendário
+                tesouro One Piece.
+              </p>
+
+              <div class="anime-rodape">
+                <span class="anime-genero">Aventura</span>
+                <span class="anime-status">No acervo</span>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- Attack on Titan -->
+          <article class="anime-card animacao"
+            data-genero="acao"
+            data-nome="Attack on Titan"
+            data-pesquisa="attack on titan shingeki no kyojin titãs humanidade mistério guerra ação shonen">
+
+            <div class="imagem">
+              <span class="anime-badge">AÇÃO</span>
+
+              <img src="./img/attack-on-titan.jpg"
+                alt="Pôster de Attack on Titan"
+                loading="lazy"
+                decoding="async">
+
+              <span class="imagem-numero">03</span>
+            </div>
+
+            <div class="anime-info">
+
+              <div class="anime-meta">
+                <span>Anime / Série</span>
+                <span class="anime-nota">★ 9.7</span>
+              </div>
+
+              <h3>Attack on Titan</h3>
+
+              <p>
+                Uma história intensa de sobrevivência, conflitos
+                e segredos, na qual a humanidade luta para descobrir
+                a verdade sobre o mundo em que vive.
+              </p>
+
+              <div class="anime-rodape">
+                <span class="anime-genero">Ação e drama</span>
+                <span class="anime-status">No acervo</span>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- Demon Slayer -->
+          <article class="anime-card animacao"
+            data-genero="shonen"
+            data-nome="Demon Slayer"
+            data-pesquisa="demon slayer kimetsu no yaiba tanjiro nezuko demônios espadachins ação shonen">
+
+            <div class="imagem">
+              <span class="anime-badge">SHONEN</span>
+
+              <img src="./img/demon-slayer.jpg"
+                alt="Pôster de Demon Slayer"
+                loading="lazy"
+                decoding="async">
+
+              <span class="imagem-numero">04</span>
+            </div>
+
+            <div class="anime-info">
+
+              <div class="anime-meta">
+                <span>Anime / Franquia</span>
+                <span class="anime-nota">★ 9.4</span>
+              </div>
+
+              <h3>Demon Slayer</h3>
+
+              <p>
+                Tanjiro inicia uma jornada para proteger sua família,
+                enfrentar demônios e encontrar uma maneira de devolver
+                a humanidade à sua irmã.
+              </p>
+
+              <div class="anime-rodape">
+                <span class="anime-genero">Ação e fantasia</span>
+                <span class="anime-status">No acervo</span>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- Jujutsu Kaisen -->
+          <article class="anime-card animacao"
+            data-genero="acao"
+            data-nome="Jujutsu Kaisen"
+            data-pesquisa="jujutsu kaisen yuji itadori feiticeiros maldições sobrenatural ação shonen">
+
+            <div class="imagem">
+              <span class="anime-badge">AÇÃO</span>
+
+              <img src="./img/jujutsu-kaisen.jpg"
+                alt="Pôster de Jujutsu Kaisen"
+                loading="lazy"
+                decoding="async">
+
+              <span class="imagem-numero">05</span>
+            </div>
+
+            <div class="anime-info">
+
+              <div class="anime-meta">
+                <span>Anime / Série</span>
+                <span class="anime-nota">★ 9.3</span>
+              </div>
+
+              <h3>Jujutsu Kaisen</h3>
+
+              <p>
+                Um universo de feiticeiros e maldições em que coragem,
+                amizade e escolhas difíceis se encontram em batalhas
+                sobrenaturais.
+              </p>
+
+              <div class="anime-rodape">
+                <span class="anime-genero">Sobrenatural</span>
+                <span class="anime-status">No acervo</span>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- Cyberpunk: Mercenários -->
+          <article class="anime-card animacao"
+            data-genero="scifi"
+            data-nome="Cyberpunk: Mercenários"
+            data-pesquisa="cyberpunk mercenários edgerunners david lucy night city tecnologia ficção científica ação">
+
+            <div class="imagem">
+              <span class="anime-badge">SCI-FI</span>
+
+              <img src="./img/cyberpunk-edgerunners.jpg"
+                alt="Pôster de Cyberpunk: Mercenários"
+                loading="lazy"
+                decoding="async">
+
+              <span class="imagem-numero">06</span>
+            </div>
+
+            <div class="anime-info">
+
+              <div class="anime-meta">
+                <span>Anime / Série</span>
+                <span class="anime-nota">★ 9.6</span>
+              </div>
+
+              <h3>Cyberpunk: Mercenários</h3>
+
+              <p>
+                Em Night City, David e seus companheiros tentam
+                sobreviver em uma metrópole futurista marcada pela
+                tecnologia, desigualdade e ambição.
+              </p>
+
+              <div class="anime-rodape">
+                <span class="anime-genero">Ficção científica</span>
+                <span class="anime-status">No acervo</span>
+              </div>
+
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Nenhum resultado -->
+        <div class="mensagem-vazia" id="mensagemVazia" hidden>
+          <span class="vazio-icone" aria-hidden="true">⌕</span>
+
+          <h3>Nenhum anime encontrado.</h3>
+
+          <p>
+            Tente pesquisar outro nome ou selecionar um gênero diferente.
+          </p>
+
+          <button type="button"
+            class="botao botao-secundario"
+            id="limparFiltros">
+            LIMPAR FILTROS
+          </button>
+        </div>
+
+        <p class="catalogo-final">
+          <span class="indicador"></span>
+          FIM DO CATÁLOGO — MAIS HISTÓRIAS VIRÃO
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Voltar ao topo -->
+  <button type="button"
+    class="btn-topo"
+    id="btnTopo"
+    aria-label="Voltar ao topo"
+    hidden>
+
+    <svg viewBox="0 0 24 24" width="22" height="22"
+      fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round"
+      aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+
+  </button>
+
+  <!-- Rodapé -->
+  <footer class="rodape">
+    <div class="container rodape-conteudo">
+
+      <a href="./Alexverso.html"
+        class="logo"
+        aria-label="Voltar ao Alexverso">
+        ALEX<span>VERSO</span><span class="ponto">.</span>
+      </a>
+
+      <p class="rodape-frase">
+        Minha biblioteca. Minhas paixões. Meu universo.
+      </p>
+
+      <a href="#inicio" class="rodape-link">
+        VOLTAR AO INÍCIO ↑
+      </a>
+
+      <small>
+        © <span id="anoAtual">2026</span> Alex Monteiro.
+        Todos os direitos reservados.
+      </small>
+
+    </div>
+  </footer>
 
 </body>
 </html>
