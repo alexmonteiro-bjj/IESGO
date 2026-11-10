@@ -1,0 +1,24 @@
+
+import random
+
+numero_secreto = random.randint(1, 20)
+tentativa = 1
+
+print("Jogo de Adivinhação (1 a 20)")
+
+while tentativa <= 5:
+    palpite = int(input("Digite seu palpite: "))
+
+    if palpite == numero_secreto:
+        print("Você acertou! Parabéns!")
+        break
+    elif palpite < numero_secreto:
+        print("O número é maior!")
+    else:
+        print("O número é menor!")
+
+    tentativa += 1
+
+if tentativa > 5:
+    print("Suas tentativas acabaram!")
+    print("O número era:", numero_secreto)

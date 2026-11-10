@@ -1,0 +1,150 @@
+import hashlib
+import os
+import random
+
+
+def calcular_sha256_texto(texto: str) -> str:
+    """Calcula o hash SHA-256 de uma string."""
+    return hashlib.sha256(texto.encode('utf-8')).hexdigest()
+
+
+def print_byte_array(byte_data: bytes):
+    """Exibe bytes em formato hexadecimal maiúsculo agrupados de 4 em 4."""
+    for i, b in enumerate(byte_data):
+        print(f"{b:02X}", end="")
+        if (i % 4) == 3:
+            print(" ", end="")
+    print()
+
+
+def hash_diretorio():
+    """Calcula o hash SHA-256 de cada arquivo em um diretório especificado."""
+    caminho = input("\nDigite o caminho da pasta: ").strip().strip('"').strip("'")
+
+    if not (os.path.exists(caminho) and os.path.isdir(caminho)):
+        print("[ERRO] O diretório especificado não foi encontrado.")
+        return
+
+    try:
+        itens = os.listdir(caminho)
+    except PermissionError as e:
+        print(f"[ERRO DE ACESSO] {e}")
+        return
+    except OSError as e:
+        print(f"[ERRO DE I/O] {e}")
+        return
+
+    print(f"\n--- HASHES DOS ARQUIVOS EM: {caminho} ---")
+    arquivos_encontrados = False
+
+    for nome_arquivo in itens:
+        caminho_completo = os.path.join(caminho, nome_arquivo)
+
+        if os.path.isfile(caminho_completo):
+            arquivos_encontrados = True
+            try:
+                sha256 = hashlib.sha256()
+                with open(caminho_completo, "rb") as f:
+                    while bloco := f.read(65536):
+                        sha256.update(bloco)
+
+                print(f"{nome_arquivo}: ", end="")
+                print_byte_array(sha256.digest())
+
+            except PermissionError as e:
+                print(f"{nome_arquivo}: [Sem permissão de acesso - {e}]")
+            except OSError as e:
+                print(f"{nome_arquivo}: [Erro de I/O - {e}]")
+
+    if not arquivos_encontrados:
+        print("Nenhum arquivo encontrado nesta pasta.")
+
+
+def menu():
+    while True:
+        print("\n" + "=" * 50)
+        print("         LABORATÓRIO DE HASHES SHA-256")
+        print("=" * 50)
+        print("1 - Gerar SHA-256")
+        print("2 - Comparar hashes")
+        print("3 - Demonstrar busca de PIN 00 a 99")
+        print("4 - Calcular hashes de arquivos em diretório")
+        print("0 - Sair")
+        print("=" * 50)
+
+        opcao = input("Opção: ").strip()
+
+        # 0 - Sair
+        if opcao == "0":
+            print("\nEncerrando o laboratório... Até logo!")
+            break
+
+        # 1 - Gerar SHA-256
+        elif opcao == "1":
+            print("\n--- 1. GERAR SHA-256 DE STRING ---")
+            texto = input("Digite o texto: ")
+            hash_gerado = calcular_sha256_texto(texto)
+            print(f"Texto original: \"{texto}\"")
+            print(f"Hash SHA-256  : {hash_gerado}")
+
+        # 2 - Comparar hashes
+        elif opcao == "2":
+            print("\n--- 2. COMPARAR HASHES DE DOIS TEXTOS ---")
+            texto1 = input("Digite o 1º texto: ")
+            texto2 = input("Digite o 2º texto: ")
+
+            hash1 = calcular_sha256_texto(texto1)
+            hash2 = calcular_sha256_texto(texto2)
+
+            print(f"\nHash 1: {hash1}")
+            print(f"Hash 2: {hash2}")
+
+            if hash1 == hash2:
+                print("\n[RESULTADO] Os textos são IDÊNTICOS.")
+            else:
+                print("\n[RESULTADO] Os textos são DIFERENTES.")
+                print("Nota: Mesmo a mudança de um único caractere gera um hash totalmente distinto.")
+
+        # 3 - Demonstrar busca de PIN 00 a 99 (Força Bruta)
+        elif opcao == "3":
+            print("\n--- 3. BUSCA POR FORÇA BRUTA (PIN 00 A 99) ---")
+
+            # PIN secreto gerado aleatoriamente pelo próprio programa
+            pin_secreto = f"{random.randint(0, 99):02d}"
+            hash_alvo = calcular_sha256_texto(pin_secreto)
+
+            print(f"PIN secreto gerado pelo sistema: {pin_secreto}")
+            print(f"Hash SHA-256 alvo              : {hash_alvo}")
+            print("\nIniciando busca por força bruta...")
+
+            tentativas = 0
+            pin_encontrado = None
+
+            # Percorre estritamente de 00 até 99
+            for n in range(100):
+                tentativas += 1
+                candidato = f"{n:02d}"  # Zeros à esquerda (00, 01, ..., 99)
+                hash_candidato = calcular_sha256_texto(candidato)
+
+                # Interrompe assim que o hash correspondente for encontrado
+                if hash_candidato == hash_alvo:
+                    pin_encontrado = candidato
+                    break  # break exigido pelos requisitos
+
+            print("-" * 50)
+            print(f"[SUCESSO] PIN encontrado : {pin_encontrado}")
+            print(f"Hash correspondente      : {hash_alvo}")
+            # Desafio Extra: Exibir o número de tentativas
+            print(f"Tentativas realizadas    : {tentativas} de 100")
+            print("-" * 50)
+
+        # 4 - Hash de Arquivos do Diretório (C# convertido)
+        elif opcao == "4":
+            hash_diretorio()
+
+        else:
+            print("\n[ERRO] Opção inválida! Escolha 1, 2, 3, 4 ou 0.")
+
+
+if __name__ == "__main__":
+    menu()

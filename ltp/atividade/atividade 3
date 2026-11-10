@@ -1,0 +1,28 @@
+
+pares = 0
+impares = 0
+soma = 0
+maior = None
+menor = None
+
+for i in range(1, 11):
+    numero = int(input("Digite um número: "))
+
+    soma += numero
+
+    if numero % 2 == 0:
+        pares += 1
+    else:
+        impares += 1
+
+    if maior is None or numero > maior:
+        maior = numero
+
+    if menor is None or numero < menor:
+        menor = numero
+
+print("Pares:", pares)
+print("Ímpares:", impares)
+print("Soma total:", soma)
+print("Maior número:", maior)
+print("Menor número:", menor)

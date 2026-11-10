@@ -1,0 +1,57 @@
+
+ARQUIVO = "contatos.txt"
+
+while True:
+    print("\n--- AGENDA DE CONTATOS ---")
+    print("1 - Cadastrar")
+    print("2 - Listar")
+    print("3 - Buscar")
+    print("0 - Sair")
+
+    opcao = input("Opção: ")
+
+    if opcao == "0":
+        print("Saindo da agenda...")
+        break
+
+    elif opcao == "1":
+        nome = input("Nome: ")
+        telefone = input("Telefone: ")
+        email = input("E-mail: ")
+
+        with open(ARQUIVO, "a", encoding="utf-8") as arquivo:
+            arquivo.write(nome + ";" + telefone + ";" + email + "\n")
+
+        print("Contato cadastrado!")
+
+    elif opcao == "2":
+        try:
+            with open(ARQUIVO, "r", encoding="utf-8") as arquivo:
+                for linha in arquivo:
+                    nome, telefone, email = linha.strip().split(";")
+                    print(nome, telefone, email)
+
+        except FileNotFoundError:
+            print("Agenda vazia!")
+
+    elif opcao == "3":
+        busca = input("Digite o nome: ").lower()
+        encontrado = False
+
+        try:
+            with open(ARQUIVO, "r", encoding="utf-8") as arquivo:
+                for linha in arquivo:
+                    nome, telefone, email = linha.strip().split(";")
+
+                    if busca in nome.lower():
+                        print(nome, telefone, email)
+                        encontrado = True
+
+            if not encontrado:
+                print("Contato não encontrado!")
+
+        except FileNotFoundError:
+            print("Agenda vazia!")
+
+    else:
+        print("Opção inválida!")

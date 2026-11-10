@@ -1,0 +1,38 @@
+
+inicio = int(input("Início: "))
+fim = int(input("Fim: "))
+
+contador = inicio
+acumulador = 0
+
+while contador <= fim:
+    print(contador, end=" ")
+    acumulador += contador
+    contador += 1
+
+print("\nSoma total:", acumulador)
+
+
+
+
+inicio = int(input("Início: "))
+fim = int(input("Fim: "))
+
+contador = inicio
+acumulador = 0
+
+print("Saída:", end=" ")
+
+if inicio <= fim:
+    while contador <= fim:
+        print(contador, end=" ")
+        acumulador += contador
+        contador += 1
+else:
+    while contador >= fim:
+        print(contador, end=" ")
+        acumulador += contador
+        contador -= 1
+
+print("\nSoma total:", acumulador)
+
