@@ -1328,12 +1328,18 @@ Também existe um segredo escondido no Alexverso...`,
       }
 
       // -------------------------------------------------------------
-      // 2. ATUALIZAÇÃO DOS FANTASMAS (IA SEM BUGS)
+      // 2. ATUALIZAÇÃO DOS FANTASMAS (IA SUAVE E SEM TRAVAR)
       // -------------------------------------------------------------
       ghosts.forEach(g => {
+        // Se ainda está aguardando saída na casa dos fantasmas
+        if (g.delay > 0) {
+          g.delay--;
+          return;
+        }
+
         let currentSpeed = g.speed;
         if (g.isEaten) {
-          currentSpeed = 0.15; // Olhos voltam rápido para casa
+          currentSpeed = 0.16; // Olhos voltam rápido para casa
         } else if (frightenTimer > 0) {
           currentSpeed = g.speed * 0.55; // Mais lento quando assustado
         }
@@ -1349,10 +1355,13 @@ Também existe um segredo escondido no Alexverso...`,
           if (g.tileX < 0) g.tileX = COLS - 1;
           else if (g.tileX >= COLS) g.tileX = 0;
 
-          // Se estava sendo comido e chegou na casa
+          // Se estava sendo comido e chegou na casa (coluna 9, linha 9 ou 10)
           if (g.isEaten && g.tileX === 9 && (g.tileY === 9 || g.tileY === 10)) {
             g.isEaten = false;
-            g.inHouse = true;
+            g.inHouse = false;
+            g.dirX = 0;
+            g.dirY = -1; // Sobe de volta para o labirinto
+            return;
           }
 
           // Lógica de saída da casa dos fantasmas
@@ -1373,6 +1382,7 @@ Também existe um segredo escondido no Alexverso...`,
           }
 
           // Movimentação nas encruzilhadas
+          const canCrossDoor = g.inHouse || g.isEaten;
           const possibleMoves = [
             { dx: 0, dy: -1 }, // Cima
             { dx: -1, dy: 0 }, // Esquerda
@@ -1381,13 +1391,23 @@ Também existe um segredo escondido no Alexverso...`,
           ].filter(m => {
             // Não volta imediatamente 180° a não ser que seja beco sem saída
             if (m.dx === -g.dirX && m.dy === -g.dirY) return false;
-            return canMoveTo(g.tileX + m.dx, g.tileY + m.dy, true, g.inHouse);
+            return canMoveTo(g.tileX + m.dx, g.tileY + m.dy, true, canCrossDoor);
           });
 
           if (possibleMoves.length === 0) {
             // Beco sem saída: inverte
-            g.dirX = -g.dirX;
-            g.dirY = -g.dirY;
+            if (canMoveTo(g.tileX - g.dirX, g.tileY - g.dirY, true, canCrossDoor)) {
+              g.dirX = -g.dirX;
+              g.dirY = -g.dirY;
+            } else {
+              const anyMove = [
+                { dx: 0, dy: -1 }, { dx: -1, dy: 0 }, { dx: 1, dy: 0 }, { dx: 0, dy: 1 }
+              ].find(m => canMoveTo(g.tileX + m.dx, g.tileY + m.dy, true, canCrossDoor));
+              if (anyMove) {
+                g.dirX = anyMove.dx;
+                g.dirY = anyMove.dy;
+              }
+            }
           } else if (g.isEaten) {
             // Retorna para a casa dos fantasmas (9, 9)
             possibleMoves.sort((a, b) => {
