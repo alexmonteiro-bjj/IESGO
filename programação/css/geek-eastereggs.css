@@ -300,3 +300,240 @@
     transform: translateY(0) scale(1);
   }
 }
+
+/* --------------------------------------------------------------------------
+   8. EASTER EGG: ANONYMOUS — MÁSCARA GUY FAWKES & MODO DARK HACKER
+   -------------------------------------------------------------------------- */
+#gee-anon-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000012;
+  background: rgba(2, 4, 8, 0.95);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: geeToastIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.gee-anon-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: #050b11;
+  border: 2px solid #00ff66;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(0, 255, 102, 0.35), inset 0 0 20px rgba(0, 255, 102, 0.1);
+  padding: 28px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  overflow: hidden;
+}
+
+/* Efeito de linhas de varredura (Scanlines) */
+.gee-anon-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 102, 0.03) 0px,
+    rgba(0, 255, 102, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+.gee-anon-mask-wrap {
+  width: 160px;
+  height: 190px;
+  animation: geeAnonFloat 3.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(0, 255, 102, 0.5));
+}
+
+.gee-anon-mask-svg {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes geeAnonFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.03);
+  }
+}
+
+.gee-anon-title {
+  font-family: monospace, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #00ff66;
+  text-shadow: 0 0 10px rgba(0, 255, 102, 0.7);
+}
+
+.gee-anon-quote {
+  font-family: monospace, sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #c8fad8;
+  background: rgba(0, 20, 10, 0.6);
+  border: 1px solid rgba(0, 255, 102, 0.3);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.gee-anon-quote span {
+  color: #00ff66;
+  font-weight: 700;
+}
+
+.gee-anon-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.gee-anon-btn {
+  background: #00ff66;
+  color: #021206;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-family: monospace, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: 1px;
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+  transition: all 0.2s ease;
+}
+
+.gee-anon-btn:hover {
+  background: #5cff9e;
+  transform: translateY(-2px);
+  box-shadow: 0 0 22px rgba(0, 255, 102, 0.7);
+}
+
+.gee-anon-btn-sec {
+  background: transparent;
+  color: #00ff66;
+  border: 1px solid #00ff66;
+  box-shadow: none;
+}
+
+.gee-anon-btn-sec:hover {
+  background: rgba(0, 255, 102, 0.15);
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   TEMA DARK HACKER APLICADO AO SITE INTEIRO (BODY.GEE-ANONYMOUS-MODE)
+   -------------------------------------------------------------------------- */
+body.gee-anonymous-mode {
+  background-color: #04080d !important;
+  background-image: radial-gradient(rgba(0, 255, 102, 0.1) 1px, transparent 0) !important;
+  background-size: 26px 26px !important;
+  color: #d1f7dc !important;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+body.gee-anonymous-mode header.cabecalho,
+body.gee-anonymous-mode header.secret-header,
+body.gee-anonymous-mode footer.rodape,
+body.gee-anonymous-mode footer.secret-footer {
+  background: rgba(4, 9, 15, 0.95) !important;
+  border-bottom: 2px solid #00ff66 !important;
+  box-shadow: 0 6px 25px rgba(0, 255, 102, 0.2) !important;
+}
+
+body.gee-anonymous-mode .card,
+body.gee-anonymous-mode .filme-card,
+body.gee-anonymous-mode .game-card,
+body.gee-anonymous-mode .anime-card,
+body.gee-anonymous-mode .secret-card,
+body.gee-anonymous-mode .stat-card {
+  background: rgba(6, 14, 22, 0.95) !important;
+  border: 1px solid rgba(0, 255, 102, 0.35) !important;
+  box-shadow: 0 8px 24px rgba(0, 255, 102, 0.12) !important;
+}
+
+body.gee-anonymous-mode .card:hover,
+body.gee-anonymous-mode .filme-card:hover,
+body.gee-anonymous-mode .game-card:hover,
+body.gee-anonymous-mode .anime-card:hover,
+body.gee-anonymous-mode .secret-card:hover {
+  border-color: #00ff66 !important;
+  box-shadow: 0 12px 30px rgba(0, 255, 102, 0.3) !important;
+  transform: translateY(-4px);
+}
+
+body.gee-anonymous-mode h1,
+body.gee-anonymous-mode h2,
+body.gee-anonymous-mode h3,
+body.gee-anonymous-mode .secret-title,
+body.gee-anonymous-mode .logo h1 {
+  color: #00ff66 !important;
+  text-shadow: 0 0 12px rgba(0, 255, 102, 0.6) !important;
+}
+
+body.gee-anonymous-mode a.botao,
+body.gee-anonymous-mode .btn-voltar {
+  background: linear-gradient(135deg, #00ff66 0%, #009944 100%) !important;
+  color: #021206 !important;
+  font-weight: 800 !important;
+  border: none !important;
+  box-shadow: 0 0 18px rgba(0, 255, 102, 0.4) !important;
+}
+
+body.gee-anonymous-mode a.botao:hover,
+body.gee-anonymous-mode .btn-voltar:hover {
+  background: #5cff9e !important;
+  box-shadow: 0 0 25px rgba(0, 255, 102, 0.7) !important;
+}
+
+/* Banner de status do Modo Anonymous EXCLUSIVO no interior do Chatbot */
+.gee-chat-anon-banner {
+  background: rgba(3, 10, 16, 0.98);
+  border-bottom: 1px solid #00ff66;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: monospace, sans-serif;
+  font-size: 11px;
+  color: #00ff66;
+  font-weight: 700;
+  user-select: none;
+  animation: geeToastIn 0.25s ease;
+  flex-shrink: 0;
+}
+
+.gee-chat-anon-banner button {
+  background: transparent;
+  border: 1px solid rgba(0, 255, 102, 0.7);
+  color: #00ff66;
+  border-radius: 12px;
+  padding: 3px 9px;
+  font-size: 10px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gee-chat-anon-banner button:hover {
+  background: #00ff66;
+  color: #000000;
+}
+

@@ -162,6 +162,18 @@
         return true;
       }
 
+      // Desativação explícita por comando no chat
+      if (/\b(desativar anonymous|desativar anonimo|desativar anonimus|desativar hacker|desativar modo anonymous|sair anonymous|restaurar site|restaurar tema|tema normal)\b/.test(clean)) {
+        this.desativarAnonymous();
+        return true;
+      }
+
+      // 8. Anonymous (Máscara Guy Fawkes e Tema Dark Hacker Permanente)
+      if (/\b(anonymous|anonimus|anonimo|anon|fawkes|guy fawkes|hack|hacker)\b/.test(clean)) {
+        this.toggleAnonymous();
+        return true;
+      }
+
       return false;
     },
 
@@ -521,6 +533,197 @@
         messages.appendChild(msg);
         messages.scrollTop = messages.scrollHeight;
       }
+    },
+
+    // ------------------------------------------------------------------------
+    // 8. ANONYMOUS — MÁSCARA GUY FAWKES & TEMA DARK HACKER PERMANENTE
+    // ------------------------------------------------------------------------
+    toggleAnonymous() {
+      if (document.body.classList.contains("gee-anonymous-mode")) {
+        this.desativarAnonymous();
+      } else {
+        this.ativarAnonymous();
+      }
+    },
+
+    inserirBannerNoChat() {
+      const tentar = () => {
+        const chatWindow = document.getElementById("ga-chat-window");
+        if (chatWindow && !document.getElementById("geeChatAnonBanner")) {
+          const header = chatWindow.querySelector(".ga-header");
+          const banner = document.createElement("div");
+          banner.id = "geeChatAnonBanner";
+          banner.className = "gee-chat-anon-banner";
+          banner.innerHTML = `
+            <span>🎭 MODO ANONYMOUS ATIVO</span>
+            <button id="geeChatAnonRestoreBtn" title="Restaurar visual padrão">RESTAURAR</button>
+          `;
+          if (header && header.nextSibling) {
+            chatWindow.insertBefore(banner, header.nextSibling);
+          } else {
+            chatWindow.prepend(banner);
+          }
+          banner.querySelector("#geeChatAnonRestoreBtn").onclick = () => {
+            this.desativarAnonymous();
+          };
+        } else if (!chatWindow) {
+          setTimeout(tentar, 250);
+        }
+      };
+      tentar();
+    },
+
+    ativarAnonymous() {
+      SFX.playTone(140, "sawtooth", 0.25);
+      SFX.playTone(90, "sawtooth", 0.45, 0.12);
+
+      // 1. Salva como PERMANENTE no localStorage
+      try {
+        localStorage.setItem("alexverso_anonymous_mode", "ativo");
+      } catch (e) {}
+
+      // 2. Aplica o tema dark hacker no site inteiro
+      document.body.classList.add("gee-anonymous-mode");
+
+      // 3. Adiciona o controle de restaurar EXCLUSIVAMENTE dentro da janela do chat
+      this.inserirBannerNoChat();
+
+      // 4. Abre o modal com a máscara icônica de Guy Fawkes
+      if (!document.getElementById("gee-anon-modal")) {
+        const modal = document.createElement("div");
+        modal.id = "gee-anon-modal";
+
+        modal.innerHTML = `
+          <div class="gee-anon-card">
+            <div class="gee-anon-mask-wrap">
+              <svg viewBox="0 0 200 240" class="gee-anon-mask-svg" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="anonMaskGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="65%" stop-color="#f6efe7"/>
+                    <stop offset="100%" stop-color="#ded3c2"/>
+                  </linearGradient>
+                </defs>
+                <!-- Rosto porcelana clássico Guy Fawkes -->
+                <path d="M45,65 Q28,120 48,170 Q75,225 100,230 Q125,225 152,170 Q172,120 155,65 Q135,26 100,26 Q65,26 45,65 Z" fill="url(#anonMaskGrad)" stroke="#1a1a1a" stroke-width="2"/>
+                <!-- Sobrancelhas arqueadas pretas marcantes -->
+                <path d="M52,82 Q74,56 92,80 Q76,68 52,82 Z" fill="#0d0d0d"/>
+                <path d="M148,82 Q126,56 108,80 Q124,68 148,82 Z" fill="#0d0d0d"/>
+                <!-- Olhos amendoados semicerrados -->
+                <path d="M56,93 Q75,82 92,93 Q75,100 56,93 Z" fill="#0d0d0d"/>
+                <path d="M144,93 Q125,82 108,93 Q125,100 144,93 Z" fill="#0d0d0d"/>
+                <!-- Bochechas rosadas características -->
+                <ellipse cx="54" cy="134" rx="14" ry="10" fill="#e27c7c" opacity="0.65"/>
+                <ellipse cx="146" cy="134" rx="14" ry="10" fill="#e27c7c" opacity="0.65"/>
+                <!-- Nariz afilado -->
+                <path d="M100,82 L96,138 L104,138 Z" fill="#baa992" opacity="0.45"/>
+                <path d="M92,140 Q100,144 108,140" stroke="#333" stroke-width="1.8" fill="none"/>
+                <!-- Bigode curvado para cima icônico -->
+                <path d="M100,153 C88,146 66,142 46,131 C56,138 72,154 90,157 C96,158 100,156 100,153 Z" fill="#0d0d0d"/>
+                <path d="M100,153 C112,146 134,142 154,131 C144,138 128,154 110,157 C104,158 100,156 100,153 Z" fill="#0d0d0d"/>
+                <!-- Sorriso enigmático -->
+                <path d="M66,168 Q100,194 134,168 Q100,182 66,168 Z" fill="#88243b"/>
+                <path d="M70,170 Q100,189 130,170" stroke="#2b0a12" stroke-width="1.5" fill="none"/>
+                <!-- Cavanhaque pontudo na ponta do queixo -->
+                <polygon points="96,186 104,186 100,216" fill="#0d0d0d"/>
+              </svg>
+            </div>
+
+            <div class="gee-anon-title">ANONYMOUS PROTOCOL</div>
+
+            <div class="gee-anon-quote">
+              "We are <span>Anonymous</span>.<br>
+              We are <span>Legion</span>.<br>
+              We do not forgive. We do not forget.<br>
+              <span>Expect us.</span>"
+            </div>
+
+            <div class="gee-anon-actions">
+              <button class="gee-anon-btn" id="geeAnonKeepBtn">🕶️ NAVEGAR NO MODO DARK</button>
+              <button class="gee-anon-btn gee-anon-btn-sec" id="geeAnonCloseBtn">✕ RESTAURAR SITE</button>
+            </div>
+          </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        const fecharModal = () => {
+          modal.remove();
+        };
+
+        modal.querySelector("#geeAnonKeepBtn").onclick = fecharModal;
+        modal.querySelector("#geeAnonCloseBtn").onclick = () => {
+          fecharModal();
+          this.desativarAnonymous();
+        };
+
+        modal.onclick = (e) => {
+          if (e.target === modal) fecharModal();
+        };
+
+        const onEsc = (e) => {
+          if (e.key === "Escape") {
+            fecharModal();
+            window.removeEventListener("keydown", onEsc);
+          }
+        };
+        window.addEventListener("keydown", onEsc);
+      }
+
+      // 4. Mensagem no chat
+      const messages = document.querySelector("#ga-widget .ga-messages");
+      if (messages) {
+        const msg = document.createElement("div");
+        msg.className = "ga-msg ga-bot";
+        msg.innerHTML = `
+          <div class="ga-bubble">
+            🎭 <strong>ANONYMOUS HACK ACTIVATED!</strong><br><br>
+            <em>"Knowledge is free. We are Anonymous. We are Legion. Expect us."</em><br><br>
+            O Alexverso agora está sob a estética <strong>Dark Hacker</strong> com a máscara de Guy Fawkes!<br><br>
+            <button class="ga-chip" style="cursor:pointer;" onclick="window.GeekEasterEggs.desativarAnonymous()">🔄 Desativar Modo Anonymous</button>
+          </div>
+        `;
+        messages.appendChild(msg);
+        messages.scrollTop = messages.scrollHeight;
+      }
+    },
+
+    desativarAnonymous() {
+      // Remove do localStorage para desativar a permanência
+      try {
+        localStorage.removeItem("alexverso_anonymous_mode");
+      } catch (e) {}
+
+      document.body.classList.remove("gee-anonymous-mode");
+      const banner = document.getElementById("geeChatAnonBanner");
+      if (banner) banner.remove();
+
+      SFX.playTone(300, "sine", 0.2);
+
+      const messages = document.querySelector("#ga-widget .ga-messages");
+      if (messages) {
+        const msg = document.createElement("div");
+        msg.className = "ga-msg ga-bot";
+        msg.innerHTML = `
+          <div class="ga-bubble">
+            🛡️ <strong>SISTEMA RESTAURADO</strong><br><br>
+            O Modo Anonymous permanente foi desativado e o visual original do Alexverso foi restabelecido.
+          </div>
+        `;
+        messages.appendChild(msg);
+        messages.scrollTop = messages.scrollHeight;
+      }
+    },
+
+    verificarPersistencia() {
+      try {
+        if (localStorage.getItem("alexverso_anonymous_mode") === "ativo") {
+          if (document.body) {
+            document.body.classList.add("gee-anonymous-mode");
+          }
+          this.inserirBannerNoChat();
+        }
+      } catch (e) {}
     }
   };
 
@@ -551,6 +754,19 @@
       konamiIndex = 0;
     }
   });
+
+  // Aplica o tema dark hacker persistente imediatamente sem piscar
+  try {
+    if (localStorage.getItem("alexverso_anonymous_mode") === "ativo" && document.body) {
+      document.body.classList.add("gee-anonymous-mode");
+    }
+  } catch (e) {}
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => GeekEasterEggs.verificarPersistencia());
+  } else {
+    GeekEasterEggs.verificarPersistencia();
+  }
 
   // Exporta globalmente para o GeekBot acessar
   window.GeekEasterEggs = GeekEasterEggs;
