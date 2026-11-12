@@ -1022,3 +1022,223 @@
         transform: scale(1);
     }
 }
+
+/* ==========================================================================
+   17. EASTER EGG — PAC-MAN ARCADE RETRÔ
+   ========================================================================== */
+
+#pacmanModal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000005;
+    background: rgba(3, 10, 25, 0.96);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    animation: pacEntrada 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+}
+
+.pac-arcade-cabinet {
+    position: relative;
+    width: 100%;
+    max-width: 410px;
+    background: #060a17;
+    border: 3px solid #ffcc00;
+    border-radius: 20px;
+    box-shadow: 0 0 35px rgba(255, 204, 0, 0.35), 0 16px 50px rgba(0, 0, 0, 0.95);
+    padding: 18px 16px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.pac-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 32px;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+}
+
+.pac-close-btn:hover {
+    color: #ffcc00;
+    transform: scale(1.15);
+}
+
+.pac-marquee {
+    width: 100%;
+    text-align: center;
+}
+
+.pac-marquee-title {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #ffcc00;
+    text-shadow: 0 0 12px rgba(255, 204, 0, 0.6);
+    margin-bottom: 6px;
+    font-family: monospace, sans-serif;
+}
+
+.pac-hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 5px 12px;
+    background: #02040b;
+    border: 1px solid rgba(255, 204, 0, 0.3);
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.pac-score-val {
+    color: #00ffff;
+    letter-spacing: 1px;
+}
+
+.pac-lives-val {
+    letter-spacing: 2px;
+}
+
+.pac-canvas-wrap {
+    position: relative;
+    border: 2px solid #162354;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #02040a;
+    box-shadow: 0 0 18px rgba(22, 35, 84, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#pacCanvas {
+    display: block;
+    image-rendering: pixelated;
+}
+
+.pac-game-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(2, 4, 10, 0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    gap: 8px;
+    transition: opacity 0.2s ease;
+}
+
+.pac-game-overlay.hidden {
+    display: none;
+}
+
+.pac-game-overlay h3 {
+    color: #ffcc00;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
+}
+
+.pac-game-overlay p {
+    color: #e2e8f0;
+    font-size: 13px;
+    max-width: 260px;
+    line-height: 1.4;
+}
+
+.pac-btn-start {
+    background: linear-gradient(135deg, #ffcc00, #ff9900);
+    color: #080d1a;
+    border: none;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    padding: 9px 22px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 4px;
+    box-shadow: 0 4px 14px rgba(255, 204, 0, 0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pac-btn-start:hover {
+    transform: scale(1.06);
+    box-shadow: 0 6px 18px rgba(255, 204, 0, 0.7);
+}
+
+/* Controles de Toque (Mobile D-Pad) */
+.pac-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-top: 2px;
+}
+
+.pac-dpad-row {
+    display: flex;
+    gap: 8px;
+}
+
+.pac-dpad-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #111a30;
+    border: 1.5px solid rgba(255, 204, 0, 0.35);
+    color: #ffcc00;
+    font-size: 17px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, transform 0.1s ease;
+    touch-action: manipulation;
+}
+
+.pac-dpad-btn:active {
+    background: #ffcc00;
+    color: #080d1a;
+    transform: scale(0.92);
+}
+
+.pac-instructions {
+    font-size: 11px;
+    color: #94a3b8;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.pac-instructions strong {
+    color: #ffcc00;
+}
+
+@keyframes pacEntrada {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+

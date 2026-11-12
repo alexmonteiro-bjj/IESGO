@@ -907,7 +907,7 @@ Também existe um segredo escondido no Alexverso...`,
   ];
 
   // ==========================================================================
-  // EASTER EGG SECRETO — RICK ASTLEY
+  // EASTER EGG SECRETO — RICK ASTLEY & PAC-MAN ARCADE
   // ==========================================================================
 
   function verificarEasterEgg(mensagem) {
@@ -915,6 +915,11 @@ Também existe um segredo escondido no Alexverso...`,
 
     if (/\brick\b/.test(texto)) {
       abrirEasterEggRick();
+      return true;
+    }
+
+    if (/\bpac\b/.test(texto) || /\bpacman\b/.test(texto) || /\bpac-man\b/.test(texto)) {
+      abrirEasterEggPacman();
       return true;
     }
 
@@ -958,6 +963,649 @@ Também existe um segredo escondido no Alexverso...`,
         modal.remove();
       }
     };
+  }
+
+  function abrirEasterEggPacman() {
+    if (document.getElementById("pacmanModal")) return;
+
+    const modal = document.createElement("div");
+    modal.id = "pacmanModal";
+
+    modal.innerHTML = `
+      <div class="pac-arcade-cabinet">
+        <button class="pac-close-btn" id="pacCloseBtn" aria-label="Fechar Arcade">&times;</button>
+
+        <div class="pac-marquee">
+          <div class="pac-marquee-title">🕹️ FLIPERAMA // PAC-MAN 1980</div>
+          <div class="pac-hud">
+            <div>SCORE: <span id="pacScore" class="pac-score-val">0000</span></div>
+            <div>VIDAS: <span id="pacLives" class="pac-lives-val">🟡🟡🟡</span></div>
+          </div>
+        </div>
+
+        <div class="pac-canvas-wrap">
+          <canvas id="pacCanvas" width="342" height="378"></canvas>
+          <div id="pacOverlay" class="pac-game-overlay">
+            <h3 id="pacOverlayTitle">PAC-MAN</h3>
+            <p id="pacOverlayMsg">Coma todos os pontinhos e fuja dos fantasmas!</p>
+            <button id="pacStartBtn" class="pac-btn-start">INICIAR JOGO</button>
+          </div>
+        </div>
+
+        <!-- Controles Móveis (Touch D-Pad) -->
+        <div class="pac-controls">
+          <button class="pac-dpad-btn" data-dir="up" aria-label="Cima">▲</button>
+          <div class="pac-dpad-row">
+            <button class="pac-dpad-btn" data-dir="left" aria-label="Esquerda">◀</button>
+            <button class="pac-dpad-btn" data-dir="down" aria-label="Baixo">▼</button>
+            <button class="pac-dpad-btn" data-dir="right" aria-label="Direita">▶</button>
+          </div>
+        </div>
+
+        <div class="pac-instructions">
+          🎮 Teclado: <strong>SETAS</strong> ou <strong>W A S D</strong> | <strong>ESC</strong> para sair
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+    initPacmanGame(modal);
+  }
+
+  function initPacmanGame(modal) {
+    const canvas = modal.querySelector("#pacCanvas");
+    const ctx = canvas.getContext("2d");
+    const scoreEl = modal.querySelector("#pacScore");
+    const livesEl = modal.querySelector("#pacLives");
+    const overlay = modal.querySelector("#pacOverlay");
+    const overlayTitle = modal.querySelector("#pacOverlayTitle");
+    const overlayMsg = modal.querySelector("#pacOverlayMsg");
+    const startBtn = modal.querySelector("#pacStartBtn");
+    const closeBtn = modal.querySelector("#pacCloseBtn");
+
+    const TILE = 18;
+    const COLS = 19;
+    const ROWS = 21;
+
+    // 1: Parede, 0: Pontinho, 2: Pílula de Poder, 3: Vazio/Caminho, 4: Porta da casa dos fantasmas
+    const MAP_TEMPLATE = [
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,2,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,2,1],
+      [1,0,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,0,1],
+      [1,0,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,0,1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,0,1],
+      [1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1],
+      [1,1,1,1,0,1,1,1,3,1,3,1,1,1,0,1,1,1,1],
+      [3,3,3,1,0,1,3,3,3,3,3,3,3,1,0,1,3,3,3],
+      [1,1,1,1,0,1,3,1,1,4,1,1,3,1,0,1,1,1,1],
+      [3,3,3,3,0,3,3,1,3,3,3,1,3,3,0,3,3,3,3],
+      [1,1,1,1,0,1,3,1,1,1,1,1,3,1,0,1,1,1,1],
+      [3,3,3,1,0,1,3,3,3,3,3,3,3,1,0,1,3,3,3],
+      [1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1],
+      [1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1],
+      [1,0,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,0,1],
+      [1,2,0,1,0,0,0,0,0,3,0,0,0,0,0,1,0,2,1],
+      [1,1,0,1,0,1,0,1,1,1,1,1,0,1,0,1,0,1,1],
+      [1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1],
+      [1,0,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ];
+
+    let grid = [];
+    let score = 0;
+    let lives = 3;
+    let pelletsLeft = 0;
+    let frightenTimer = 0;
+    let isPlaying = false;
+    let animId = null;
+
+    // Pac-Man: baseado em movimentação discreta por ladrilho (tile-to-tile)
+    let pac = {
+      tileX: 9,
+      tileY: 16,
+      dirX: 0,
+      dirY: 0,
+      nextDirX: -1,
+      nextDirY: 0,
+      progress: 0,
+      speed: 0.1
+    };
+
+    // Fantasmas com IAs e saídas seguras da casa
+    let ghosts = [];
+
+    function initGhosts() {
+      ghosts = [
+        {
+          name: "Blinky",
+          color: "#ff0033",
+          tileX: 9,
+          tileY: 8,
+          dirX: 1,
+          dirY: 0,
+          progress: 0,
+          speed: 0.08,
+          inHouse: false,
+          delay: 0,
+          isEaten: false
+        },
+        {
+          name: "Pinky",
+          color: "#ffb8ff",
+          tileX: 9,
+          tileY: 10,
+          dirX: 0,
+          dirY: -1,
+          progress: 0,
+          speed: 0.075,
+          inHouse: true,
+          delay: 25,
+          isEaten: false
+        },
+        {
+          name: "Inky",
+          color: "#00ffff",
+          tileX: 8,
+          tileY: 10,
+          dirX: 1,
+          dirY: 0,
+          progress: 0,
+          speed: 0.075,
+          inHouse: true,
+          delay: 140,
+          isEaten: false
+        },
+        {
+          name: "Clyde",
+          color: "#ffb852",
+          tileX: 10,
+          tileY: 10,
+          dirX: -1,
+          dirY: 0,
+          progress: 0,
+          speed: 0.07,
+          inHouse: true,
+          delay: 260,
+          isEaten: false
+        }
+      ];
+    }
+
+    function canMoveTo(tx, ty, isGhost, canCrossDoor) {
+      if (ty < 0 || ty >= ROWS) return false;
+      // Túnel horizontal infinito
+      if (tx < 0 || tx >= COLS) return true;
+
+      const tile = grid[ty][tx];
+      if (tile === 1) return false; // Parede é bloqueada para todos
+
+      if (tile === 4) {
+        // Porta da casa dos fantasmas: apenas fantasmas autorizados podem atravessar
+        return isGhost && !!canCrossDoor;
+      }
+
+      return true;
+    }
+
+    function setupGame() {
+      grid = MAP_TEMPLATE.map(row => [...row]);
+      pelletsLeft = 0;
+      for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+          if (grid[r][c] === 0 || grid[r][c] === 2) {
+            pelletsLeft++;
+          }
+        }
+      }
+      score = 0;
+      lives = 3;
+      frightenTimer = 0;
+      resetPositions();
+      updateHUD();
+    }
+
+    function resetPositions() {
+      pac.tileX = 9;
+      pac.tileY = 16;
+      pac.dirX = 0;
+      pac.dirY = 0;
+      pac.nextDirX = -1;
+      pac.nextDirY = 0;
+      pac.progress = 0;
+
+      initGhosts();
+    }
+
+    function updateHUD() {
+      if (scoreEl) scoreEl.textContent = String(score).padStart(4, "0");
+      if (livesEl) {
+        livesEl.textContent = "🟡".repeat(Math.max(0, lives));
+      }
+    }
+
+    function setDirection(dx, dy) {
+      // Se virar 180° (direção oposta), inverte imediatamente com resposta instantânea
+      if (dx === -pac.dirX && dy === -pac.dirY && (pac.dirX !== 0 || pac.dirY !== 0)) {
+        pac.tileX += pac.dirX;
+        pac.tileY += pac.dirY;
+        pac.dirX = dx;
+        pac.dirY = dy;
+        pac.progress = 1 - pac.progress;
+        pac.nextDirX = 0;
+        pac.nextDirY = 0;
+        if (!isPlaying) startGame();
+        return;
+      }
+
+      pac.nextDirX = dx;
+      pac.nextDirY = dy;
+
+      // Se o Pac-Man estiver parado, tenta andar imediatamente
+      if (pac.dirX === 0 && pac.dirY === 0) {
+        if (canMoveTo(pac.tileX + dx, pac.tileY + dy, false, false)) {
+          pac.dirX = dx;
+          pac.dirY = dy;
+          pac.nextDirX = 0;
+          pac.nextDirY = 0;
+        }
+      }
+
+      if (!isPlaying) startGame();
+    }
+
+    function handleKeyDown(e) {
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space"].includes(e.code)) {
+        e.preventDefault();
+      }
+
+      switch (e.key.toLowerCase()) {
+        case "arrowup": case "w": setDirection(0, -1); break;
+        case "arrowdown": case "s": setDirection(0, 1); break;
+        case "arrowleft": case "a": setDirection(-1, 0); break;
+        case "arrowright": case "d": setDirection(1, 0); break;
+        case "escape": fecharJogo(); break;
+      }
+    }
+
+    // Touch D-Pad
+    modal.querySelectorAll(".pac-dpad-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const dir = btn.getAttribute("data-dir");
+        if (dir === "up") setDirection(0, -1);
+        if (dir === "down") setDirection(0, 1);
+        if (dir === "left") setDirection(-1, 0);
+        if (dir === "right") setDirection(1, 0);
+      });
+    });
+
+    function startGame() {
+      overlay.classList.add("hidden");
+      isPlaying = true;
+    }
+
+    function gameOver(won) {
+      isPlaying = false;
+      overlay.classList.remove("hidden");
+      if (won) {
+        overlayTitle.textContent = "🏆 VOCÊ VENCEU!";
+        overlayMsg.textContent = `Pontuação final: ${score} pontos! O labirinto do Alexverso foi zerado!`;
+      } else {
+        overlayTitle.textContent = "💀 GAME OVER";
+        overlayMsg.textContent = `Os fantasmas te pegaram! Pontuação final: ${score} pontos.`;
+      }
+      startBtn.textContent = "JOGAR NOVAMENTE";
+    }
+
+    startBtn.onclick = () => {
+      if (lives <= 0 || pelletsLeft <= 0) {
+        setupGame();
+      }
+      startGame();
+    };
+
+    function update() {
+      if (!isPlaying) return;
+
+      if (frightenTimer > 0) frightenTimer--;
+
+      // -------------------------------------------------------------
+      // 1. ATUALIZAÇÃO DO PAC-MAN
+      // -------------------------------------------------------------
+      pac.progress += pac.speed;
+
+      if (pac.progress >= 1.0) {
+        // Pac-Man chegou ao novo ladrilho
+        pac.tileX += pac.dirX;
+        pac.tileY += pac.dirY;
+        pac.progress = 0;
+
+        // Túnel horizontal infinito
+        if (pac.tileX < 0) pac.tileX = COLS - 1;
+        else if (pac.tileX >= COLS) pac.tileX = 0;
+
+        // Comer pontinho
+        if (grid[pac.tileY] && grid[pac.tileY][pac.tileX] === 0) {
+          grid[pac.tileY][pac.tileX] = 3;
+          score += 10;
+          pelletsLeft--;
+          updateHUD();
+        } else if (grid[pac.tileY] && grid[pac.tileY][pac.tileX] === 2) {
+          grid[pac.tileY][pac.tileX] = 3;
+          score += 50;
+          pelletsLeft--;
+          frightenTimer = 450; // ~7.5 segundos
+          // Inverte direção dos fantasmas ao assustar
+          ghosts.forEach(g => {
+            if (!g.inHouse && !g.isEaten) {
+              g.dirX = -g.dirX;
+              g.dirY = -g.dirY;
+            }
+          });
+          updateHUD();
+        }
+
+        if (pelletsLeft <= 0) {
+          gameOver(true);
+          return;
+        }
+
+        // Verifica se pode virar na direção solicitada
+        if (pac.nextDirX !== 0 || pac.nextDirY !== 0) {
+          if (canMoveTo(pac.tileX + pac.nextDirX, pac.tileY + pac.nextDirY, false, false)) {
+            pac.dirX = pac.nextDirX;
+            pac.dirY = pac.nextDirY;
+            pac.nextDirX = 0;
+            pac.nextDirY = 0;
+          }
+        }
+
+        // Se continuar na direção atual atingir parede, para
+        if (!canMoveTo(pac.tileX + pac.dirX, pac.tileY + pac.dirY, false, false)) {
+          pac.dirX = 0;
+          pac.dirY = 0;
+        }
+      }
+
+      // -------------------------------------------------------------
+      // 2. ATUALIZAÇÃO DOS FANTASMAS (IA SEM BUGS)
+      // -------------------------------------------------------------
+      ghosts.forEach(g => {
+        let currentSpeed = g.speed;
+        if (g.isEaten) {
+          currentSpeed = 0.15; // Olhos voltam rápido para casa
+        } else if (frightenTimer > 0) {
+          currentSpeed = g.speed * 0.55; // Mais lento quando assustado
+        }
+
+        g.progress += currentSpeed;
+
+        if (g.progress >= 1.0) {
+          g.tileX += g.dirX;
+          g.tileY += g.dirY;
+          g.progress = 0;
+
+          // Túnel horizontal infinito
+          if (g.tileX < 0) g.tileX = COLS - 1;
+          else if (g.tileX >= COLS) g.tileX = 0;
+
+          // Se estava sendo comido e chegou na casa
+          if (g.isEaten && g.tileX === 9 && (g.tileY === 9 || g.tileY === 10)) {
+            g.isEaten = false;
+            g.inHouse = true;
+          }
+
+          // Lógica de saída da casa dos fantasmas
+          if (g.inHouse) {
+            if (g.tileX < 9) {
+              g.dirX = 1; g.dirY = 0;
+            } else if (g.tileX > 9) {
+              g.dirX = -1; g.dirY = 0;
+            } else if (g.tileY > 8) {
+              g.dirX = 0; g.dirY = -1; // Sobe pela porta
+            } else {
+              // Chegou fora da casa (linha 8, coluna 9)
+              g.inHouse = false;
+              g.dirX = Math.random() < 0.5 ? 1 : -1;
+              g.dirY = 0;
+            }
+            return;
+          }
+
+          // Movimentação nas encruzilhadas
+          const possibleMoves = [
+            { dx: 0, dy: -1 }, // Cima
+            { dx: -1, dy: 0 }, // Esquerda
+            { dx: 1, dy: 0 },  // Direita
+            { dx: 0, dy: 1 }   // Baixo
+          ].filter(m => {
+            // Não volta imediatamente 180° a não ser que seja beco sem saída
+            if (m.dx === -g.dirX && m.dy === -g.dirY) return false;
+            return canMoveTo(g.tileX + m.dx, g.tileY + m.dy, true, g.inHouse);
+          });
+
+          if (possibleMoves.length === 0) {
+            // Beco sem saída: inverte
+            g.dirX = -g.dirX;
+            g.dirY = -g.dirY;
+          } else if (g.isEaten) {
+            // Retorna para a casa dos fantasmas (9, 9)
+            possibleMoves.sort((a, b) => {
+              const da = Math.hypot((g.tileX + a.dx) - 9, (g.tileY + a.dy) - 9);
+              const db = Math.hypot((g.tileX + b.dx) - 9, (g.tileY + b.dy) - 9);
+              return da - db;
+            });
+            g.dirX = possibleMoves[0].dx;
+            g.dirY = possibleMoves[0].dy;
+          } else if (frightenTimer > 0) {
+            // Assustado: escolhe direção aleatória
+            const choice = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+            g.dirX = choice.dx;
+            g.dirY = choice.dy;
+          } else {
+            // IA individual clássica
+            if (g.name === "Blinky") {
+              // Blinky: persegue diretamente a posição do Pac-Man
+              possibleMoves.sort((a, b) => {
+                const da = Math.hypot((g.tileX + a.dx) - pac.tileX, (g.tileY + a.dy) - pac.tileY);
+                const db = Math.hypot((g.tileX + b.dx) - pac.tileX, (g.tileY + b.dy) - pac.tileY);
+                return da - db;
+              });
+              g.dirX = possibleMoves[0].dx;
+              g.dirY = possibleMoves[0].dy;
+            } else if (g.name === "Pinky") {
+              // Pinky: prevê a frente do Pac-Man
+              const targetX = pac.tileX + pac.dirX * 3;
+              const targetY = pac.tileY + pac.dirY * 3;
+              possibleMoves.sort((a, b) => {
+                const da = Math.hypot((g.tileX + a.dx) - targetX, (g.tileY + a.dy) - targetY);
+                const db = Math.hypot((g.tileX + b.dx) - targetX, (g.tileY + b.dy) - targetY);
+                return da - db;
+              });
+              g.dirX = possibleMoves[0].dx;
+              g.dirY = possibleMoves[0].dy;
+            } else {
+              // Inky & Clyde: patrulha mista (70% perseguição, 30% desvio)
+              if (Math.random() < 0.7) {
+                possibleMoves.sort((a, b) => {
+                  const da = Math.hypot((g.tileX + a.dx) - pac.tileX, (g.tileY + a.dy) - pac.tileY);
+                  const db = Math.hypot((g.tileX + b.dx) - pac.tileX, (g.tileY + b.dy) - pac.tileY);
+                  return da - db;
+                });
+                g.dirX = possibleMoves[0].dx;
+                g.dirY = possibleMoves[0].dy;
+              } else {
+                const choice = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+                g.dirX = choice.dx;
+                g.dirY = choice.dy;
+              }
+            }
+          }
+        }
+      });
+
+      // -------------------------------------------------------------
+      // 3. DETECÇÃO DE COLISÃO PRECISA
+      // -------------------------------------------------------------
+      const pacScreenX = (pac.tileX + pac.dirX * pac.progress) * TILE + TILE / 2;
+      const pacScreenY = (pac.tileY + pac.dirY * pac.progress) * TILE + TILE / 2;
+
+      ghosts.forEach(g => {
+        const ghostScreenX = (g.tileX + g.dirX * g.progress) * TILE + TILE / 2;
+        const ghostScreenY = (g.tileY + g.dirY * g.progress) * TILE + TILE / 2;
+
+        const distance = Math.hypot(pacScreenX - ghostScreenX, pacScreenY - ghostScreenY);
+
+        if (distance < TILE * 0.75) {
+          if (frightenTimer > 0 && !g.isEaten) {
+            // Fantasma devorado pelo Pac-Man!
+            g.isEaten = true;
+            score += 200;
+            updateHUD();
+          } else if (!g.isEaten) {
+            // Pac-Man perde vida
+            lives--;
+            updateHUD();
+            if (lives <= 0) {
+              gameOver(false);
+            } else {
+              resetPositions();
+            }
+          }
+        }
+      });
+    }
+
+    function draw() {
+      ctx.fillStyle = "#02040a";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 1. Labirinto e Pontinhos
+      for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+          const val = grid[r][c];
+          const px = c * TILE;
+          const py = r * TILE;
+
+          if (val === 1) {
+            ctx.fillStyle = "#121d45";
+            ctx.fillRect(px, py, TILE, TILE);
+            ctx.strokeStyle = "#2948ff";
+            ctx.lineWidth = 1.2;
+            ctx.strokeRect(px + 1, py + 1, TILE - 2, TILE - 2);
+          } else if (val === 4) {
+            ctx.strokeStyle = "#ff69b4";
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.moveTo(px, py + TILE / 2);
+            ctx.lineTo(px + TILE, py + TILE / 2);
+            ctx.stroke();
+          } else if (val === 0) {
+            ctx.fillStyle = "#ffd89b";
+            ctx.beginPath();
+            ctx.arc(px + TILE / 2, py + TILE / 2, 2.5, 0, Math.PI * 2);
+            ctx.fill();
+          } else if (val === 2) {
+            const blink = Math.floor(Date.now() / 220) % 2 === 0;
+            ctx.fillStyle = blink ? "#ffcc00" : "#ffffff";
+            ctx.beginPath();
+            ctx.arc(px + TILE / 2, py + TILE / 2, 5.5, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+      }
+
+      // 2. Pac-Man (Com interpolação contínua)
+      const pacPx = (pac.tileX + pac.dirX * pac.progress) * TILE + TILE / 2;
+      const pacPy = (pac.tileY + pac.dirY * pac.progress) * TILE + TILE / 2;
+      const mouth = 0.22 * Math.sin(Date.now() / 90) + 0.22;
+
+      let baseAngle = 0;
+      if (pac.dirX === 1) baseAngle = 0;
+      else if (pac.dirX === -1) baseAngle = Math.PI;
+      else if (pac.dirY === 1) baseAngle = Math.PI * 0.5;
+      else if (pac.dirY === -1) baseAngle = Math.PI * 1.5;
+
+      ctx.fillStyle = "#ffff00";
+      ctx.beginPath();
+      ctx.arc(pacPx, pacPy, 7.5, baseAngle + mouth, baseAngle + Math.PI * 2 - mouth);
+      ctx.lineTo(pacPx, pacPy);
+      ctx.fill();
+
+      // 3. Fantasmas
+      ghosts.forEach(g => {
+        const gpx = (g.tileX + g.dirX * g.progress) * TILE + TILE / 2;
+        const gpy = (g.tileY + g.dirY * g.progress) * TILE + TILE / 2;
+        const rad = 7.5;
+
+        if (g.isEaten) {
+          // Apenas os olhos voltando para a base
+          ctx.fillStyle = "#ffffff";
+          ctx.beginPath();
+          ctx.arc(gpx - 2.8, gpy - 2, 2.2, 0, Math.PI * 2);
+          ctx.arc(gpx + 2.8, gpy - 2, 2.2, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = "#2948ff";
+          ctx.beginPath();
+          ctx.arc(gpx - 2.8 + g.dirX * 0.8, gpy - 2 + g.dirY * 0.8, 1.2, 0, Math.PI * 2);
+          ctx.arc(gpx + 2.8 + g.dirX * 0.8, gpy - 2 + g.dirY * 0.8, 1.2, 0, Math.PI * 2);
+          ctx.fill();
+          return;
+        }
+
+        const isFright = frightenTimer > 0;
+        const flash = frightenTimer < 120 && Math.floor(Date.now() / 150) % 2 === 0;
+        ctx.fillStyle = isFright ? (flash ? "#ffffff" : "#1e3a8a") : g.color;
+
+        // Corpo e topo arredondado
+        ctx.beginPath();
+        ctx.arc(gpx, gpy - 1, rad, Math.PI, 0, false);
+        // Pernas onduladas clássicas
+        ctx.lineTo(gpx + rad, gpy + rad);
+        ctx.lineTo(gpx + rad * 0.33, gpy + rad * 0.6);
+        ctx.lineTo(gpx - rad * 0.33, gpy + rad);
+        ctx.lineTo(gpx - rad, gpy + rad * 0.6);
+        ctx.closePath();
+        ctx.fill();
+
+        // Olhos brancos
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.arc(gpx - 2.8, gpy - 2, 2.2, 0, Math.PI * 2);
+        ctx.arc(gpx + 2.8, gpy - 2, 2.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Pupilas
+        ctx.fillStyle = isFright ? "#ff0000" : "#0d1b46";
+        const eyeOffset = 0.8;
+        ctx.beginPath();
+        ctx.arc(gpx - 2.8 + g.dirX * eyeOffset, gpy - 2 + g.dirY * eyeOffset, 1.2, 0, Math.PI * 2);
+        ctx.arc(gpx + 2.8 + g.dirX * eyeOffset, gpy - 2 + g.dirY * eyeOffset, 1.2, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+
+    function loop() {
+      update();
+      draw();
+      animId = requestAnimationFrame(loop);
+    }
+
+    function fecharJogo() {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("keydown", handleKeyDown);
+      modal.remove();
+    }
+
+    closeBtn.onclick = fecharJogo;
+    modal.onclick = (e) => {
+      if (e.target === modal) fecharJogo();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    setupGame();
+    animId = requestAnimationFrame(loop);
   }
 
   // ==========================================================================
