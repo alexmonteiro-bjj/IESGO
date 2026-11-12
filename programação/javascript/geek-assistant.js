@@ -907,12 +907,36 @@ Também existe um segredo escondido no Alexverso...`,
   ];
 
   // ==========================================================================
-  // EASTER EGG SECRETO — RICK ASTLEY & PAC-MAN ARCADE
+  // EASTER EGG SECRETO — RICK ASTLEY & PAC-MAN ARCADE (+ MÓDULO EXTRA)
   // ==========================================================================
+
+  // Garante carregamento automático do módulo de novos Easter Eggs
+  (function carregarModuloEasterEggs() {
+    if (!document.querySelector('script[src*="geek-eastereggs.js"]')) {
+      const script = document.createElement("script");
+      script.src = "../javascript/geek-eastereggs.js";
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+    if (!document.querySelector('link[href*="geek-eastereggs.css"]')) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "../css/geek-eastereggs.css";
+      document.head.appendChild(link);
+    }
+  })();
 
   function verificarEasterEgg(mensagem) {
     const texto = mensagem.toLowerCase().trim();
 
+    // 1. Módulo externo de novos Easter Eggs (geek-eastereggs.js)
+    if (window.GeekEasterEggs && typeof window.GeekEasterEggs.executar === "function") {
+      if (window.GeekEasterEggs.executar(texto)) {
+        return true;
+      }
+    }
+
+    // 2. Easter Eggs originais integrados
     if (/\brick\b/.test(texto)) {
       abrirEasterEggRick();
       return true;
