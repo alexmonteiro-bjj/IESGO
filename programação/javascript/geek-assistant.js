@@ -17,19 +17,15 @@
     tempoResposta: 650,
     paginaSecreta: "secreto.html",
     geminiApiKey: (function() {
+      const p1 = "AQ";
+      const p2 = ".Ab8RN6IM";
+      const p3 = "_WQkSR5lOm4XwPiHvWIPQdru";
+      const p4 = "8O8uF-V4WkQ7fFe_4Q";
+      const key = [p1, p2, p3, p4].join("");
       try {
-        const saved = localStorage.getItem("alexverso_gemini_key");
-        if (saved) return saved;
-        const p1 = "AQ";
-        const p2 = ".Ab8RN6IM";
-        const p3 = "_WQkSR5lOm4XwPiHvWIPQdru";
-        const p4 = "8O8uF-V4WkQ7fFe_4Q";
-        const key = [p1, p2, p3, p4].join("");
         localStorage.setItem("alexverso_gemini_key", key);
-        return key;
-      } catch (e) {
-        return "";
-      }
+      } catch (e) {}
+      return key;
     })(),
     geminiModel: "gemini-3.1-flash-lite"
   };
@@ -1707,8 +1703,6 @@ Também existe um segredo escondido no Alexverso...`,
   async function fetchGeminiAI(userPrompt) {
     if (!CONFIG.geminiApiKey) return null;
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${CONFIG.geminiModel}:generateContent?key=${CONFIG.geminiApiKey}`;
-
     chatHistory.push({
       role: "user",
       parts: [{ text: userPrompt }]
@@ -1723,44 +1717,58 @@ Também existe um segredo escondido no Alexverso...`,
         parts: [{
           text: `Você é a "Alexverso AI — Órbita", a inteligência artificial oficial e assistente geek do site Alexverso, criado pelo Alex.
 Suas diretrizes:
-- Seja muito carismática, inteligente, divertida e apaixonada pela cultura pop (Star Wars, Marvel, DC, animes como One Piece, Naruto, Jujutsu Kaisen, games, ficção científica como Duna, Matrix, Tron).
-- Responda em português brasileiro com fluidez e entusiasmo.
-- Formate respostas usando negrito (**texto**) e tópicos quando útil, mantendo as respostas diretas, cativantes e agradáveis para ler em balões de chat (sem textões gigantescos).
-- Você conhece o site Alexverso e sabe que ele possui páginas de Início, Animes, Filmes & Séries, Games e um Cofre Secreto de cinema guardado pela palavra élfica "Mellon".
-- Se perguntarem quem você é, apresente-se como a inteligência artificial oficial do Alexverso!`
+- Responda SEMPRE com precisão, conhecimento aprofundado, inteligência e entusiasmo sobre cultura pop (filmes, séries, animes, mangás, games, Marvel, DC, Star Wars, ficção científica, etc.).
+- Nunca dê informações falsas ou confusas sobre enredos, personagens ou lançamentos.
+- Responda de forma natural e direta à dúvida do usuário: NÃO fique se reapresentando ("Olá, eu sou a Órbita...") em todas as mensagens. Vá direto ao ponto com simpatia e carisma.
+- Formate respostas usando negrito (**texto**) e tópicos de forma leve e agradável para balões de chat. Evite textões cansativos.
+- Você conhece o site Alexverso (seções Início, Animes, Games, Filmes & Séries e um Cofre Secreto de cinema). NUNCA revele a senha secreta de surpresa; apenas se o usuário perguntar expressamente por segredos do site, dê uma pista sutil sobre a palavra élfica para 'amigo'.`
         }]
       },
       contents: chatHistory
     };
 
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 14000);
+    // Modelos com fallback automático caso um sofra instabilidade temporária
+    const modelsToTry = [CONFIG.geminiModel, "gemini-3.5-flash-lite"];
 
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      signal: controller.signal
-    });
+    for (const model of modelsToTry) {
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${CONFIG.geminiApiKey}`;
 
-    clearTimeout(timeout);
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 12000);
 
-    if (!response.ok) {
-      throw new Error(`Gemini status: ${response.status}`);
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          signal: controller.signal
+        });
+
+        clearTimeout(timeout);
+
+        if (!response.ok) {
+          console.warn(`[Alexverso AI] Modelo ${model} retornou status ${response.status}. Tentando próximo...`);
+          continue;
+        }
+
+        const data = await response.json();
+        const candidate = data.candidates && data.candidates[0];
+        const textResponse = candidate && candidate.content && candidate.content.parts && candidate.content.parts[0] && candidate.content.parts[0].text;
+
+        if (textResponse) {
+          chatHistory.push({
+            role: "model",
+            parts: [{ text: textResponse }]
+          });
+          return textResponse;
+        }
+      } catch (err) {
+        console.warn(`[Alexverso AI] Erro ao consultar ${model}:`, err);
+      }
     }
 
-    const data = await response.json();
-    const candidate = data.candidates && data.candidates[0];
-    const textResponse = candidate && candidate.content && candidate.content.parts && candidate.content.parts[0] && candidate.content.parts[0].text;
-
-    if (textResponse) {
-      chatHistory.push({
-        role: "model",
-        parts: [{ text: textResponse }]
-      });
-      return textResponse;
-    }
-
+    // Se nenhum modelo respondeu, desfaz o último prompt do histórico para não desbalancear
+    chatHistory.pop();
     return null;
   }
 
