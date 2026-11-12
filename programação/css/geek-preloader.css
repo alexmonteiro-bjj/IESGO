@@ -1,0 +1,465 @@
+
+/* ==========================================================================
+   ALEXVERSO — SYSTEM CORE LOADER
+   Design: Premium Sci-Fi / Space Command / Solid Background
+   ========================================================================== */
+
+#geek-preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+    isolation: isolate;
+
+    background: #061329;
+    color: #ffffff;
+
+    font-family: "Radio Canada Big", sans-serif;
+
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+
+    transition:
+        opacity .65s ease,
+        visibility .65s ease,
+        transform .65s ease;
+}
+
+#geek-preloader.gp-loaded {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.025);
+    pointer-events: none;
+}
+
+/* FUNDO SÓLIDO */
+
+#geek-preloader::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    background: #061329;
+}
+
+/* ELEMENTO DECORATIVO SUPERIOR */
+
+#geek-preloader::after {
+    content: "SYSTEM INITIALIZATION";
+
+    position: absolute;
+    top: 38px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: #8c9bb1;
+
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: 5px;
+
+    white-space: nowrap;
+}
+
+/* ELEMENTOS ANTIGOS DE FUNDO DESATIVADOS */
+
+.gp-grid-bg,
+.gp-scanline {
+    display: none;
+}
+
+/* ==========================================================================
+   CONTAINER
+   ========================================================================== */
+
+.gp-container {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 90%;
+    max-width: 410px;
+
+    padding: 20px;
+}
+
+/* ==========================================================================
+   REATOR CENTRAL
+   ========================================================================== */
+
+.gp-portal-wrap {
+    position: relative;
+
+    width: 190px;
+    height: 190px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 42px;
+}
+
+/* MARCAÇÕES EXTERNAS */
+
+.gp-portal-wrap::before {
+    content: "";
+
+    position: absolute;
+    inset: -12px;
+
+    border-radius: 50%;
+
+    border: 1px solid #263a56;
+
+    animation: gp-outer-rotation 30s linear infinite;
+}
+
+/* MARCAÇÕES GEOMÉTRICAS */
+
+.gp-portal-wrap::after {
+    content: "";
+
+    position: absolute;
+    inset: -22px;
+
+    border-radius: 50%;
+
+    border: 1px dashed #33445d;
+
+    animation: gp-spin 35s linear infinite reverse;
+}
+
+/* ANEL EXTERNO */
+
+.gp-ring-outer {
+    position: absolute;
+    inset: 0;
+
+    border-radius: 50%;
+
+    border: 3px solid #172a45;
+
+    border-top-color: #d5ad42;
+    border-right-color: #d5ad42;
+
+    box-shadow:
+        0 0 18px rgba(201,162,39,.12);
+
+    animation: gp-spin 7s linear infinite;
+}
+
+/* ANEL MÉDIO */
+
+.gp-ring-mid {
+    position: absolute;
+    inset: 17px;
+
+    border-radius: 50%;
+
+    border: 2px solid #263a56;
+
+    border-bottom-color: #e4c36a;
+    border-left-color: #e4c36a;
+
+    animation: gp-spin-reverse 5s linear infinite;
+}
+
+/* ANEL INTERNO */
+
+.gp-ring-inner {
+    position: absolute;
+    inset: 36px;
+
+    border-radius: 50%;
+
+    border: 1px solid #526078;
+
+    border-top-color: #f2d88c;
+
+    animation: gp-spin 9s linear infinite;
+}
+
+/* NÚCLEO */
+
+.gp-core {
+    position: relative;
+    z-index: 3;
+
+    width: 76px;
+    height: 76px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #102544;
+
+    border: 2px solid #d5ad42;
+
+    color: #f2d88c;
+
+    font-size: 30px;
+
+    box-shadow:
+        0 0 0 7px #0b1c34,
+        0 0 0 8px #263a56,
+        0 0 28px rgba(201,162,39,.22);
+
+    animation: gp-pulse 3s ease-in-out infinite;
+}
+
+.gp-icon {
+    display: inline-block;
+    transition: transform .4s ease;
+}
+
+/* ==========================================================================
+   IDENTIDADE
+   ========================================================================== */
+
+.gp-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    margin-bottom: 10px;
+
+    color: #ffffff;
+
+    font-size: 25px;
+    font-weight: 800;
+
+    letter-spacing: 6px;
+
+    text-transform: uppercase;
+}
+
+.gp-title span {
+    color: #d5ad42;
+}
+
+/* IDENTIFICADOR */
+
+.gp-tag {
+    padding: 7px 14px;
+
+    margin-bottom: 28px;
+
+    background: #102544;
+
+    border: 1px solid #34445c;
+
+    border-radius: 2px;
+
+    color: #d5ad42;
+
+    font-family: monospace;
+    font-size: 10px;
+
+    letter-spacing: 3px;
+}
+
+/* ==========================================================================
+   STATUS
+   ========================================================================== */
+
+.gp-status-box {
+    min-height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 27px;
+}
+
+.gp-status-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    color: #aab8ca;
+
+    font-size: 12px;
+    letter-spacing: 1px;
+
+    text-align: center;
+
+    animation: gp-fade .4s ease;
+}
+
+.gp-status-text em {
+    color: #e5c36c;
+    font-style: normal;
+}
+
+/* ==========================================================================
+   PROGRESSO
+   ========================================================================== */
+
+.gp-progress-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    width: 100%;
+}
+
+/* TRILHO */
+
+.gp-progress-bar {
+    position: relative;
+
+    width: 100%;
+    height: 7px;
+
+    overflow: hidden;
+
+    background: #142640;
+
+    border: 1px solid #34445c;
+
+    border-radius: 2px;
+}
+
+/* PREENCHIMENTO */
+
+.gp-progress-fill {
+    position: relative;
+
+    width: 0%;
+    height: 100%;
+
+    background: #d5ad42;
+
+    border-radius: 2px;
+
+    box-shadow: 0 0 12px rgba(213,173,66,.35);
+
+    transition: width .2s ease-out;
+}
+
+/* INFORMAÇÕES */
+
+.gp-progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 2px;
+
+    color: #8090a7;
+
+    font-family: monospace;
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+.gp-percent {
+    color: #e5c36c;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   ANIMAÇÕES
+   ========================================================================== */
+
+@keyframes gp-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes gp-spin-reverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+@keyframes gp-outer-rotation {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes gp-pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow:
+            0 0 0 7px #0b1c34,
+            0 0 0 8px #263a56,
+            0 0 22px rgba(201,162,39,.15);
+    }
+
+    50% {
+        transform: scale(1.07);
+        box-shadow:
+            0 0 0 7px #0b1c34,
+            0 0 0 8px #263a56,
+            0 0 35px rgba(201,162,39,.4);
+    }
+}
+
+@keyframes gp-fade {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+   ========================================================================== */
+
+@media (max-width: 480px) {
+
+    .gp-portal-wrap {
+        width: 155px;
+        height: 155px;
+        margin-bottom: 35px;
+    }
+
+    .gp-title {
+        font-size: 20px;
+        letter-spacing: 4px;
+    }
+
+    .gp-tag {
+        font-size: 9px;
+    }
+
+}
+
+/* ==========================================================================
+   ACESSIBILIDADE
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #geek-preloader *,
+    #geek-preloader::before,
+    #geek-preloader::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+}

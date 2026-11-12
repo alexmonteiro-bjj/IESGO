@@ -1,53 +1,85 @@
 
 /* ==========================================================
-   ALEXVERSO — FILMES E SÉRIES
-   Funcionalidades: menu, preloader, animações e navegação
+   ALEXVERSO — JAVASCRIPT DA PÁGINA DE FILMES E SÉRIES
    ========================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
   "use strict";
 
-  const selecionar = (seletor, contexto = document) =>
-    contexto.querySelector(seletor);
+  // 1. ELEMENTOS PRINCIPAIS
 
-  const selecionarTodos = (seletor, contexto = document) =>
-    [...contexto.querySelectorAll(seletor)];
+  const preloader = document.getElementById("preloader");
+  const cabecalho = document.getElementById("topo");
+  const menu = document.getElementById("menuPrincipal");
+  const menuToggle = document.getElementById("menuToggle");
 
-  /* 1. ELEMENTOS PRINCIPAIS */
+  const barraLeitura = document.getElementById("barraLeitura");
+  const btnTopo = document.getElementById("btnTopo");
+  const anoAtual = document.getElementById("anoAtual");
 
-  const cabecalho = selecionar(".cabecalho");
-  const menu = selecionar("#menuPrincipal, .menu");
-  const menuToggle = selecionar("#menuToggle, .menu-mobile-btn");
-  const preloader = selecionar("#preloader");
-  const barraLeitura = selecionar("#barraLeitura");
-  const btnTopo = selecionar("#btnTopo");
-  const anoAtual = selecionar("#anoAtual");
+  // Elementos do catálogo
 
-  /* 2. PRELOADER */
+  const campoBusca = document.getElementById("campoBusca");
+  const limparBusca = document.getElementById("limparBusca");
+  const filtrosGenero = document.getElementById("filtrosGenero");
+
+  const contadorFilmes = document.getElementById("contadorFilmes");
+
+  const gradeFilmes =
+    document.getElementById("gradeFilmes") ||
+    document.getElementById("gradeFilmesSeries");
+
+  const mensagemVazia = document.getElementById("mensagemVazia");
+  const limparFiltros = document.getElementById("limparFiltros");
+
+  const cards = gradeFilmes
+    ? Array.from(
+        gradeFilmes.querySelectorAll(".filme-card, .serie-card")
+      )
+    : Array.from(
+        document.querySelectorAll(".filme-card, .serie-card")
+      );
+
+  let generoSelecionado = "todos";
+
+  // 2. PRELOADER
+
+  let preloaderOcultado = false;
 
   function esconderPreloader() {
-    if (!preloader) return;
+    if (!preloader || preloaderOcultado) return;
 
+    preloaderOcultado = true;
     preloader.classList.add("oculto");
-    document.body.classList.remove("carregando");
+
+    window.setTimeout(() => {
+      preloader.style.display = "none";
+    }, 450);
   }
 
-  if (preloader) {
-    document.body.classList.add("carregando");
-
-    if (document.readyState === "complete") {
-      esconderPreloader();
-    } else {
-      window.addEventListener("load", esconderPreloader, {
-        once: true
-      });
-    }
-
-    // Evita que o preloader permaneça na tela por tempo indeterminado.
-    window.setTimeout(esconderPreloader, 3000);
+  if (document.readyState === "complete") {
+    esconderPreloader();
+  } else {
+    window.addEventListener("load", esconderPreloader, {
+      once: true
+    });
   }
 
-  /* 3. MENU RESPONSIVO */
+  // Evita deixar o carregamento preso caso alguma imagem demore.
+
+  window.setTimeout(esconderPreloader, 4000);
+
+  // 3. MENU PARA CELULAR
+
+  function abrirMenu() {
+    if (!menu || !menuToggle) return;
+
+    menu.classList.add("aberto");
+    document.body.classList.add("menu-aberto");
+
+    menuToggle.setAttribute("aria-expanded", "true");
+    menuToggle.setAttribute("aria-label", "Fechar menu de navegação");
+  }
 
   function fecharMenu() {
     if (!menu || !menuToggle) return;
@@ -56,48 +88,42 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.remove("menu-aberto");
 
     menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute(
-      "aria-label",
-      "Abrir menu de navegação"
-    );
-  }
-
-  function alternarMenu() {
-    if (!menu || !menuToggle) return;
-
-    const aberto = menu.classList.toggle("aberto");
-
-    document.body.classList.toggle("menu-aberto", aberto);
-
-    menuToggle.setAttribute("aria-expanded", String(aberto));
-    menuToggle.setAttribute(
-      "aria-label",
-      aberto
-        ? "Fechar menu de navegação"
-        : "Abrir menu de navegação"
-    );
+    menuToggle.setAttribute("aria-label", "Abrir menu de navegação");
   }
 
   if (menu && menuToggle) {
-    menuToggle.addEventListener("click", alternarMenu);
+    menuToggle.addEventListener("click", () => {
+      const estaAberto = menu.classList.contains("aberto");
 
-    selecionarTodos("a", menu).forEach((link) => {
+      if (estaAberto) {
+        fecharMenu();
+      } else {
+        abrirMenu();
+      }
+    });
+
+    menu.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", fecharMenu);
     });
 
-    document.addEventListener("keydown", (evento) => {
-      if (evento.key === "Escape") {
+    document.addEventListener("click", (evento) => {
+      const clicouNoMenu = menu.contains(evento.target);
+      const clicouNoBotao = menuToggle.contains(evento.target);
+
+      if (!clicouNoMenu && !clicouNoBotao) {
         fecharMenu();
       }
     });
 
-    document.addEventListener("click", (evento) => {
-      if (
-        menu.classList.contains("aberto") &&
-        !menu.contains(evento.target) &&
-        !menuToggle.contains(evento.target)
-      ) {
+    document.addEventListener("keydown", (evento) => {
+      if (evento.key === "Escape") {
+        const estavaAberto = menu.classList.contains("aberto");
+
         fecharMenu();
+
+        if (estavaAberto) {
+          menuToggle.focus();
+        }
       }
     });
 
@@ -108,67 +134,184 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* 4. CABEÇALHO E BARRA DE LEITURA */
+  // 4. CABEÇALHO E BARRA DE LEITURA
 
-  let quadroPendente = false;
+  function atualizarCabecalho() {
+    if (!cabecalho) return;
 
-  function atualizarPagina() {
-    const rolagem =
-      window.scrollY ||
-      document.documentElement.scrollTop;
-
-    const alturaTotal =
-      document.documentElement.scrollHeight -
-      window.innerHeight;
-
-    const progresso =
-      alturaTotal > 0
-        ? Math.min(100, Math.max(0, (rolagem / alturaTotal) * 100))
-        : 0;
-
-    if (cabecalho) {
-      cabecalho.classList.toggle("rolado", rolagem > 30);
-    }
-
-    if (barraLeitura) {
-      barraLeitura.style.width = `${progresso}%`;
-    }
-
-    if (btnTopo) {
-      btnTopo.hidden = rolagem < 400;
-    }
-
-    quadroPendente = false;
+    cabecalho.classList.toggle("rolado", window.scrollY > 30);
   }
 
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (!quadroPendente) {
-        window.requestAnimationFrame(atualizarPagina);
-        quadroPendente = true;
+  function atualizarBarraLeitura() {
+    if (!barraLeitura) return;
+
+    const alturaDocumento =
+      document.documentElement.scrollHeight - window.innerHeight;
+
+    if (alturaDocumento <= 0) {
+      barraLeitura.style.width = "0%";
+      return;
+    }
+
+    const progresso = Math.min(
+      100,
+      Math.max(0, (window.scrollY / alturaDocumento) * 100)
+    );
+
+    barraLeitura.style.width = `${progresso}%`;
+  }
+
+  // 5. BOTÃO VOLTAR AO TOPO
+
+  function atualizarBotaoTopo() {
+    if (!btnTopo) return;
+
+    btnTopo.hidden = window.scrollY <= 400;
+  }
+
+  if (btnTopo) {
+    btnTopo.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  }
+
+  // 6. BUSCA E FILTROS
+
+  function normalizarTexto(texto) {
+    return String(texto || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLocaleLowerCase("pt-BR")
+      .trim();
+  }
+
+  function atualizarCatalogo() {
+    if (cards.length === 0 && !gradeFilmes) return;
+
+    const termoBusca = normalizarTexto(
+      campoBusca ? campoBusca.value : ""
+    );
+
+    let quantidadeVisivel = 0;
+
+    cards.forEach((card) => {
+      const nome = normalizarTexto(card.dataset.nome);
+      const pesquisa = normalizarTexto(card.dataset.pesquisa);
+      const genero = card.dataset.genero || "";
+
+      const correspondeBusca =
+        termoBusca === "" ||
+        nome.includes(termoBusca) ||
+        pesquisa.includes(termoBusca);
+
+      const correspondeGenero =
+        generoSelecionado === "todos" ||
+        genero === generoSelecionado;
+
+      const mostrar = correspondeBusca && correspondeGenero;
+
+      card.hidden = !mostrar;
+
+      if (mostrar) {
+        quantidadeVisivel++;
       }
-    },
-    { passive: true }
-  );
+    });
 
-  atualizarPagina();
+    if (contadorFilmes) {
+      const textoQuantidade =
+        quantidadeVisivel === 1
+          ? "título encontrado"
+          : "títulos encontrados";
 
-  /* 5. ANIMAÇÕES DOS ELEMENTOS */
+      contadorFilmes.textContent =
+        `${quantidadeVisivel} ${textoQuantidade}`;
+    }
 
-  const elementosAnimados = selecionarTodos(".animacao");
+    if (mensagemVazia) {
+      mensagemVazia.hidden = quantidadeVisivel !== 0;
+    }
 
-  const movimentoReduzido = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
+    if (gradeFilmes) {
+      gradeFilmes.hidden = quantidadeVisivel === 0;
+    }
 
-  if ("IntersectionObserver" in window && !movimentoReduzido) {
+    if (limparBusca && campoBusca) {
+      limparBusca.hidden = campoBusca.value.length === 0;
+    }
+  }
+
+  if (campoBusca) {
+    campoBusca.addEventListener("input", atualizarCatalogo);
+  }
+
+  if (limparBusca && campoBusca) {
+    limparBusca.addEventListener("click", () => {
+      campoBusca.value = "";
+      atualizarCatalogo();
+      campoBusca.focus();
+    });
+  }
+
+  if (filtrosGenero) {
+    filtrosGenero.querySelectorAll(".filtro").forEach((botao) => {
+      botao.addEventListener("click", () => {
+        generoSelecionado = botao.dataset.genero || "todos";
+
+        filtrosGenero.querySelectorAll(".filtro").forEach((filtro) => {
+          const ativo = filtro === botao;
+
+          filtro.classList.toggle("ativo", ativo);
+          filtro.setAttribute("aria-pressed", String(ativo));
+        });
+
+        atualizarCatalogo();
+      });
+    });
+  }
+
+  function restaurarFiltros() {
+    if (campoBusca) {
+      campoBusca.value = "";
+    }
+
+    generoSelecionado = "todos";
+
+    if (filtrosGenero) {
+      filtrosGenero.querySelectorAll(".filtro").forEach((botao) => {
+        const ativo = botao.dataset.genero === "todos";
+
+        botao.classList.toggle("ativo", ativo);
+        botao.setAttribute("aria-pressed", String(ativo));
+      });
+    }
+
+    atualizarCatalogo();
+  }
+
+  if (limparFiltros) {
+    limparFiltros.addEventListener("click", () => {
+      restaurarFiltros();
+
+      if (campoBusca) {
+        campoBusca.focus();
+      }
+    });
+  }
+
+  // 7. ANIMAÇÕES DE ENTRADA
+
+  const elementosAnimados = document.querySelectorAll(".animacao");
+
+  if ("IntersectionObserver" in window) {
     const observador = new IntersectionObserver(
-      (entradas, observer) => {
+      (entradas, observadorAtual) => {
         entradas.forEach((entrada) => {
           if (entrada.isIntersecting) {
             entrada.target.classList.add("aparecer");
-            observer.unobserve(entrada.target);
+            observadorAtual.unobserve(entrada.target);
           }
         });
       },
@@ -178,8 +321,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     );
 
-    elementosAnimados.forEach((elemento) => {
+    elementosAnimados.forEach((elemento, indice) => {
       elemento.classList.add("animacao-pendente");
+
+      elemento.style.transitionDelay =
+        `${Math.min(indice % 3, 2) * 100}ms`;
+
       observador.observe(elemento);
     });
   } else {
@@ -188,65 +335,65 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* 6. BOTÃO VOLTAR AO TOPO */
+  // 8. IMAGENS INDISPONÍVEIS
 
-  if (btnTopo) {
-    btnTopo.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: movimentoReduzido ? "auto" : "smooth"
-      });
-    });
-  }
+  document.querySelectorAll(
+    ".imagem img, .filme-card img, .serie-card img"
+  ).forEach((imagem) => {
 
-  /* 7. ANO AUTOMÁTICO */
+    function verificarImagem() {
+      if (imagem.complete && imagem.naturalWidth === 0) {
+        imagem.style.visibility = "hidden";
+
+        if (imagem.parentElement) {
+          imagem.parentElement.classList.add("imagem-indisponivel");
+        }
+      }
+    }
+
+    imagem.addEventListener("error", verificarImagem);
+
+    // Também trata erros ocorridos antes da inicialização do JS.
+
+    verificarImagem();
+  });
+
+  // 9. ANO AUTOMÁTICO NO RODAPÉ
 
   if (anoAtual) {
     anoAtual.textContent = new Date().getFullYear();
   }
 
-  /* 8. DESTAQUE DO MENU ATIVO */
+  // 10. ATUALIZAÇÃO DA INTERFACE DURANTE A ROLAGEM
 
-  if (menu) {
-    const paginaAtual = window.location.pathname
-      .split("/")
-      .pop()
-      .toLowerCase();
+  let aguardandoAtualizacao = false;
 
-    selecionarTodos("a", menu).forEach((link) => {
-      const destino = link.getAttribute("href");
-
-      if (!destino) return;
-
-      const arquivoDestino = destino
-        .split("/")
-        .pop()
-        .split("#")[0]
-        .toLowerCase();
-
-      if (
-        arquivoDestino &&
-        arquivoDestino === paginaAtual
-      ) {
-        selecionarTodos(".ativo", menu).forEach((item) => {
-          item.classList.remove("ativo");
-          item.removeAttribute("aria-current");
-        });
-
-        link.classList.add("ativo");
-        link.setAttribute("aria-current", "page");
-      }
-    });
+  function atualizarInterface() {
+    atualizarCabecalho();
+    atualizarBarraLeitura();
+    atualizarBotaoTopo();
   }
 
-  /* 9. TRATAMENTO DE IMAGENS */
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (aguardandoAtualizacao) return;
 
-  selecionarTodos(".filme-card img, .serie-card img").forEach(
-    (imagem) => {
-      imagem.addEventListener("error", () => {
-        imagem.classList.add("imagem-indisponivel");
+      aguardandoAtualizacao = true;
+
+      window.requestAnimationFrame(() => {
+        atualizarInterface();
+        aguardandoAtualizacao = false;
       });
-    }
+    },
+    { passive: true }
   );
+
+  window.addEventListener("resize", atualizarInterface);
+
+  // INICIALIZAÇÃO
+
+  atualizarCatalogo();
+  atualizarInterface();
 
 });

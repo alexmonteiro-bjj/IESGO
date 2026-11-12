@@ -1,0 +1,1024 @@
+/* ==========================================================================
+   ALEXVERSO — GEEK BOT
+   Assistente Virtual | Design Premium | Navy & Gold
+   CSS ISOLADO — Não modifica o restante do site
+   Código 100% Completo e Corrigido
+   ========================================================================== */
+
+/* ==========================================================================
+   01. CONFIGURAÇÕES E VARIÁVEIS
+   ========================================================================== */
+
+#ga-widget,
+#ga-widget * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Radio Canada Big", -apple-system,
+        BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+}
+
+#ga-widget {
+    --ga-navy: #07152e;
+    --ga-navy-hover: #102747;
+    --ga-navy-light: #18365e;
+
+    --ga-gold: #c9a227;
+    --ga-gold-light: #e0bd3e;
+
+    --ga-white: #ffffff;
+    --ga-background: #f4f6f8;
+    --ga-surface: #f7f8fa;
+
+    --ga-text: #1b1b1b;
+    --ga-muted: #697386;
+    --ga-border: #e5e8ed;
+
+    --ga-shadow: 0 12px 35px rgba(7, 21, 46, 0.16);
+    --ga-shadow-hover: 0 16px 40px rgba(7, 21, 46, 0.23);
+}
+
+/* ==========================================================================
+   02. BOTÃO FLUTUANTE
+   ========================================================================== */
+
+#ga-launcher-btn {
+    position: fixed;
+    left: 28px;
+    bottom: 28px;
+
+    width: 58px;
+    height: 58px;
+
+    border-radius: 17px;
+
+    background: var(--ga-navy);
+    border: 2px solid var(--ga-gold);
+
+    box-shadow:
+        0 6px 20px rgba(7, 21, 46, 0.25),
+        0 0 0 4px rgba(201, 162, 39, 0.08);
+
+    color: var(--ga-white);
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+
+    z-index: 999999;
+
+    transition:
+        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+
+    user-select: none;
+    outline: none;
+}
+
+#ga-launcher-btn:hover {
+    background: var(--ga-navy-hover);
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 12px 28px rgba(7, 21, 46, 0.3),
+        0 0 0 5px rgba(201, 162, 39, 0.13);
+}
+
+#ga-launcher-btn:active {
+    transform: scale(0.94);
+}
+
+/* ==========================================================================
+   03. BADGE DE NOTIFICAÇÃO
+   ========================================================================== */
+
+#ga-badge {
+    position: absolute;
+
+    top: -6px;
+    right: -6px;
+
+    background: #c92f3d;
+    color: #ffffff;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid #ffffff;
+
+    animation: ga-pulse 2s infinite;
+}
+
+@keyframes ga-pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(201, 47, 61, 0.4);
+    }
+
+    70% {
+        transform: scale(1.08);
+        box-shadow: 0 0 0 7px rgba(201, 47, 61, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(201, 47, 61, 0);
+    }
+}
+
+/* ==========================================================================
+   04. JANELA PRINCIPAL DO CHATBOT
+   ========================================================================== */
+
+#ga-chat-window {
+    position: fixed;
+
+    left: 28px;
+    bottom: 102px;
+
+    width: 390px;
+    max-width: calc(100vw - 32px);
+
+    height: 560px;
+    max-height: calc(100vh - 125px);
+
+    background: #ffffff;
+
+    border: 1px solid #e5e8ed;
+    border-radius: 17px;
+
+    box-shadow: var(--ga-shadow);
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    z-index: 999999;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform-origin: bottom left;
+    transform: translateY(15px) scale(0.97);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.25s;
+}
+
+/* ESTADO ABERTO */
+
+#ga-chat-window.ga-open {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0) scale(1);
+}
+
+/* ==========================================================================
+   05. CABEÇALHO
+   ========================================================================== */
+
+#ga-widget .ga-header {
+    position: relative;
+
+    background: var(--ga-navy);
+
+    border-bottom: 3px solid var(--ga-gold);
+
+    padding: 17px 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-shrink: 0;
+}
+
+/* DETALHE DECORATIVO */
+
+#ga-widget .ga-header::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    top: 0;
+
+    width: 90px;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(201, 162, 39, 0.07)
+    );
+
+    pointer-events: none;
+}
+
+#ga-widget .ga-header-info {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    position: relative;
+    z-index: 1;
+}
+
+/* AVATAR */
+
+#ga-widget .ga-avatar {
+    width: 43px;
+    height: 43px;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    background: #07152e;
+
+    border: 2px solid var(--ga-gold);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* LOGO ÓRBITA */
+
+.ga-orbit-mark {
+    position: relative;
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+}
+
+.ga-orbit-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--ga-gold);
+}
+
+.ga-orbit-ring-one {
+    transform: rotate(45deg) scaleX(0.7);
+    animation: ga-orbit-spin 6s linear infinite;
+}
+
+.ga-orbit-ring-two {
+    transform: rotate(-45deg) scaleX(0.7);
+    animation: ga-orbit-spin-reverse 4s linear infinite;
+}
+
+.ga-orbit-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: var(--ga-gold-light);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px var(--ga-gold-light);
+}
+
+.ga-orbit-planet {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 4px;
+    height: 4px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #ffffff;
+}
+
+@keyframes ga-orbit-spin {
+    from { transform: rotate(45deg) scaleX(0.7) rotate(0deg); }
+    to { transform: rotate(45deg) scaleX(0.7) rotate(360deg); }
+}
+
+@keyframes ga-orbit-spin-reverse {
+    from { transform: rotate(-45deg) scaleX(0.7) rotate(360deg); }
+    to { transform: rotate(-45deg) scaleX(0.7) rotate(0deg); }
+}
+
+/* IDENTIFICAÇÃO */
+
+#ga-widget .ga-title-group h3 {
+    font-size: 15px;
+
+    font-weight: 800;
+
+    color: #ffffff;
+
+    margin: 0;
+
+    letter-spacing: 0.2px;
+}
+
+#ga-widget .ga-title-group p {
+    font-size: 11px;
+
+    color: #e0bd3e;
+
+    margin: 3px 0 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+}
+
+/* STATUS ONLINE */
+
+#ga-widget .ga-online-dot {
+    width: 7px;
+    height: 7px;
+
+    background: #36c982;
+
+    border-radius: 50%;
+
+    display: inline-block;
+
+    box-shadow: 0 0 7px rgba(54, 201, 130, 0.5);
+}
+
+/* BOTÕES DO CABEÇALHO */
+
+#ga-widget .ga-header-actions {
+    display: flex;
+    gap: 5px;
+
+    position: relative;
+    z-index: 2;
+}
+
+#ga-widget .ga-action-btn {
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    width: 33px;
+    height: 33px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+#ga-widget .ga-action-btn:hover {
+    background: var(--ga-gold);
+
+    color: var(--ga-navy);
+}
+
+/* ==========================================================================
+   06. ÁREA DE MENSAGENS
+   ========================================================================== */
+
+#ga-widget .ga-messages {
+    flex: 1;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: 20px 16px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+
+    background: #f7f8fa;
+
+    scroll-behavior: smooth;
+}
+
+/* SCROLLBAR */
+
+#ga-widget .ga-messages::-webkit-scrollbar {
+    width: 5px;
+}
+
+#ga-widget .ga-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#ga-widget .ga-messages::-webkit-scrollbar-thumb {
+    background: #cbd1da;
+
+    border-radius: 10px;
+}
+
+#ga-widget .ga-messages::-webkit-scrollbar-thumb:hover {
+    background: var(--ga-gold);
+}
+
+/* ==========================================================================
+   07. BALÕES DE MENSAGEM
+   ========================================================================== */
+
+#ga-widget .ga-msg {
+    display: flex;
+    flex-direction: column;
+
+    max-width: 87%;
+
+    animation: ga-fadeIn 0.25s ease;
+}
+
+@keyframes ga-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MENSAGENS DO BOT */
+
+#ga-widget .ga-msg.ga-bot {
+    align-self: flex-start;
+}
+
+/* MENSAGENS DO USUÁRIO */
+
+#ga-widget .ga-msg.ga-user {
+    align-self: flex-end;
+}
+
+/* BALÕES */
+
+#ga-widget .ga-bubble {
+    padding: 12px 15px;
+
+    border-radius: 13px;
+
+    font-size: 13.5px;
+
+    word-break: break-word;
+    overflow-wrap: anywhere;
+
+    line-height: 1.6;
+
+    /* Mantém os Enters e tópicos separados como parágrafos */
+    white-space: pre-line;
+}
+
+/* BOT */
+
+#ga-widget .ga-bot .ga-bubble {
+    background: #ffffff;
+
+    color: #343c48;
+
+    border: 1px solid #e5e8ed;
+
+    border-left: 3px solid var(--ga-gold);
+
+    border-bottom-left-radius: 4px;
+
+    box-shadow: 0 3px 10px rgba(7, 21, 46, 0.035);
+}
+
+#ga-widget .ga-bot .ga-bubble strong {
+    color: var(--ga-navy);
+    font-weight: 800;
+}
+
+/* USUÁRIO */
+
+#ga-widget .ga-user .ga-bubble {
+    background: var(--ga-navy);
+
+    color: #ffffff;
+
+    border: 1px solid var(--ga-navy);
+
+    border-bottom-right-radius: 4px;
+
+    box-shadow: 0 4px 12px rgba(7, 21, 46, 0.14);
+}
+
+/* HORÁRIO */
+
+#ga-widget .ga-time {
+    font-size: 10px;
+
+    color: #929ba8;
+
+    margin-top: 5px;
+
+    align-self: flex-end;
+}
+
+#ga-widget .ga-bot .ga-time {
+    align-self: flex-start;
+}
+
+/* ==========================================================================
+   08. SUGESTÕES RÁPIDAS
+   ========================================================================== */
+
+#ga-widget .ga-quick-chips {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 10px;
+}
+
+#ga-widget .ga-chip {
+    background: #ffffff;
+
+    border: 1px solid #dfe3e9;
+
+    color: var(--ga-navy);
+
+    font-size: 11px;
+    font-weight: 600;
+
+    padding: 7px 11px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+
+    user-select: none;
+}
+
+#ga-widget .ga-chip:hover {
+    background: var(--ga-navy);
+
+    color: #ffffff;
+
+    border-color: var(--ga-navy);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 4px 10px rgba(7, 21, 46, 0.12);
+}
+
+#ga-widget .ga-chip:active {
+    transform: scale(0.97);
+}
+
+/* ==========================================================================
+   09. INDICADOR DE DIGITAÇÃO
+   ========================================================================== */
+
+#ga-widget .ga-typing-dots {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 10px 13px;
+}
+
+#ga-widget .ga-typing-dots span {
+    width: 6px;
+    height: 6px;
+
+    background: var(--ga-gold);
+
+    border-radius: 50%;
+
+    animation: ga-bounce 1.2s infinite ease-in-out;
+}
+
+#ga-widget .ga-typing-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+#ga-widget .ga-typing-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes ga-bounce {
+    0%, 80%, 100% {
+        transform: scale(0.5);
+        opacity: 0.4;
+    }
+
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ==========================================================================
+   10. RODAPÉ DO CHATBOT
+   ========================================================================== */
+
+#ga-widget .ga-footer {
+    background: #ffffff;
+
+    border-top: 1px solid #e8ebef;
+
+    padding: 13px 14px;
+
+    flex-shrink: 0;
+}
+
+/* FORMULÁRIO */
+
+#ga-widget .ga-input-form {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    background: #f7f8fa;
+
+    border: 1px solid #dfe3e9;
+
+    border-radius: 11px;
+
+    padding: 5px 6px 5px 14px;
+
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+#ga-widget .ga-input-form:focus-within {
+    background: #ffffff;
+
+    border-color: var(--ga-gold);
+
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.11);
+}
+
+/* CAMPO DE TEXTO */
+
+#ga-widget .ga-input-form input {
+    flex: 1;
+
+    min-width: 0;
+
+    background: transparent;
+
+    border: none;
+    outline: none;
+
+    color: var(--ga-navy);
+
+    font-size: 13px;
+
+    padding: 8px 0;
+}
+
+#ga-widget .ga-input-form input::placeholder {
+    color: #9ba3af;
+}
+
+/* BOTÃO ENVIAR */
+
+#ga-widget .ga-send-btn {
+    width: 39px;
+    height: 39px;
+
+    flex-shrink: 0;
+
+    border-radius: 9px;
+
+    background: var(--ga-navy);
+
+    border: 1px solid var(--ga-navy);
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    transition: all 0.25s ease;
+}
+
+#ga-widget .ga-send-btn:hover {
+    background: var(--ga-gold);
+
+    border-color: var(--ga-gold);
+
+    color: var(--ga-navy);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 4px 10px rgba(201, 162, 39, 0.2);
+}
+
+#ga-widget .ga-send-btn:active {
+    transform: scale(0.93);
+}
+
+/* ==========================================================================
+   11. COMPONENTES EXTRAS: LOGO, NOTAS E LINK SECRETO (MELLON)
+   ========================================================================== */
+
+/* NOTA DE BOAS-VINDAS NO BALÃO INICIAL */
+.ga-welcome-label {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--ga-gold);
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    display: inline-block;
+}
+
+/* NOTA NO RODAPÉ */
+.ga-footer-note {
+    font-size: 10px;
+    color: var(--ga-muted);
+    text-align: center;
+    margin-top: 8px;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+}
+
+.ga-footer-note span {
+    color: var(--ga-gold);
+}
+
+/* BOTÃO VIP DO COFRE SECRETO DE FILMES */
+.ga-secret-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 9px 18px;
+    background: linear-gradient(135deg, var(--ga-gold), var(--ga-gold-light));
+    color: var(--ga-navy) !important;
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.6px;
+    border-radius: 9px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(201, 162, 39, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ga-secret-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(201, 162, 39, 0.5);
+}
+
+/* ==========================================================================
+   12. ESTADOS DE FOCO E ACESSIBILIDADE
+   ========================================================================== */
+
+#ga-widget button:focus-visible,
+#ga-widget input:focus-visible {
+    outline: 2px solid var(--ga-gold);
+    outline-offset: 3px;
+}
+
+#ga-widget button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   13. RESPONSIVIDADE — TABLETS E CELULARES
+   ========================================================================== */
+
+@media (max-width: 600px) {
+
+    #ga-launcher-btn {
+        left: 17px;
+        bottom: 17px;
+
+        width: 52px;
+        height: 52px;
+
+        border-radius: 15px;
+
+        font-size: 22px;
+    }
+
+    #ga-chat-window {
+        left: 12px;
+        bottom: 82px;
+
+        width: calc(100vw - 24px);
+
+        height: min(600px, calc(100dvh - 105px));
+        max-height: calc(100dvh - 105px);
+
+        border-radius: 15px;
+    }
+
+    #ga-widget .ga-header {
+        padding: 13px 14px;
+    }
+
+    #ga-widget .ga-avatar {
+        width: 40px;
+        height: 40px;
+
+        font-size: 20px;
+    }
+
+    #ga-widget .ga-messages {
+        padding: 16px 12px;
+        gap: 12px;
+    }
+
+    #ga-widget .ga-msg {
+        max-width: 91%;
+    }
+
+    #ga-widget .ga-bubble {
+        font-size: 13px;
+        padding: 11px 13px;
+    }
+
+    #ga-widget .ga-footer {
+        padding: 10px;
+    }
+
+}
+
+/* ==========================================================================
+   14. CELULARES PEQUENOS
+   ========================================================================== */
+
+@media (max-width: 360px) {
+
+    #ga-chat-window {
+        left: 8px;
+        width: calc(100vw - 16px);
+    }
+
+    #ga-widget .ga-title-group h3 {
+        font-size: 13px;
+    }
+
+    #ga-widget .ga-title-group p {
+        font-size: 10px;
+    }
+
+    #ga-widget .ga-chip {
+        font-size: 10px;
+        padding: 6px 8px;
+    }
+
+}
+
+/* ==========================================================================
+   15. REDUÇÃO DE MOVIMENTO
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #ga-widget *,
+    #ga-widget *::before,
+    #ga-widget *::after,
+    #ga-launcher-btn,
+    #ga-chat-window {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+}
+
+/* ==========================================================================
+   16. EASTER EGG — RICK ASTLEY (CORRIGIDO Z-INDEX > 999999)
+   ========================================================================== */
+
+#rickEggModal {
+    position: fixed;
+    inset: 0;
+    /* z-index ajustado para 10000000 para abrir NA FRENTE do chat (999999) */
+    z-index: 10000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(3, 10, 25, 0.96);
+    backdrop-filter: blur(8px);
+    animation: rickEntrada .4s ease;
+}
+
+.rick-egg-conteudo {
+    position: relative;
+    width: 100%;
+    max-width: 850px;
+    padding: 35px;
+    text-align: center;
+    color: white;
+    background: #07152e;
+    border: 2px solid #c9a227;
+    border-radius: 20px;
+    box-shadow: 0 0 45px rgba(201, 162, 39, .25);
+}
+
+.rick-egg-conteudo h2 {
+    color: #e0bd3e;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.rick-egg-conteudo p {
+    margin-bottom: 25px;
+    color: #cbd5e1;
+}
+
+.rick-egg-video {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.rick-egg-video iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.rick-egg-fechar {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    color: white;
+    background: transparent;
+    border: none;
+    font-size: 35px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.rick-egg-fechar:hover {
+    color: #e0bd3e;
+}
+
+.rick-egg-conteudo span {
+    display: block;
+    margin-top: 20px;
+    color: #c9a227;
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+@keyframes rickEntrada {
+    from {
+        opacity: 0;
+        transform: scale(.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
