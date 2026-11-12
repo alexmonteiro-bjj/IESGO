@@ -18,16 +18,12 @@
     paginaSecreta: "secreto.html",
     geminiApiKey: (function() {
       const p1 = "AQ";
-      const p2 = ".Ab8RN6IM";
-      const p3 = "_WQkSR5lOm4XwPiHvWIPQdru";
-      const p4 = "8O8uF-V4WkQ7fFe_4Q";
-      const key = [p1, p2, p3, p4].join("");
-      try {
-        localStorage.setItem("alexverso_gemini_key", key);
-      } catch (e) {}
-      return key;
+      const p2 = ".Ab8RN6LF";
+      const p3 = "QJ9SV6shFv8nqkU1ab__7v42k";
+      const p4 = "eD5fZW0FaJaTVpGlA";
+      return [p1, p2, p3, p4].join("");
     })(),
-    geminiModel: "gemini-3.1-flash-lite"
+    geminiModel: "gemini-3.8-flash"
   };
 
   // ==========================================================================
