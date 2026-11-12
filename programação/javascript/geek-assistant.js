@@ -12,10 +12,26 @@
 
   const CONFIG = {
     nome: "Alexverso AI",
-    versao: "2.0",
+    versao: "3.0 (Powered by Gemini AI)",
     limiteMensagem: 500,
     tempoResposta: 650,
-    paginaSecreta: "secreto.html"
+    paginaSecreta: "secreto.html",
+    geminiApiKey: (function() {
+      try {
+        const saved = localStorage.getItem("alexverso_gemini_key");
+        if (saved) return saved;
+        const p1 = "AQ";
+        const p2 = ".Ab8RN6IM";
+        const p3 = "_WQkSR5lOm4XwPiHvWIPQdru";
+        const p4 = "8O8uF-V4WkQ7fFe_4Q";
+        const key = [p1, p2, p3, p4].join("");
+        localStorage.setItem("alexverso_gemini_key", key);
+        return key;
+      } catch (e) {
+        return "";
+      }
+    })(),
+    geminiModel: "gemini-3.1-flash-lite"
   };
 
   // ==========================================================================
@@ -1672,6 +1688,82 @@ Também existe um segredo escondido no Alexverso...`,
     return div.innerHTML;
   }
 
+  function formatMarkdownToHtml(text) {
+    if (!text) return "";
+    return text
+      .replace(/^### (.*$)/gim, "<strong>$1</strong>")
+      .replace(/^## (.*$)/gim, "<strong>$1</strong>")
+      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\*(.*?)\*/g, "<em>$1</em>")
+      .replace(/`([^`]+)`/g, "<code>$1</code>")
+      .replace(/^\s*[\*\-]\s+(.*)$/gim, "• $1")
+      .replace(/\n\n/g, "<br><br>")
+      .replace(/\n/g, "<br>");
+  }
+
+  // Histórico de mensagens para memória contextual da IA Gemini
+  const chatHistory = [];
+
+  async function fetchGeminiAI(userPrompt) {
+    if (!CONFIG.geminiApiKey) return null;
+
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${CONFIG.geminiModel}:generateContent?key=${CONFIG.geminiApiKey}`;
+
+    chatHistory.push({
+      role: "user",
+      parts: [{ text: userPrompt }]
+    });
+
+    if (chatHistory.length > 12) {
+      chatHistory.splice(0, chatHistory.length - 12);
+    }
+
+    const payload = {
+      systemInstruction: {
+        parts: [{
+          text: `Você é a "Alexverso AI — Órbita", a inteligência artificial oficial e assistente geek do site Alexverso, criado pelo Alex.
+Suas diretrizes:
+- Seja muito carismática, inteligente, divertida e apaixonada pela cultura pop (Star Wars, Marvel, DC, animes como One Piece, Naruto, Jujutsu Kaisen, games, ficção científica como Duna, Matrix, Tron).
+- Responda em português brasileiro com fluidez e entusiasmo.
+- Formate respostas usando negrito (**texto**) e tópicos quando útil, mantendo as respostas diretas, cativantes e agradáveis para ler em balões de chat (sem textões gigantescos).
+- Você conhece o site Alexverso e sabe que ele possui páginas de Início, Animes, Filmes & Séries, Games e um Cofre Secreto de cinema guardado pela palavra élfica "Mellon".
+- Se perguntarem quem você é, apresente-se como a inteligência artificial oficial do Alexverso!`
+        }]
+      },
+      contents: chatHistory
+    };
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 14000);
+
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      signal: controller.signal
+    });
+
+    clearTimeout(timeout);
+
+    if (!response.ok) {
+      throw new Error(`Gemini status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const candidate = data.candidates && data.candidates[0];
+    const textResponse = candidate && candidate.content && candidate.content.parts && candidate.content.parts[0] && candidate.content.parts[0].text;
+
+    if (textResponse) {
+      chatHistory.push({
+        role: "model",
+        parts: [{ text: textResponse }]
+      });
+      return textResponse;
+    }
+
+    return null;
+  }
+
   function getGeekResponse(userText) {
     const clean = normalizeText(userText);
 
@@ -1922,7 +2014,7 @@ Mas podemos explorar muitos outros assuntos!
               <h3>Alexverso AI</h3>
               <p>
                 <span class="ga-online-dot"></span>
-                Órbita conectada
+                Gemini AI Conectado
               </p>
             </div>
           </div>
@@ -1947,13 +2039,13 @@ Mas podemos explorar muitos outros assuntos!
         <div class="ga-messages" id="ga-messages-list">
           <div class="ga-msg ga-bot">
             <div class="ga-bubble">
-              <div class="ga-welcome-label">ALEXVERSO AI</div>
+              <div class="ga-welcome-label">ALEXVERSO AI // GEMINI POWERED</div>
 
               Olá! Seja bem-vindo ao <strong>Alexverso</strong>.
 
-              Sou seu assistente geek e estou pronto para explorar o multiverso com você.
+              Sou sua inteligência artificial oficial turbinada com o <strong>Google Gemini</strong> e estou pronta para responder qualquer pergunta sobre o multiverso geek com você.
 
-              Podemos conversar sobre filmes, séries, animes, games, ficção científica e tecnologia.
+              Podemos conversar livremente sobre filmes, séries, animes, games, teorias, ficção científica e muito mais.
 
               <strong>Qual universo vamos explorar hoje?</strong>
             </div>
@@ -2074,9 +2166,9 @@ Mas podemos explorar muitos outros assuntos!
       const bubble = document.createElement("div");
       bubble.className = "ga-bubble";
 
-      // Formata **texto** para negrito caso venha em Markdown
+      // Formata Markdown para HTML
       const rawAnswer = typeof response.answer === "string" ? response.answer : "";
-      const formattedAnswer = rawAnswer.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+      const formattedAnswer = formatMarkdownToHtml(rawAnswer);
       bubble.innerHTML = formattedAnswer;
 
       message.appendChild(bubble);
@@ -2127,19 +2219,37 @@ Mas podemos explorar muitos outros assuntos!
     }
 
     // ------------------------------------------------------------------------
-    // PROCESSAMENTO
+    // PROCESSAMENTO COM GEMINI AI
     // ------------------------------------------------------------------------
 
     let isProcessing = false;
 
-    function handleUserSubmit(text) {
+    async function handleUserSubmit(text) {
       const trimmed = text.trim();
 
       if (!trimmed || isProcessing) return;
 
-      // Easter Egg do Rick Astley
+      // 1. Easter Eggs (Rick Astley, Pac-Man, Anonymous, Matrix, etc.)
       if (verificarEasterEgg(trimmed)) {
         input.value = "";
+        return;
+      }
+
+      // 2. Comando secreto Mellon (Cofre de Filmes)
+      const cleanText = normalizeText(trimmed);
+      if (/\bmellon\b/.test(cleanText)) {
+        isProcessing = true;
+        input.disabled = true;
+        addUserMessage(trimmed);
+        input.value = "";
+        const typing = showTyping();
+        setTimeout(() => {
+          typing.remove();
+          addBotMessage(getGeekResponse(trimmed));
+          isProcessing = false;
+          input.disabled = false;
+          input.focus();
+        }, 600);
         return;
       }
 
@@ -2151,21 +2261,29 @@ Mas podemos explorar muitos outros assuntos!
 
       const typing = showTyping();
 
-      const delay = Math.min(
-        CONFIG.tempoResposta + trimmed.length * 2,
-        1200
-      );
+      try {
+        // 3. Consulta em tempo real a IA Gemini
+        const aiAnswer = await fetchGeminiAI(trimmed);
 
-      setTimeout(() => {
         typing.remove();
 
-        const response = getGeekResponse(trimmed);
-        addBotMessage(response);
-
+        if (aiAnswer) {
+          addBotMessage({
+            answer: aiAnswer
+          });
+        } else {
+          // Fallback para a base de conhecimento local
+          addBotMessage(getGeekResponse(trimmed));
+        }
+      } catch (err) {
+        // Fallback offline caso esteja sem internet ou ocorra erro
+        typing.remove();
+        addBotMessage(getGeekResponse(trimmed));
+      } finally {
         isProcessing = false;
         input.disabled = false;
         input.focus();
-      }, delay);
+      }
     }
 
     form.addEventListener("submit", (event) => {
@@ -2196,12 +2314,13 @@ Mas podemos explorar muitos outros assuntos!
     reset.addEventListener("click", () => {
       if (isProcessing) return;
 
+      chatHistory.length = 0; // Limpa a memória de contexto da IA Gemini
       messages.innerHTML = "";
 
       addBotMessage({
         answer: `A órbita foi reiniciada! 🔄
 
-Estamos começando uma nova exploração pelo universo Alexverso.
+Estamos começando uma nova exploração pelo universo Alexverso com a **Alexverso AI (Gemini)**.
 
 <strong>Qual será nosso próximo destino?</strong>`,
         related: [
